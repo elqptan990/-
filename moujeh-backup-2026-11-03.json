@@ -1,0 +1,999 @@
+{
+  "exportedAt": "2026-11-03T13:40:16.831Z",
+  "clients": [
+    {
+      "id": "xecrqh5gomw0nsi5a",
+      "code": "1",
+      "ar": "",
+      "company": "Qitaeat Al khalij",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xf50eebovmw0nsi5b",
+      "code": "14",
+      "ar": "",
+      "company": "Br Al-Watan Co",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "x684mn3lqmw0nsi5b",
+      "code": "25",
+      "ar": "",
+      "company": "New B.R Al Watan Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xnatyx72ymw0nsi5b",
+      "code": "8",
+      "ar": "",
+      "company": "AL-Thubaiti Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xch8qmu7nmw0nsi5b",
+      "code": "9",
+      "ar": "",
+      "company": "AL-Thuraya",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xilm7w5mqmw0nsi5b",
+      "code": "2",
+      "ar": "",
+      "company": "AL FALAH",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xojo2ru2qmw0nsi5b",
+      "code": "27",
+      "ar": "",
+      "company": "Qowa Al-Imtiyaz",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "x4vfhu6cjmw0nsi5b",
+      "code": "31",
+      "ar": "",
+      "company": "Tatwir Al-sahra Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xyx327hfcmw0nsi5b",
+      "code": "13",
+      "ar": "",
+      "company": "Azhar Al-kifah",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xhxshp8d7mw0nsi5b",
+      "code": "11",
+      "ar": "",
+      "company": "Alqosour Alalamiah",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xhqd6igz9mw0nsi5b",
+      "code": "24",
+      "ar": "",
+      "company": "Najmat Al.Sokhoor CO.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xkt994kqtmw0nsi5b",
+      "code": "6",
+      "ar": "",
+      "company": "AL-Ejtiaz CO.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xwn1068icmw0nsi5b",
+      "code": "7",
+      "ar": "",
+      "company": "AL-Qosour Alalmaiah",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xi6xkqc2imw0nsi5b",
+      "code": "17",
+      "ar": "",
+      "company": "Fasto Trading Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xuiw8f9ykmw0nsi5b",
+      "code": "16",
+      "ar": "",
+      "company": "Esam Bajneed Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xdak74qjimw0nsi5b",
+      "code": "28",
+      "ar": "",
+      "company": "Rond Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xyk79dh0jmw0nsi5b",
+      "code": "15",
+      "ar": "",
+      "company": "Darah Eltakaddam Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xf87hab5imw0nsi5b",
+      "code": "29",
+      "ar": "",
+      "company": "Rwad AL-Jazira",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xjsuw7zakmw0nsi5b",
+      "code": "18",
+      "ar": "",
+      "company": "Fausto Company",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xr3nk60frmw0nsi5b",
+      "code": "30",
+      "ar": "",
+      "company": "Saeed bajneed Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xlxfaoygfmw0nsi5b",
+      "code": "5",
+      "ar": "",
+      "company": "AL yousefiya",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xyl3tqrrrmw0nsi5b",
+      "code": "4",
+      "ar": "",
+      "company": "Al Tuwaijri company",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xd98xn7womw0nsi5b",
+      "code": "22",
+      "ar": "",
+      "company": "Mawrid Altharwh",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xn1k8ln4ymw0nsi5b",
+      "code": "12",
+      "ar": "",
+      "company": "Asalet Eltashyeed Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "x13doyivhmw0nsi5b",
+      "code": "26",
+      "ar": "",
+      "company": "Peyotkom company",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xlz3rf9fcmw0nsi5b",
+      "code": "3",
+      "ar": "",
+      "company": "Al Sufaeeyyh Al Wataniyh",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xef9jtm08mw0nsi5b",
+      "code": "20",
+      "ar": "",
+      "company": "Golden Summit Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xzggj8pxhmw0nsi5b",
+      "code": "23",
+      "ar": "",
+      "company": "Mohamed Al Nashmi Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xj34z8czrmw0nsi5b",
+      "code": "21",
+      "ar": "",
+      "company": "Masader Al Muttahida Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xpe9qrz4omw0nsi5b",
+      "code": "32",
+      "ar": "",
+      "company": "Top Building Co.",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "xoq9afrsomw0nsi5b",
+      "code": "10",
+      "ar": "",
+      "company": "Al-Thurayya company",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    },
+    {
+      "id": "x4mugbvsumw0nsi5b",
+      "code": "19",
+      "ar": "",
+      "company": "Future STH Company",
+      "receiver": "",
+      "nationality": "",
+      "mobile": "",
+      "iqama": "",
+      "car": "",
+      "route": ""
+    }
+  ],
+  "vouchers": [
+    {
+      "id": "xxv37dkakmw0o8aln",
+      "number": "1",
+      "date": "2026-11-03",
+      "clientId": "xecrqh5gomw0nsi5a",
+      "clientName": "Qitaeat Al khalij",
+      "templateId": "",
+      "extra": {},
+      "items": [
+        {
+          "item": "MAFCO PROOF",
+          "qty": "(100 Liter)",
+          "drum": "16 Drum"
+        }
+      ],
+      "receiver": {
+        "name": "محمد إسماعيل",
+        "nationality": "مصري",
+        "mobile": "0505789578",
+        "iqama": "2193380231",
+        "car": "9146",
+        "route": "الرياض"
+      },
+      "createdAt": 1793709342637
+    },
+    {
+      "id": "xdssiu4t3mw0olxxs",
+      "number": "2",
+      "date": "2026-11-03",
+      "clientId": "xilm7w5mqmw0nsi5b",
+      "clientName": "AL FALAH",
+      "templateId": "",
+      "extra": {},
+      "items": [
+        {
+          "item": "MC-1",
+          "qty": "(1- Pallet) 200 Liter",
+          "drum": "( 4 Drum )"
+        },
+        {
+          "item": "MAFCO PROOF",
+          "qty": "(4- Pallet) 200 Liter",
+          "drum": "16 Drum"
+        },
+        {
+          "item": "Emulsion",
+          "qty": "(140 Kg)",
+          "drum": "4 Drum"
+        }
+      ],
+      "receiver": {
+        "name": "محمد إسماعيل",
+        "nationality": "مصري",
+        "mobile": "0505789578",
+        "iqama": "2193380231",
+        "car": "9146",
+        "route": "الرياض"
+      },
+      "createdAt": 1793709979410
+    }
+  ],
+  "templates": [
+    {
+      "id": "xqx8z35sdmw0nsi54",
+      "name": "نموذج سند الصرف الافتراضي",
+      "fields": {
+        "number": {
+          "x": 26,
+          "y": 57,
+          "size": 12,
+          "align": "right",
+          "dir": "ltr",
+          "visible": false,
+          "anchor": "left"
+        },
+        "date": {
+          "x": 7.5,
+          "y": 71.5,
+          "size": 16,
+          "align": "right",
+          "dir": "ltr",
+          "visible": true,
+          "anchor": "left"
+        },
+        "payTo": {
+          "x": 7,
+          "y": 82.5,
+          "size": 16,
+          "align": "right",
+          "dir": "ltr",
+          "visible": true,
+          "anchor": "left"
+        },
+        "table": {
+          "startY": 107.5,
+          "rowHeight": 9,
+          "maxRows": 7,
+          "size": 15,
+          "colNoX": 15,
+          "colItemX": 10,
+          "colQtyX": 109,
+          "colRemarksX": 162
+        },
+        "r_name": {
+          "x": 51.5,
+          "y": 217.5,
+          "size": 16,
+          "align": "right",
+          "dir": "auto",
+          "visible": true,
+          "anchor": "right"
+        },
+        "r_nationality": {
+          "x": 51.5,
+          "y": 226.5,
+          "size": 16,
+          "align": "right",
+          "dir": "auto",
+          "visible": true,
+          "anchor": "right"
+        },
+        "r_mobile": {
+          "x": 51.5,
+          "y": 236,
+          "size": 16,
+          "align": "right",
+          "dir": "ltr",
+          "visible": true,
+          "anchor": "right"
+        },
+        "r_iqama": {
+          "x": 51.5,
+          "y": 245.5,
+          "size": 16,
+          "align": "right",
+          "dir": "ltr",
+          "visible": true,
+          "anchor": "right"
+        },
+        "r_car": {
+          "x": 51.5,
+          "y": 255.5,
+          "size": 16,
+          "align": "right",
+          "dir": "ltr",
+          "visible": true,
+          "anchor": "right"
+        },
+        "r_route": {
+          "x": 51.6,
+          "y": 263.5,
+          "size": 16,
+          "align": "right",
+          "dir": "auto",
+          "visible": true,
+          "anchor": "right"
+        }
+      }
+    }
+  ],
+  "drivers": [
+    {
+      "name": "محمد انصر رسول غلام",
+      "nationality": "باكستان",
+      "mobile": "0505789578",
+      "iqama": "2536942663",
+      "car": "5745",
+      "route": ""
+    },
+    {
+      "name": "طارق عزيز ميان غول",
+      "nationality": "باكستان",
+      "mobile": "0557227196",
+      "iqama": "2475500241",
+      "car": "2939",
+      "route": ""
+    },
+    {
+      "name": "محمد والي سلطان",
+      "nationality": "باكستان",
+      "mobile": "0509039305",
+      "iqama": "2321558484",
+      "car": "2626",
+      "route": ""
+    },
+    {
+      "name": "ياسر موسي العبود",
+      "nationality": "سوريا",
+      "mobile": "0506873930",
+      "iqama": "2249992997",
+      "car": "6448",
+      "route": ""
+    },
+    {
+      "name": "عبد العزيز جمعه السليمان",
+      "nationality": "سوريا",
+      "mobile": "0508058366",
+      "iqama": "2306562931",
+      "car": "5240",
+      "route": ""
+    },
+    {
+      "name": "محمد يحي",
+      "nationality": "اليمن",
+      "mobile": "0532363159",
+      "iqama": "2525336687",
+      "car": "1671",
+      "route": ""
+    },
+    {
+      "name": "عبد جاسم العبد الله",
+      "nationality": "سوريا",
+      "mobile": "0509508744",
+      "iqama": "2221651835",
+      "car": "6837",
+      "route": ""
+    },
+    {
+      "name": "عبدالحكيم سفيان محمد",
+      "nationality": "اثيوبيا",
+      "mobile": "0558367125",
+      "iqama": "2299469748",
+      "car": "5269",
+      "route": ""
+    },
+    {
+      "name": "محمد والي سلطان علي",
+      "nationality": "باكستان",
+      "mobile": "0509508744",
+      "iqama": "2321558484",
+      "car": "2626",
+      "route": ""
+    },
+    {
+      "name": "وليد حماده ابراهيم عوض الله",
+      "nationality": "مصري",
+      "mobile": "0570931190",
+      "iqama": "2576689794",
+      "car": "8117",
+      "route": ""
+    },
+    {
+      "name": "حياة خان صايف الله خان",
+      "nationality": "باكستان",
+      "mobile": "0553187414",
+      "iqama": "2464407804",
+      "car": "1807",
+      "route": ""
+    },
+    {
+      "name": "صواب خان تاوس",
+      "nationality": "باكستان",
+      "mobile": "0591158565",
+      "iqama": "2289226702",
+      "car": "1638",
+      "route": ""
+    },
+    {
+      "name": "أبو الحسن علي محمد",
+      "nationality": "مصري",
+      "mobile": "0505789578",
+      "iqama": "2306719051",
+      "car": "8552",
+      "route": ""
+    },
+    {
+      "name": "نزام الدين بوثان سيفوالدين",
+      "nationality": "الهند",
+      "mobile": "0530369231",
+      "iqama": "2217561147",
+      "car": "5725",
+      "route": ""
+    },
+    {
+      "name": "هاني فتح الباب خميس",
+      "nationality": "مصري",
+      "mobile": "0552710872",
+      "iqama": "2399684568",
+      "car": "2646",
+      "route": ""
+    },
+    {
+      "name": "فيصل يحي سفيان",
+      "nationality": "اثيوبيا",
+      "mobile": "0574919895",
+      "iqama": "2622739452",
+      "car": "5296",
+      "route": ""
+    },
+    {
+      "name": "نور الدين ناجي علي البشيري",
+      "nationality": "اليمن",
+      "mobile": "0502860388",
+      "iqama": "2535686758",
+      "car": "5036",
+      "route": ""
+    },
+    {
+      "name": "مفرح صالح علي البشيري",
+      "nationality": "اليمن",
+      "mobile": "0550879855",
+      "iqama": "2564409754",
+      "car": "3734",
+      "route": ""
+    },
+    {
+      "name": "علام زيب محمد علي خان",
+      "nationality": "باكستان",
+      "mobile": "0552166391",
+      "iqama": "2188628685",
+      "car": "3034",
+      "route": ""
+    },
+    {
+      "name": "علي محمد علي الاعرج",
+      "nationality": "اليمن",
+      "mobile": "0550456580",
+      "iqama": "2548265467",
+      "car": "2880",
+      "route": ""
+    },
+    {
+      "name": "محمد إسماعيل",
+      "nationality": "مصري",
+      "mobile": "0505789578",
+      "iqama": "2193380231",
+      "car": "9146",
+      "route": "الرياض"
+    },
+    {
+      "name": "كفاية الله عظمة الله",
+      "nationality": "مصري",
+      "mobile": "0505789578",
+      "iqama": "2541506511",
+      "car": "9704",
+      "route": ""
+    },
+    {
+      "name": "محمد عريف امير نواب",
+      "nationality": "باكستان",
+      "mobile": "0573591879",
+      "iqama": "2610817773",
+      "car": "6223",
+      "route": ""
+    },
+    {
+      "name": "سيلفاراج جياسيجه نادار",
+      "nationality": "الهند",
+      "mobile": "0556202648",
+      "iqama": "2222085652",
+      "car": "4129",
+      "route": ""
+    },
+    {
+      "name": "امتياز حسين محمد رزاق",
+      "nationality": "باكستان",
+      "mobile": "0562740197",
+      "iqama": "2337929489",
+      "car": "4472",
+      "route": ""
+    },
+    {
+      "name": "وليد سيد احمد علي",
+      "nationality": "مصري",
+      "mobile": "0543991574",
+      "iqama": "2540028210",
+      "car": "1098",
+      "route": ""
+    },
+    {
+      "name": "ابراهيم حمدي ابراهيم",
+      "nationality": "مصري",
+      "mobile": "0560570791",
+      "iqama": "2543346452",
+      "car": "7791",
+      "route": ""
+    },
+    {
+      "name": "محمد ارمان علي",
+      "nationality": "الهند",
+      "mobile": "0503038075",
+      "iqama": "2429313592",
+      "car": "4631",
+      "route": ""
+    },
+    {
+      "name": "محمد زكريا العبود",
+      "nationality": "سوريا",
+      "mobile": "0538580454",
+      "iqama": "748-2000-8590574-1",
+      "car": "37223",
+      "route": ""
+    },
+    {
+      "name": "محمد سيف الدين",
+      "nationality": "السودان",
+      "mobile": "0500146797",
+      "iqama": "2494488220",
+      "car": "8173",
+      "route": ""
+    },
+    {
+      "name": "شوكت علي محمد",
+      "nationality": "باكستان",
+      "mobile": "0500860734",
+      "iqama": "2508205974",
+      "car": "6019",
+      "route": ""
+    },
+    {
+      "name": "احمد محمد علي خطاب",
+      "nationality": "مصري",
+      "mobile": "0570583841",
+      "iqama": "2564073142",
+      "car": "3363",
+      "route": ""
+    },
+    {
+      "name": "محمد سمل عبد الصمد",
+      "nationality": "باكستان",
+      "mobile": "0546189420",
+      "iqama": "2545112738",
+      "car": "1705",
+      "route": ""
+    },
+    {
+      "name": "حسنين علي طفيل علي",
+      "nationality": "باكستان",
+      "mobile": "0551495239",
+      "iqama": "2597545785",
+      "car": "2221",
+      "route": ""
+    },
+    {
+      "name": "عادل مجيد عبد ال مجيد",
+      "nationality": "باكستان",
+      "mobile": "0582426873",
+      "iqama": "2528327857",
+      "car": "5159",
+      "route": ""
+    },
+    {
+      "name": "نديم اسلم اسلم بارفيش",
+      "nationality": "باكستان",
+      "mobile": "0581602704",
+      "iqama": "2583940875",
+      "car": "3327",
+      "route": ""
+    }
+  ],
+  "products": [
+    {
+      "item": "MC-1",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "RC-2",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "MC-1",
+      "qty": "(1- Pallet) 100 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "RC-2",
+      "qty": "(1- Pallet) 100 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "MAFCO PROOF",
+      "qty": "(1- Pallet) 100 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "MAFCO PROOF",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "PRIMER D-41",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "PRIMER D-41",
+      "qty": "(1- Pallet) 18 Liter",
+      "drum": "(48 pail)"
+    },
+    {
+      "item": "Emulsion",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "Oxidized 115/15",
+      "qty": "(140 Kg)",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "Polymer",
+      "qty": "(500 X 20 Kg)",
+      "drum": "(10,000 kg)"
+    },
+    {
+      "item": "Polymer",
+      "qty": "(10 X 500 Kg)",
+      "drum": "(5,000 kg)"
+    },
+    {
+      "item": "MAFCO FIBER",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 160",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 180",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 200",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 160-Granular",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 180-Granular",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO 200-Granular",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "1-Liter Metal Can",
+      "qty": "(1 Pallet)",
+      "drum": "( 1380 pcs )"
+    },
+    {
+      "item": "Second quality",
+      "qty": "(1 Pallet)",
+      "drum": "( 23 Roll )"
+    },
+    {
+      "item": "MAFCO PROOF",
+      "qty": "(1- Pallet) 200 Liter",
+      "drum": "( 4 Drum )"
+    },
+    {
+      "item": "Emulsion",
+      "qty": "(140 Kg)",
+      "drum": "( 4 Drum )"
+    }
+  ],
+  "companyNames": [
+    "Qitaeat Al khalij",
+    "Br Al-Watan Co",
+    "New B.R Al Watan Co.",
+    "AL-Thubaiti Co.",
+    "AL-Thuraya",
+    "AL FALAH",
+    "Qowa Al-Imtiyaz",
+    "Tatwir Al-sahra Co.",
+    "Azhar Al-kifah",
+    "Alqosour Alalamiah",
+    "Najmat Al.Sokhoor CO.",
+    "AL-Ejtiaz CO.",
+    "AL-Qosour Alalmaiah",
+    "Fasto Trading Co.",
+    "Esam Bajneed Co.",
+    "Rond Co.",
+    "Darah Eltakaddam Co.",
+    "Rwad AL-Jazira",
+    "Fausto Company",
+    "Saeed bajneed Co.",
+    "AL yousefiya",
+    "Al Tuwaijri company",
+    "Mawrid Altharwh",
+    "Asalet Eltashyeed Co.",
+    "Peyotkom company",
+    "Al Sufaeeyyh Al Wataniyh",
+    "Golden Summit Co.",
+    "Mohamed Al Nashmi Co.",
+    "Masader Al Muttahida Co.",
+    "Top Building Co.",
+    "Al-Thurayya company",
+    "Future STH Company"
+  ],
+  "settings": {
+    "nextNumber": 3,
+    "activeTemplateId": "xqx8z35sdmw0nsi54",
+    "seedRefsV1": true,
+    "posV3": true,
+    "migV2": true,
+    "clientCodesSequentialV3": true
+  }
+}

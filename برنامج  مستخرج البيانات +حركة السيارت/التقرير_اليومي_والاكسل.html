@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مستخرج ومترجم بيانات الميزان الشامل</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<style>
+  :root{
+    --primary:#161718;
+    --primary-dark:#101213;
+    --accent:#2688a3;
+    --accent-2:#20639b;
+    --bg:#2a3841;
+    --card:#ffffff;
+    --border:#535d64;
+    --text:#1c2b33;
+    --muted:#6b7c87;
+    --success:#053b1c;
+    --danger:#c0392b;
+    --row-alt:#f4f8fb;
+    --row-hover:#e3f2fa;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;
+    background:var(--bg);
+    font-family:"Segoe UI", "Times New Roman", Times, serif;
+    color:var(--text);
+    direction:rtl;
+    font-size:14px;
+  }
+  body{padding:24px;}
+  .app-header{
+    max-width:1400px;margin:0 auto 20px auto;
+    display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(135deg,var(--primary) 0%,var(--accent-2) 100%);
+    color:#fff;border-radius:16px;padding:22px 30px;
+    box-shadow:0 8px 24px rgba(11,79,108,.25);
+  }
+  .app-header h1{margin:0;font-size:26px;font-weight:700;}
+  .app-header .subtitle{margin-top:4px;font-size:14px;font-weight:700;opacity:.9;}
+  .app-header .badge{
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.35);
+    padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;
+  }
+  .container{max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 4px 16px rgba(20,40,60,.08);
+    border:1px solid var(--border);
+  }
+  .card h2{margin:0 0 14px 0;font-size:18px;color:var(--primary-dark);font-weight:700;}
+
+  /* upload area */
+  .drop-zone{
+    border:2.5px dashed #9fc3d6;
+    border-radius:14px;
+    background:#f7fbfd;
+    padding:36px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s all;
+  }
+  .drop-zone:hover, .drop-zone.dragover{
+    background:#eaf6fb;
+    border-color:var(--accent);
+  }
+  .drop-zone .icon{font-size:42px;margin-bottom:8px;}
+  .drop-zone .main-text{font-size:16px;font-weight:700;color:var(--primary-dark);}
+  .drop-zone .sub-text{font-size:13px;color:var(--muted);margin-top:4px;font-weight:700;}
+  .btn{
+    display:inline-block;margin-top:14px;
+    background:var(--primary);
+    color:#fff;border:none;padding:10px 26px;border-radius:10px;
+    font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+    transition:.15s;
+  }
+  .btn:hover{background:var(--primary-dark);}
+  .btn.secondary{background:var(--accent-2);}
+  .btn.secondary:hover{background:#184d78;}
+  .btn.success{background:var(--success);}
+  .btn.success:hover{background:#166b3a;}
+  .btn:disabled{background:#a9b4bb;cursor:not-allowed;}
+  #fileInput{display:none;}
+
+  .steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:760px){.steps-grid{grid-template-columns:1fr;}}
+  .step{background:#f7fbfd;border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .step-title{font-size:16px;font-weight:700;color:var(--primary-dark);display:flex;align-items:center;gap:8px;}
+  .step-num{background:var(--accent-2);color:#fff;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;}
+  .trans-input{width:100%;padding:12px 14px;border:2px solid var(--accent);border-radius:12px;font-size:22px;font-weight:700;font-family:"Times New Roman",serif;text-align:center;direction:ltr;background:#fff;}
+  .trans-input:focus{outline:none;box-shadow:0 0 0 3px rgba(38,136,163,.25);}
+  .step .drop-zone{padding:16px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+  .drop-row{display:flex;align-items:center;gap:12px;}
+  .step .drop-zone .icon{font-size:34px;margin:0;}
+  .step .drop-zone .btn{margin-top:6px;padding:8px 22px;}
+  .result-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .result-top .tabs{margin:0;}
+  .download-btn{margin:0;padding:12px 28px;font-size:16px;box-shadow:0 4px 12px rgba(5,59,28,.3);}
+  .trans-box{background:#fff8e6;border:1.5px solid #e0b84a;border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+  .trans-box label{font-weight:700;color:var(--primary-dark);font-size:15px;display:block;margin-bottom:8px;}
+  .trans-box input{width:100%;max-width:320px;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:18px;font-weight:700;font-family:"Times New Roman",serif;text-align:center;direction:ltr;}
+  .trans-box input:focus{outline:none;border-color:var(--accent);}
+  .trans-hint{margin-top:8px;font-size:12px;color:var(--muted);font-weight:700;}
+
+  .file-info{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;
+  }
+  .info-pill{
+    background:#f0f7fa;border:1px solid var(--border);
+    border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;
+    color:var(--primary-dark);
+  }
+  .info-pill span{color:var(--muted);font-weight:700;}
+
+  .status-msg{
+    margin-top:14px;padding:12px 16px;border-radius:10px;font-size:14px;font-weight:700;
+    display:none;
+  }
+  .status-msg.error{background:#fdecea;color:var(--danger);border:1px solid #f5c6c0;display:block;}
+  .status-msg.success{background:#eafaf0;color:var(--success);border:1px solid #b9e8c9;display:block;}
+  .status-msg.info{background:#eaf6fb;color:var(--primary-dark);border:1px solid #bfe4f2;display:block;}
+
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .search-box{
+    flex:1;min-width:220px;position:relative;
+  }
+  .search-box input{
+    width:100%;padding:11px 16px;border-radius:10px;border:1.5px solid var(--border);
+    font-family:inherit;font-size:14px;font-weight:700;color:var(--text);
+    background:#fff;
+  }
+  .search-box input:focus{outline:none;border-color:var(--accent);}
+  .toolbar-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .row-count{font-size:13px;color:var(--muted);font-weight:700;}
+
+  .table-wrap{
+    overflow:auto;
+    max-height:640px;
+    border:1px solid var(--border);
+    border-radius:12px;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    font-size:14px;
+    font-weight:700;
+    font-family:"Times New Roman", Times, serif;
+  }
+  thead th{
+    position:sticky;top:0;z-index:2;
+    background:var(--primary);
+    color:#fff;
+    padding:12px 10px;
+    text-align:center;
+    border:1px solid var(--primary-dark);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:9px 10px;
+    text-align:center;
+    border:1px solid var(--border);
+    white-space:nowrap;
+  }
+  tbody tr:nth-child(even){background:var(--row-alt);}
+  tbody tr:hover{background:var(--row-hover);}
+  .tabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+  .tab-btn{background:#e8eef2;border:1px solid var(--border);border-radius:10px;padding:8px 20px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;color:var(--primary-dark);}
+  .tab-btn.active{background:var(--accent-2);color:#fff;}
+  tbody td.cust{background:#d9d9d9;}
+  tbody td.sup{background:#ffd8a8;}
+  .no-results{
+    text-align:center;padding:30px;color:var(--muted);font-weight:700;
+  }
+  .hidden{display:none !important;}
+  footer{
+    text-align:center;font-size:12px;color:var(--muted);font-weight:700;margin-top:6px;
+  }
+
+  tbody tr.d, tbody tr.d:hover{background:#fff !important;}
+  tbody tr.d td{border:1px solid #000;font-size:15px;padding:3px 8px;background:#fff;}
+  tbody tr.d td.lbl{text-align:right;}
+  tbody tr.d td.small{font-size:15px;}
+  tbody tr.d td.g-gray{background:linear-gradient(#f8f8f8,#cecece);}
+  tbody tr.d td.g-blue{background:linear-gradient(#fafdfe,#d4ecf8);}
+  tbody tr.d td.g-dark{background:linear-gradient(#ffffff,#8a8a8a);}
+  tbody tr.d td.g-yellow{background:linear-gradient(#ffffcc,#ffff00);}
+  tbody tr.d td.g-green{background:linear-gradient(#e9f7e1,#7fcb6e);}
+  tbody tr.d td.gs{border:none;background:transparent;}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div>
+    <h1>مستخرج ومترجم البيانات الشامل <span style="opacity:.7;font-size:16px;">Data Extractor</span></h1>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Steps Card -->
+  <div class="card">
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-title"><span class="step-num">1</span> آخر رقم معاملة</div>
+        <input type="text" id="lastTransInput" class="trans-input" inputmode="numeric" placeholder="مثال: 27161">
+      </div>
+      <div class="step">
+        <div class="step-title"><span class="step-num">2</span> رفع ملف Excel</div>
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-row">
+            <div class="icon">📊</div>
+            <div>
+              <div class="main-text">اسحب وأفلت الملف هنا</div>
+            </div>
+          </div>
+          <button class="btn" id="chooseBtn" type="button">اختيار ملف Excel</button>
+          <input type="file" id="fileInput" accept=".xls,.xlsx">
+        </div>
+      </div>
+    </div>
+
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+
+  <!-- Table Card -->
+  <div class="card hidden" id="resultCard">
+    <div class="result-top">
+      <div id="sheetTabs" class="tabs"></div>
+      <button class="btn success download-btn" id="downloadBtn" type="button">⬇ تحميل ملف Excel المترجم</button>
+    </div>
+    <div id="dayPicker" class="hidden" style="margin-bottom:12px;padding:10px 14px;background:#fff8e6;border:1.5px solid #e0b84a;border-radius:12px;font-weight:700;">
+      الملف يحتوي أكثر من يوم عمل. اختر اليوم (من 7 ص إلى 7 ص):
+      <select id="daySelect" style="margin-inline-start:10px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--border);font-family:inherit;font-size:14px;font-weight:700;"></select>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 بحث">
+      </div>
+      <span class="row-count" id="rowCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="dataTable">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="no-results hidden" id="noResults">لا توجد نتائج مطابقة للبحث</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* =========================================================================
+   مستخرج ومترجم بيانات الميزان — نسخة التعريب الشامل والترجمة الحرفية
+   ========================================================================= */
+
+/* 1) قاموس عناوين الأعمدة (Headers) */
+const HEADER_DICTIONARY = {
+  'transno': 'رقم المعاملة', 'transactionno': 'رقم المعاملة', 'transaction': 'المعاملة',
+  'id': 'المعرّف', 'ticketno': 'رقم التذكرة', 'ticket': 'التذكرة', 'serial': 'الرقم التسلسلي',
+  'dvehicode': 'كود المركبة', 'vehicode': 'كود المركبة', 'vehicleno': 'رقم المركبة',
+  'vehiclenum': 'رقم المركبة', 'vehicle': 'المركبة', 'truckno': 'رقم الشاحنة', 'truck': 'الشاحنة',
+  'trailerno': 'رقم المقطورة', 'trailer': 'المقطورة', 'platno': 'رقم اللوحة', 'plateno': 'رقم اللوحة',
+  'plate': 'اللوحة', 'dtranname': 'اسم الناقل', 'tranname': 'اسم الناقل', 'transportname': 'اسم الناقل',
+  'transport': 'الناقل', 'carrier': 'الناقل', 'transporter': 'الناقل', 'dprodname': 'اسم المنتج',
+  'prodname': 'اسم المنتج', 'product': 'اسم المنتج', 'productname': 'اسم المنتج', 'item': 'المادة',
+  'itemname': 'اسم المادة', 'material': 'المادة', 'driver': 'السائق', 'drivername': 'اسم السائق',
+  'driverid': 'رقم السائق', 'nationality': 'الجنسية', 'nationality2': 'الجنسية', 'nat': 'الجنسية',
+  'firstwt': 'الوزن الأول', 'firstweight': 'الوزن الأول', 'weight1': 'الوزن الأول', 'first': 'الأول',
+  'datein': 'تاريخ الدخول', 'dateofentry': 'تاريخ الدخول', 'indate': 'تاريخ الدخول',
+  'entrydate': 'تاريخ الدخول', 'entrytime': 'وقت الدخول', 'timein': 'وقت الدخول',
+  'intime': 'وقت الدخول', 'time1': 'وقت الأول', 'secondwt': 'الوزن الثاني',
+  'secondweight': 'الوزن الثاني', 'weight2': 'الوزن الثاني', 'second': 'الثاني',
+  'dateout': 'تاريخ الخروج', 'exitdate': 'تاريخ الخروج', 'outdate': 'تاريخ الخروج',
+  'timeout': 'وقت الخروج', 'exittime': 'وقت الخروج', 'outtime': 'وقت الخروج',
+  'time2': 'وقت الثاني', 'netwt': 'الوزن الصافي', 'netweight': 'الوزن الصافي', 'net': 'الصافي',
+  'grosswt': 'الوزن الإجمالي', 'grossweight': 'الوزن الإجمالي', 'gross': 'الإجمالي',
+  'tarewt': 'الوزن الفارغ', 'tareweight': 'الوزن الفارغ', 'tare': 'الفارغ', 'difference': 'الفرق',
+  'dremark': 'الملاحظات', 'remark': 'الملاحظات', 'remarks': 'الملاحظات', 'notes': 'الملاحظات',
+  'comment': 'تعليق', 'comments': 'تعليقات', 'dcustname': 'اسم العميل', 'custname': 'اسم العميل',
+  'customername': 'اسم العميل', 'customer': 'العميل', 'custid': 'رقم العميل', 'dsupname': 'اسم المورد',
+  'supname': 'اسم المورد', 'suppliername': 'اسم المورد', 'supplier': 'المورد', 'supid': 'رقم المورد',
+  'contractor': 'المقاول', 'source': 'المصدر', 'destination': 'الوجهة', 'location': 'الموقع',
+  'site': 'الموقع', 'project': 'المشروع', 'branch': 'الفرع', 'status': 'الحالة',
+  'quantity': 'الكمية', 'unit': 'الوحدة', 'price': 'السعر', 'rate': 'السعر',
+  'amount': 'المبلغ', 'total': 'الإجمالي', 'date': 'التاريخ', 'time': 'الوقت',
+  'name': 'الاسم', 'type': 'النوع', 'category': 'الفئة', 'code': 'الكود',
+  'reference': 'المرجع', 'ref': 'المرجع', 'description': 'الوصف', 'user': 'المستخدم',
+  'operator': 'المشغل', 'shift': 'الوردية'
+};
+
+/* 2) قاموس العبارات الكاملة والمسميات المركبة */
+const PHRASE_DICTIONARY = {
+  'durrat al-hafayef': 'درة الهفايف',
+  'nebras': 'نبراس',
+  'izumax': 'ايزوماكس',
+  'anqa co.': 'مصنع أنقى',
+  'anqa co': 'مصنع أنقى',
+  "dabt al-bee'ah": 'ضبط البيئة',
+  'ajyad': 'أجياد',
+  'esnad': 'إسناد',
+  'tamdeen watania': 'تمدين وطنية',
+  'tamdeen al-watania': 'التمدين الوطنية',
+  'tamdeen watania co': 'شركة تمدين وطنية',
+  'ibn-ال saudi': 'ابن السعودي',
+  'ibn al saudi': 'ابن السعودي',
+  'ibn al-saudi': 'ابن السعودي',
+  'ibn saudi': 'ابن السعودي',
+  'falak road': 'طريق الفلك',
+  'falak street': 'شارع الفلك',
+  'dathin': 'دثين',
+  'al-ittihad al-sarie': 'الاتحاد السريع',
+  'al ittihad al sarie': 'الاتحاد السريع',
+  'al-sudais': 'السديس',
+  'al sudais': 'السديس',
+  'al.ejtiaz': 'الاجتياز',
+  'al-ejtiaz': 'الاجتياز',
+  'al ejtiaz': 'الاجتياز',
+  'al-hamror': 'الحمرور',
+  'al hamror': 'الحمرور',
+  'shibh al-jazira': 'شبه الجزيرة',
+  'shibh al jazira': 'شبه الجزيرة',
+  'far ocean co.': 'شركة فار أوشن',
+  'far ocean co': 'شركة فار أوشن',
+  'far ocean': 'فار أوشن',
+  'azminat al-emaar': 'أزمنة الإعمار',
+  'khalij aden': 'خليج عدن',
+  'intisar company': 'شركة انتصار',
+  'intisar co': 'شركة انتصار',
+  'asalet al-tashyeed': 'أصالة التشييد',
+  'al-ayed': 'العايد',
+  'alayed': 'العايد',
+  'al ayed': 'العايد',
+  'eid al-qahtani': 'عيد القحطاني',
+  'eid al qahtani': 'عيد القحطاني',
+  'hawazen al jazira': 'هوازن الجزيرة',
+  'hawazen al-jazira': 'هوازن الجزيرة',
+  'mojah aramco': 'موجة أرامكو',
+  'diamond brilliance co.': 'شركة دايموند بريليانس',
+  'diamond brilliance co': 'شركة دايموند بريليانس',
+  'wahaj al asemah': 'وهج العاصمة',
+  'wahaj al-asemah': 'وهج العاصمة',
+  'rashid contracting': 'راشد للمقاولات',
+  'al-rashid': 'الراشد',
+  'saudi aramco': 'أرامكو السعودية',
+  'aramco': 'أرامكو',
+  'sabic': 'سابك',
+  'petro rabigh': 'بترو رابغ',
+  'al-marai': 'المراعي',
+  'almarai': 'المراعي',
+  'red sea': 'البحر الأحمر',
+  'neom': 'نيوم',
+  'qiddiya': 'القدية',
+  'roshn': 'روشن',
+  'dar al arkan': 'دار الأركان',
+  'drinking water': 'ماء شرب',
+  'feed water': 'ماء تغذية',
+  'sweet water': 'مياه عذبة',
+  'raw water': 'مياه خام',
+  'waste water': 'مياه صرف',
+  'treated water': 'مياه معالجة',
+  'crude oil': 'زيت خام',
+  'diesel fuel': 'وقود ديزل',
+  'gasoline 91': 'بنزين 91',
+  'gasoline 95': 'بنزين 95',
+  'ready mix': 'خرسانة جاهزة',
+  'ready mix concrete': 'خرسانة جاهزة',
+  'base course': 'طبقة أساس (بيس كورس)',
+  'sub base': 'طبقة تحت الأساس (صب بيس)',
+  'crusher run': 'دفان كسارة',
+  'white sand': 'رمل أبيض',
+  'red sand': 'رمل أحمر',
+  'dune sand': 'رمل نفود',
+  'washed sand': 'رمل مغسول',
+  'fine sand': 'رمل ناعم',
+  'coarse sand': 'رمل خشن',
+  'limestone': 'حجر جيري',
+  'rebar steel': 'حديد تسليح',
+  'scrap iron': 'سكراب حديد'
+};
+
+/* 3) قاموس الكلمات والأسماء */
+const WORD_DICTIONARY = {
+  'tamdeen': 'تمدين', 'watania': 'وطنية', 'wataniya': 'وطنية', 'dathin': 'دثين',
+  'falak': 'فلك', 'road': 'طريق', 'street': 'شارع', 'way': 'طريق', 'highway': 'طريق سريع',
+  'avenue': 'شارع', 'exit': 'مخرج', 'gate': 'بوابة', 'port': 'ميناء', 'airport': 'مطار',
+  'station': 'محطة', 'plant': 'محطة / مصنع', 'factory': 'مصنع', 'company': 'شركة',
+  'co': 'شركة', 'co.': 'شركة', 'corp': 'شركة', 'corporation': 'مؤسسة', 'est': 'مؤسسة',
+  'establishment': 'مؤسسة', 'ltd': 'المحدودة', 'contracting': 'مقاولات', 'contractor': 'مقاول',
+  'transport': 'نقل', 'transportation': 'نقل', 'trading': 'تجارة', 'trade': 'تجارة',
+  'branch': 'فرع', 'center': 'مركز', 'site': 'موقع', 'project': 'مشروع', 'area': 'منطقة',
+  'zone': 'منطقة', 'district': 'حي', 'city': 'مدينة', 'quarry': 'محجر', 'crusher': 'كسارة',
+  'yard': 'ساحة', 'warehouse': 'مستودع', 'store': 'مستودع', 'depot': 'مستودع',
+  'water': 'مياه', 'diesel': 'ديزل', 'gasoline': 'بنزين', 'petrol': 'بنزين', 'kerosene': 'كيروسين',
+  'oil': 'زيت', 'bitumen': 'بيتومين', 'asphalt': 'أسفلت', 'sand': 'رمل', 'gravel': 'بحص',
+  'aggregate': 'حصى', 'cement': 'إسمنت', 'concrete': 'خرسانة', 'clinker': 'كلنكر',
+  'gypsum': 'جبس', 'iron': 'حديد', 'steel': 'صلب', 'rebar': 'حديد تسليح', 'scrap': 'سكراب / خردة',
+  'aluminum': 'ألومنيوم', 'sulphur': 'كبريت', 'salt': 'ملح', 'polymer': 'بوليمر',
+  'waste': 'نفايات', 'sludge': 'حمأة', 'soil': 'تربة', 'boulder': 'صخور', 'blocks': 'بلك',
+  'truck': 'شاحنة', 'trailer': 'مقطورة / تريلا', 'tipper': 'قلاب', 'flatbed': 'سطحة',
+  'tanker': 'صهريج / وايت', 'lowbed': 'لوبد', 'pickup': 'وانيت', 'scale': 'ميزان',
+  'ton': 'طن', 'tons': 'طن', 'tonne': 'طن', 'kg': 'كجم', 'meter': 'متر', 'cubic': 'مكعب',
+  'cbm': 'متر مكعب', 'liter': 'لتر', 'litre': 'لتر', 'inch': 'بوصة', 'bags': 'أكياس',
+  'driver': 'سائق', 'customer': 'عميل', 'client': 'عميل', 'supplier': 'مورد', 'operator': 'مشغل',
+  'riyadh': 'الرياض', 'jeddah': 'جدة', 'dammam': 'الدمام', 'khobar': 'الخبر', 'jubail': 'الجبيل',
+  'makkah': 'مكة المكرمة', 'madinah': 'المدينة المنورة', 'yanbu': 'ينبع', 'qassim': 'القصيم',
+  'buraidah': 'بريدة', 'onaizah': 'عنيزة', 'hail': 'حائل', 'tabuk': 'تبوك', 'abha': 'أبها',
+  'khamis': 'خميس مشيط', 'najran': 'نجران', 'jizan': 'جازان', 'taif': 'الطائف', 'hofuf': 'الهفوف',
+  'salwa': 'سلوى', 'khafji': 'الخفجي', 'safaniyah': 'السفانية', 'tanura': 'تنورة',
+  'qahtani': 'القحطاني', 'al-qahtani': 'القحطاني', 'otaibi': 'العتيبي', 'al-otaibi': 'العتيبي',
+  'harbi': 'الحربي', 'al-harbi': 'الحربي', 'dosari': 'الدوسري', 'al-dosari': 'الدوسري',
+  'mutairi': 'المطيري', 'al-mutairi': 'المطيري', 'ghamdi': 'الغامدي', 'al-ghamdi': 'الغامدي',
+  'zahrani': 'الزهراني', 'al-zahrani': 'الزهراني', 'shammari': 'الشمري', 'al-shammari': 'الشمري',
+  'anazi': 'العنزي', 'al-anazi': 'العنزي', 'shehri': 'الشهري', 'al-shehri': 'الشهري',
+  'asiri': 'العسيري', 'al-asiri': 'العسيري', 'khaldi': 'الخالدي', 'al-khaldi': 'الخالدي',
+  'rajhi': 'الراجحي', 'al-rajhi': 'الراجحي', 'sudais': 'السديس', 'al-sudais': 'السديس',
+  'jazira': 'الجزيرة', 'al-jazira': 'الجزيرة', 'shibh': 'شبه',
+  'ahmed': 'أحمد', 'ahmad': 'أحمد', 'mohamed': 'محمد', 'mohammed': 'محمد', 'muhammad': 'محمد',
+  'ali': 'علي', 'omar': 'عمر', 'khalid': 'خالد', 'khaled': 'خالد', 'saad': 'سعد', 'saud': 'سعود',
+  'salem': 'سالم', 'salman': 'سلمان', 'sultan': 'سلطان', 'fahad': 'فهد', 'fahd': 'فهد',
+  'faisal': 'فيصل', 'mansour': 'منصور', 'nasser': 'ناصر', 'youssef': 'يوسف', 'yusuf': 'يوسف',
+  'ibrahim': 'إبراهيم', 'ismail': 'إسماعيل', 'saleh': 'صالح', 'tariq': 'طارق', 'walid': 'وليد',
+  'waleed': 'وليد', 'hassan': 'حسن', 'hussein': 'حسين', 'hussain': 'حسين', 'mahmoud': 'محمود',
+  'mustafa': 'مصطفى', 'mostafa': 'مصطفى', 'hamad': 'حمد', 'bader': 'بدر', 'bandar': 'بندر',
+  'turki': 'تركي', 'naif': 'نايف', 'rashed': 'راشد', 'rashid': 'راشد', 'saeed': 'سعيد',
+  'ibn': 'ابن', 'bin': 'بن', 'abu': 'أبو', 'al': 'ال', 'el': 'ال', 'saudi': 'سعودي',
+  'al-saudi': 'السعودي', 'egyptian': 'مصري', 'yemeni': 'يمني', 'sudanese': 'سوداني',
+  'pakistani': 'باكستاني', 'indian': 'هندي',
+  'mercedes': 'مرسيدس', 'volvo': 'فولفو', 'man': 'مان', 'scania': 'سكانيا', 'isuzu': 'إيسوزو',
+  'renault': 'رينو', 'mitsubishi': 'ميتسوبيشي', 'hino': 'هينو', 'toyota': 'تويوتا', 'hyundai': 'هيونداي',
+  'caterpillar': 'كاتربيلر', 'cat': 'كاتربيلر', 'komatsu': 'كوماتسو',
+  'and': 'و', 'for': 'لـ', 'in': 'دخول', 'out': 'خروج', 'entry': 'دخول', 'first': 'أول',
+  'second': 'ثاني', 'net': 'صافي', 'gross': 'إجمالي', 'tare': 'فارغ', 'yes': 'نعم', 'no': 'لا',
+  'approved': 'معتمد', 'rejected': 'مرفوض', 'pending': 'قيد الانتظار', 'completed': 'مكتمل'
+};
+
+/* 4) محرك التعريب الحرفي والصوتي للأسماء الجديدة */
+function transliterateToken(tok) {
+  let s = String(tok).trim();
+  if (!s || /^[\u0600-\u06FF]+$/.test(s)) return s;
+
+  const lower = s.toLowerCase().replace(/^[^\w]+|[^\w]+$/g, '');
+  if (WORD_DICTIONARY[lower]) return WORD_DICTIONARY[lower];
+
+  if (lower === 'ibn') return 'ابن';
+  if (lower === 'bin') return 'بن';
+  if (lower === 'abu') return 'أبو';
+  if (lower === 'al' || lower === 'el') return 'ال';
+
+  let working = lower;
+  let prefix = '';
+  if (working.startsWith('al-') || working.startsWith('el-')) {
+    prefix = 'ال'; working = working.substring(3);
+    if (WORD_DICTIONARY[working]) return prefix + WORD_DICTIONARY[working];
+  } else if (working.startsWith('al') && working.length > 4 && !['all', 'also', 'alone', 'album'].includes(working)) {
+    prefix = 'ال'; working = working.substring(2);
+    if (WORD_DICTIONARY[working]) return prefix + WORD_DICTIONARY[working];
+  }
+
+  let suffix = '';
+  if (working.endsWith('iyyah') || working.endsWith('iyya') || working.endsWith('iyah') || working.endsWith('iya')) {
+    suffix = 'ية'; working = working.replace(/(iyyah|iyya|iyah|iya)$/, '');
+  } else if (working.endsWith('ia') && working.length > 3) {
+    suffix = 'ية'; working = working.substring(0, working.length - 2);
+  } else if (working.endsWith('ah') && working.length > 3) {
+    suffix = 'ة'; working = working.substring(0, working.length - 2);
+  } else if (working.endsWith('tion')) {
+    suffix = 'شن'; working = working.substring(0, working.length - 4);
+  }
+
+  working = working.replace(/c(?=[eiy])/g, 's');
+  let initialVowel = '';
+  if (/^[ie]/.test(working) && working.length > 1) {
+    initialVowel = 'إ'; working = working.substring(1);
+  } else if (/^[a]/.test(working) && working.length > 1) {
+    initialVowel = 'أ'; working = working.substring(1);
+  } else if (/^[ou]/.test(working) && working.length > 1) {
+    initialVowel = 'أو'; working = working.substring(1);
+  }
+
+  const multiCharMaps = [
+    [/sh/g, 'ش'], [/kh/g, 'خ'], [/th/g, 'ث'], [/gh/g, 'غ'],
+    [/dh/g, 'ذ'], [/ch/g, 'تش'], [/ph/g, 'ف'], [/ck/g, 'ك'],
+    [/qu/g, 'كو'], [/oo/g, 'و'], [/ou/g, 'و'], [/ee/g, 'ي'],
+    [/ea/g, 'ي'], [/ei/g, 'ي'], [/ai/g, 'اي'], [/ay/g, 'اي'],
+    [/aw/g, 'او'], [/au/g, 'او'], [/aa/g, 'ا']
+  ];
+  for (const [pat, rep] of multiCharMaps) working = working.replace(pat, rep);
+
+  const singleCharMap = {
+    'b':'ب','p':'ب','t':'ت','j':'ج','h':'ه','d':'د','r':'ر','z':'ز',
+    's':'س','f':'ف','v':'ف','q':'ق','k':'ك','l':'ل','m':'م','n':'ن',
+    'w':'و','y':'ي','x':'كس','g':'ج','c':'ك','a':'ا','e':'ي','i':'ي','o':'و','u':'و'
+  };
+
+  let result = '';
+  for (let i = 0; i < working.length; i++) result += singleCharMap[working[i]] || working[i];
+
+  return (prefix + initialVowel + result + suffix)
+    .replace(/ا{2,}/g, 'ا').replace(/ي{2,}/g, 'ي').replace(/و{2,}/g, 'و');
+}
+
+/* 5) الدالة المركزية لترجمة أي خلية نصية */
+function translateCellText(text) {
+  if (text === null || text === undefined) return '';
+  let original = String(text).trim();
+  if (original === '') return '';
+
+  if (!isNaN(original) && original !== '') return original;
+  if (!/[a-zA-Z]/.test(original)) return original;
+
+  let cleanInput = original.replace(/([a-zA-Z]+)-ال\s+([a-zA-Z]+)/i, '$1 al-$2')
+                           .replace(/([a-zA-Z]+)-ال-([a-zA-Z]+)/i, '$1 al-$2');
+
+  const lowerFull = cleanInput.toLowerCase().trim();
+  if (PHRASE_DICTIONARY[lowerFull]) return PHRASE_DICTIONARY[lowerFull];
+
+  const roadMatch = lowerFull.match(/^(.+?)\s+(road|street|way)$/i);
+  if (roadMatch) {
+    const namePart = translateCellText(roadMatch[1]);
+    const typePart = (roadMatch[2].toLowerCase() === 'street') ? 'شارع' : 'طريق';
+    const definedName = namePart.startsWith('ال') ? namePart : ('ال' + namePart);
+    return typePart + ' ' + definedName;
+  }
+
+  const coMatch = lowerFull.match(/^(.+?)\s+(co|co\.|company)$/i);
+  if (coMatch) {
+    const namePart = translateCellText(coMatch[1]);
+    return 'شركة ' + namePart;
+  }
+
+  const tokens = cleanInput.match(/[\w\u0600-\u06FF]+(?:-[\w\u0600-\u06FF]+)*|[^\s\w\u0600-\u06FF]+|\s+/g) || [cleanInput];
+  const translatedTokens = tokens.map(tok => {
+    if (/^\s+$/.test(tok)) return tok;
+    if (/^[^\s\w\u0600-\u06FF]+$/.test(tok)) return tok === '&' ? ' و ' : tok;
+    if (!isNaN(tok.trim()) && tok.trim() !== '') return tok;
+    if (/^[\u0600-\u06FF]+$/.test(tok)) return tok;
+
+    const lowerTok = tok.toLowerCase().replace(/[.,()]/g, '');
+    if (WORD_DICTIONARY[lowerTok]) return WORD_DICTIONARY[lowerTok];
+
+    return transliterateToken(tok);
+  });
+
+  return translatedTokens.join('').replace(/\s{2,}/g, ' ').trim();
+}
+
+/* 6) ترجمة رأس العمود */
+function translateHeader(header) {
+  if (!header) return '';
+  const cleanKey = String(header).toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (HEADER_DICTIONARY[cleanKey]) return HEADER_DICTIONARY[cleanKey];
+  return translateCellText(header);
+}
+
+/* حالة التطبيق والعناصر */
+let state = null, activeSheet = 0;
+
+const dropZone    = document.getElementById('dropZone');
+const fileInput   = document.getElementById('fileInput');
+const chooseBtn   = document.getElementById('chooseBtn');
+const statusMsg   = document.getElementById('statusMsg');
+const resultCard  = document.getElementById('resultCard');
+const tableHead   = document.getElementById('tableHead');
+const tableBody   = document.getElementById('tableBody');
+const searchInput = document.getElementById('searchInput');
+const rowCountEl  = document.getElementById('rowCount');
+const noResults   = document.getElementById('noResults');
+const downloadBtn = document.getElementById('downloadBtn');
+const lastTransInput = document.getElementById('lastTransInput');
+
+chooseBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+dropZone.addEventListener('click', () => fileInput.click());
+
+fileInput.addEventListener('change', (e) => {
+  if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+  fileInput.value = '';
+});
+
+['dragenter','dragover'].forEach(evt => {
+  dropZone.addEventListener(evt, (e) => {
+    e.preventDefault(); e.stopPropagation();
+    dropZone.classList.add('dragover');
+  });
+});
+['dragleave','drop'].forEach(evt => {
+  dropZone.addEventListener(evt, (e) => {
+    e.preventDefault(); e.stopPropagation();
+    dropZone.classList.remove('dragover');
+  });
+});
+dropZone.addEventListener('drop', (e) => {
+  const files = e.dataTransfer.files;
+  if (files && files[0]) handleFile(files[0]);
+});
+
+searchInput.addEventListener('input', () => renderTable(searchInput.value));
+downloadBtn.addEventListener('click', exportToExcel);
+
+function showStatus(message, type) {
+  statusMsg.textContent = message;
+  statusMsg.className = 'status-msg ' + type;
+}
+function clearStatus() {
+  statusMsg.className = 'status-msg';
+  statusMsg.textContent = '';
+}
+
+function handleFile(file) {
+  clearStatus();
+  resultCard.classList.add('hidden');
+
+  if (typeof XLSX === 'undefined') {
+    showStatus('⚠ مكتبة Excel غير محمّلة. اتصل بالإنترنت مرة واحدة ثم أعد فتح الصفحة.', 'error');
+    return;
+  }
+  if (!/\.(xlsx|xls)$/i.test(file.name)) {
+    showStatus('⚠ الملف يجب أن يكون xls أو xlsx.', 'error');
+    return;
+  }
+
+  showStatus('⏳ جاري المعالجة...', 'info');
+
+  const reader = new FileReader();
+  reader.onerror = function () {
+    showStatus('⚠ تعذر قراءة الملف.', 'error');
+  };
+  reader.onload = function (e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array', cellDates: false });
+      if (!workbook.SheetNames || workbook.SheetNames.length === 0) {
+        showStatus('⚠ لا توجد ورقة عمل داخل الملف.', 'error');
+        return;
+      }
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const rawRows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: true, defval: '' });
+      if (!rawRows || rawRows.length < 2) {
+        showStatus('⚠ الملف فارغ.', 'error');
+        return;
+      }
+      processWorkbookData(rawRows);
+    } catch (err) {
+      console.error(err);
+      showStatus('⚠ خطأ أثناء المعالجة: ' + err.message, 'error');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+const PRODUCT_HEADER_RE = /prod|item|material|منتج|مادة|الماده/i;
+const DRIVER_HEADER_RE  = /driver|سائق|mobile|phone|جوال|contact|تواصل/i;
+const CUST_HEADER_RE    = /cust|client|عميل|عملاء/i;
+const SUP_HEADER_RE     = /sup|مورد/i;
+
+/* إزالة أرقام الجوالات وعبارة "رقم السائق للتواصل*" تلقائيًا */
+const LABEL_RE      = /رقم\s*(?:ال)?سائق\s*(?:ل|لل)\s*تواصل\s*[*:]*/g;
+const PHONE_RE      = /(?<!\d)(?:\+?966|00966|0)5\d{8}(?!\d)/g;
+const PHONE_BARE_RE = /(?<!\d)5\d{8}(?!\d)/g;
+function cleanText(str, broad) {
+  let t = String(str).replace(LABEL_RE, ' ').replace(PHONE_RE, ' ');
+  if (broad) t = t.replace(PHONE_BARE_RE, ' ');
+  t = t.replace(/\s{2,}/g, ' ').trim();
+  if (/^[\s*:\-_.,؛،]*$/.test(t)) return '';
+  return t;
+}
+
+/* ============================ الإعدادات ============================ */
+const ACCOUNTING_FMT = '_-* #,##0_-;\\-* #,##0_-;_-* "-"??_-;_-@_-';
+
+/* صفحة تقرير الاكسل */
+const EXCEL_SPEC = {
+  name: 'تقرير الاكسل',
+  cols: ['تاريخ الخروج','كود المركبة','رقم المعاملة','السائق','اسم الناقل','الجنسية','الوزن الصافي','الملاحظات','اسم المنتج','PARTY'],
+  fmt: { 'الوزن الصافي': '0.00' },
+  tons: ['الوزن الصافي']
+};
+const NUMERIC_LABELS = ['رقم المعاملة','كود المركبة','الوزن الصافي','السائق','الملاحظات'];
+const PARTY_LABEL = 'العملاء / الموردين';
+
+/* التقرير اليومي */
+const DAILY_COLS   = ['م','العميل','المادة','الكمية','الناقل','رقم السيارة','Ticket','وقت الدخول','وقت الخروج'];
+const DAY_START_HOUR = 7;                  // يوم التقرير من 7 ص إلى 7 ص التالية
+const VOID_MAX_KG  = 1000;                 // أي وزن أقل من هذا يُعتبر ملغى
+const EXCLUDE_DAILY = [/water|مياه|ماء/i]; // مواد لا تظهر في التقرير اليومي
+const DAY_NAMES = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+/* 60/70 الوارد: يُضاف رمز جهة المورد حسب عمود الجنسية */
+const ORIGIN_RULES = [
+  [/yanbu|yanbo|ينبع/i, 'Y'],
+  [/tanura|tanoura|tannura|ras\s*tan|تنور/i, 'R.S'],
+  [/jed+ah|jidd?ah|جدة/i, 'J'],
+  [/riyadh|riyad|الرياض/i, 'R']
+];
+/* تجميع المواد في الإجماليات (الاختصار) */
+const GROUP_RULES = [
+  [/sbs/i, 'SBS'],
+  [/(^|[^a-z])c\.?\s?r(?![a-z])|c-?\s?rubber|crumb/i, 'C.R']
+];
+
+function numify(v) {
+  if (typeof v === 'string' && /^(0|[1-9]\d{0,14})(\.\d+)?$/.test(v.trim())) return Number(v.trim());
+  return v;
+}
+function typeFor(orig, tr) {
+  if (/date/i.test(orig) || /^تاريخ/.test(tr)) return 'date';
+  if (/time/i.test(orig) || /^وقت/.test(tr)) return 'time';
+  if (PRODUCT_HEADER_RE.test(orig) || /المنتج|المادة/.test(tr)) return 'keep';
+  if (DRIVER_HEADER_RE.test(orig)) return 'driver';
+  return 'translate_all';
+}
+
+/* ============================ التاريخ والوقت ============================ */
+const EPOCH = Date.UTC(1899, 11, 30);
+function dateSerial(v) {
+  if (typeof v === 'number') return Math.floor(v);
+  if (v instanceof Date && !isNaN(v.getTime())) return Math.floor((Date.UTC(v.getFullYear(), v.getMonth(), v.getDate()) - EPOCH) / 86400000);
+  const m = String(v).match(/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+  if (m) return Math.floor((Date.UTC(+m[3], +m[2] - 1, +m[1]) - EPOCH) / 86400000);
+  return NaN;
+}
+function timeMinutes(v) {
+  if (typeof v === 'number') return Math.round((v - Math.floor(v)) * 1440);
+  const m = String(v).match(/(\d{1,2}):(\d{2})(?::\d{2})?\s*([AaPp][Mm])?/);
+  if (!m) return NaN;
+  let h = +m[1];
+  if (m[3]) h = (h % 12) + (/p/i.test(m[3]) ? 12 : 0);
+  return h * 60 + (+m[2]);
+}
+function stampOf(d, t) {
+  const ds = dateSerial(d), tm = timeMinutes(t);
+  return (isNaN(ds) || isNaN(tm)) ? NaN : ds * 1440 + tm;
+}
+function bizDay(stamp) { return Math.floor((stamp - DAY_START_HOUR * 60) / 1440); }
+function serialInfo(s) {
+  if (isNaN(s)) return { day: '', date: '' };
+  const d = new Date(EPOCH + s * 86400000);
+  return {
+    day: DAY_NAMES[d.getUTCDay()],
+    date: String(d.getUTCDate()).padStart(2, '0') + '/' + String(d.getUTCMonth() + 1).padStart(2, '0') + '/' + d.getUTCFullYear()
+  };
+}
+
+function serialToParts(serial) {
+  const days = Math.floor(serial);
+  const d = new Date(EPOCH + days * 86400000);
+  return { d: d.getUTCDate(), m: d.getUTCMonth() + 1, y: d.getUTCFullYear() };
+}
+function formatSerialDate(serial) {
+  const p = serialToParts(serial);
+  return String(p.d).padStart(2, '0') + '/' + String(p.m).padStart(2, '0') + '/' + p.y;
+}
+function formatSerialTime(serial) {
+  const sec = Math.round((serial - Math.floor(serial)) * 86400) % 86400;
+  const h = Math.floor(sec / 3600), mi = Math.floor((sec % 3600) / 60);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  let h12 = h % 12; if (h12 === 0) h12 = 12;
+  return h12 + ':' + String(mi).padStart(2, '0') + ' ' + ampm;
+}
+function formatTimeValue(value) {
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    const hours = value.getHours(), minutes = value.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    let hour12 = hours % 12; if (hour12 === 0) hour12 = 12;
+    return hour12 + ':' + String(minutes).padStart(2, '0') + ' ' + ampm;
+  }
+  if (typeof value === 'string') {
+    const match = value.match(/(\d{1,2}):(\d{2})(?::\d{2})?\s*([AaPp][Mm])/);
+    if (match) return match[1] + ':' + match[2] + ' ' + match[3].toUpperCase();
+  }
+  return null;
+}
+function formatDateValue(dateObj) {
+  return String(dateObj.getDate()).padStart(2, '0') + '/' + String(dateObj.getMonth() + 1).padStart(2, '0') + '/' + dateObj.getFullYear();
+}
+
+function processCell(value, colType) {
+  if (value === '' || value === null || value === undefined) return '';
+
+  if (colType === 'date') {
+    if (typeof value === 'number') return formatSerialDate(value);
+    if (value instanceof Date) return formatDateValue(value);
+    return String(value);
+  }
+  if (colType === 'time') {
+    if (typeof value === 'number') return formatSerialTime(value);
+    const t = formatTimeValue(value);
+    return t !== null ? t : String(value);
+  }
+  if (typeof value === 'number') {
+    if (colType === 'driver' && /^(?:966|00966|0)?5\d{8}$/.test(String(Math.round(value)))) return '';
+    return value;
+  }
+  const cleaned = cleanText(value, colType === 'driver');
+  if (cleaned === '') return '';
+  if (colType === 'keep') return cleaned;
+  return translateCellText(cleaned);
+}
+
+/* ============================ المعالجة ============================ */
+function originCode(v) {
+  const s = String(v || '');
+  for (const [re, code] of ORIGIN_RULES) if (re.test(s)) return code;
+  return '';
+}
+function groupOf(p) {
+  for (const [re, g] of GROUP_RULES) if (re.test(p)) return g;
+  return p;
+}
+function dailyProduct(it) {
+  let p = it.rawProd;
+  if (/^plastic\s*pellets/i.test(p)) p = 'P.P';
+  if (it.dir === 'in' && /^60\s*\/\s*70$/.test(p)) {
+    const o = originCode(it.origin);
+    if (o) p = '60/70-' + o;
+  }
+  return p;
+}
+
+/* تجهيز الصفوف (وارد/صادر، الطرف، الناقل ...) لليوم المختار */
+function prepareItems(kept, I) {
+  // 3) وارد / صادر حسب الوزنين: الوزن الأول أكبر = وارد
+  kept.forEach((it, i) => {
+    it.seq = i;
+    it.dir = (!isNaN(it.first) && !isNaN(it.second) && it.first !== it.second)
+      ? (it.first > it.second ? 'in' : 'out')
+      : (it.sup ? 'in' : 'out');
+    it.party = it.dir === 'in' ? (it.sup || it.cust) : (it.cust || it.sup);
+    it.partyAll = it.cust && it.sup ? it.cust + ' / ' + it.sup : (it.cust || it.sup);
+    it.kind = it.cust ? 'cust' : (it.sup ? 'sup' : '');
+    it.carrier = String(it.vals[I.carr] === undefined ? '' : it.vals[I.carr]);
+    it.vehicle = numify(it.vals[I.veh]);
+    it.tin = it.vals[I.tIn];
+    it.tout = it.vals[I.tOut];
+  });
+}
+
+function processWorkbookData(rawRows) {
+  const headers = rawRows[0].map(h => (h === null || h === undefined) ? '' : String(h));
+  const body = rawRows.slice(1);
+  const trHeaders = headers.map(h => translateHeader(h));
+  const types = headers.map((h, i) => typeFor(h, trHeaders[i]));
+  const ix = label => trHeaders.indexOf(label);
+
+  const custIdx = headers.findIndex(h => CUST_HEADER_RE.test(h));
+  const supIdx  = headers.findIndex(h => SUP_HEADER_RE.test(h));
+  const I = {
+    first: ix('الوزن الأول'), second: ix('الوزن الثاني'), net: ix('الوزن الصافي'),
+    prod: ix('اسم المنتج'), carr: ix('اسم الناقل'), veh: ix('كود المركبة'),
+    nat: ix('الجنسية'), dIn: ix('تاريخ الدخول'), tIn: ix('وقت الدخول'),
+    tOut: ix('وقت الخروج'), trans: ix('رقم المعاملة')
+  };
+  const need = [['الوزن الصافي', I.net], ['اسم المنتج', I.prod], ['اسم الناقل', I.carr],
+                ['كود المركبة', I.veh], ['وقت الدخول', I.tIn], ['وقت الخروج', I.tOut]]
+               .filter(x => x[1] < 0).map(x => x[0]);
+  if (custIdx < 0 && supIdx < 0) need.push(PARTY_LABEL);
+  if (need.length) {
+    showStatus('⚠ أعمدة ناقصة في الملف: ' + need.join('، '), 'error');
+    return;
+  }
+
+  const num = v => {
+    if (typeof v === 'number') return v;
+    const n = parseFloat(String(v).replace(/,/g, ''));
+    return isNaN(n) ? NaN : n;
+  };
+  const at = (row, i) => i >= 0 ? row[i] : '';
+
+  const items = [];
+  body.forEach(row => {
+    if (row.every(c => c === '' || c === null || c === undefined)) return;
+    const vals = headers.map((h, i) => processCell(row[i] === undefined ? '' : row[i], types[i]));
+    items.push({
+      vals,
+      cust: custIdx >= 0 ? String(vals[custIdx]).trim() : '',
+      sup:  supIdx  >= 0 ? String(vals[supIdx]).trim()  : '',
+      first: num(at(row, I.first)), second: num(at(row, I.second)), net: num(at(row, I.net)),
+      stamp: stampOf(at(row, I.dIn), at(row, I.tIn)),
+      origin: at(row, I.nat),
+      rawProd: String(vals[I.prod] || '').trim(),
+      origTrans: I.trans >= 0 ? numify(vals[I.trans]) : ''
+    });
+  });
+
+  // 1) استبعاد الأوزان الملغاة (مثل 30 كجم)
+  const live = items.filter(it => !(it.net < VOID_MAX_KG));
+  const voidCount = items.length - live.length;
+
+  // 2) يوم التقرير = اليوم الأكثر حركة (يبدأ 7 ص) ويمكن تغييره من القائمة، وما سواه من وردية أخرى
+  const cnt = {};
+  live.forEach(it => { if (!isNaN(it.stamp)) { const d = bizDay(it.stamp); cnt[d] = (cnt[d] || 0) + 1; } });
+  let reportDay = NaN, best = 0;
+  Object.keys(cnt).forEach(k => { if (cnt[k] > best || (cnt[k] === best && +k > reportDay)) { best = cnt[k]; reportDay = +k; } });
+  const kept = live.filter(it => isNaN(it.stamp) || isNaN(reportDay) || bizDay(it.stamp) === reportDay);
+  const otherShift = live.length - kept.length;
+
+  prepareItems(kept, I);
+
+  // أعمدة صفحة الاكسل
+  const missing = [];
+  const excelCols = [];
+  EXCEL_SPEC.cols.forEach(label => {
+    if (label === 'PARTY') { excelCols.push({ party: true, label: PARTY_LABEL, type: 'party' }); return; }
+    const idx = trHeaders.indexOf(label);
+    if (idx < 0) { missing.push(label); return; }
+    excelCols.push({ idx, label, type: types[idx] });
+  });
+
+  const waterCount = kept.filter(it => EXCLUDE_DAILY.some(re => re.test(it.rawProd))).length;
+
+  state = { items: kept, allLive: live, I, excelCols, reportDay, daily: null, excel: null };
+  activeSheet = 0;
+
+  const notes = [];
+  if (otherShift) notes.push('وردية أخرى (' + otherShift + ')');
+  if (voidCount)  notes.push('وزن ملغى (' + voidCount + ')');
+  if (waterCount) notes.push('مياه من اليومي (' + waterCount + ')');
+  if (missing.length) {
+    showStatus('⚠ أعمدة غير موجودة في صفحة الاكسل: ' + missing.join('، '), 'error');
+  } else {
+    showStatus('✅ تم' + (notes.length ? ' — استُبعد: ' + notes.join('، ') : ''), 'success');
+  }
+
+  resultCard.classList.remove('hidden');
+  refreshViews();
+  buildDayPicker();
+}
+
+/* ترقيم رقم المعاملة: الصف الأخير = الرقم المكتوب، وكل صف أعلاه أقل بواحد */
+function getLastTrans() {
+  const raw = (lastTransInput.value || '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d]/g, '');
+  return raw === '' ? null : Number(raw);
+}
+function applyTickets() {
+  const last = getLastTrans();
+  const n = state.items.length;
+  state.items.forEach((it, i) => { it.ticket = last === null ? it.origTrans : last - (n - 1 - i); });
+}
+lastTransInput.addEventListener('input', () => {
+  if (!state) return;
+  refreshViews();
+});
+
+function buildDayPicker() {
+  const box = document.getElementById('dayPicker');
+  const sel = document.getElementById('daySelect');
+  const cnt = {};
+  state.allLive.forEach(it => { if (!isNaN(it.stamp)) { const d = bizDay(it.stamp); cnt[d] = (cnt[d] || 0) + 1; } });
+  const days = Object.keys(cnt).map(Number).sort((a, b) => a - b);
+  sel.innerHTML = '';
+  days.forEach(d => {
+    const info = serialInfo(d), nx = serialInfo(d + 1);
+    const o = document.createElement('option');
+    o.value = d;
+    o.textContent = info.day + ' ' + info.date + ' 7 ص  ←  ' + nx.day + ' ' + nx.date + ' 7 ص   (' + cnt[d] + ' شاحنة)';
+    if (d === state.reportDay) o.selected = true;
+    sel.appendChild(o);
+  });
+  box.classList.toggle('hidden', days.length < 2);
+}
+document.getElementById('daySelect').addEventListener('change', function () {
+  if (!state) return;
+  const day = Number(this.value);
+  const kept = state.allLive.filter(it => isNaN(it.stamp) || bizDay(it.stamp) === day);
+  prepareItems(kept, state.I);
+  state.items = kept;
+  state.reportDay = day;
+  refreshViews();
+});
+
+function refreshViews() {
+  applyTickets();
+  state.daily = makeDaily();
+  state.excel = makeExcel();
+  buildTabs();
+  renderTable(searchInput.value);
+}
+
+/* ============================ بناء التقرير اليومي ============================ */
+function makeDaily() {
+  const rows = state.items
+    .filter(it => !EXCLUDE_DAILY.some(re => re.test(it.rawProd)))
+    .map(it => {
+      const product = dailyProduct(it);
+      return {
+        dir: it.dir, party: it.party, product, group: groupOf(product),
+        net: isNaN(it.net) ? 0 : it.net, carrier: it.carrier, vehicle: it.vehicle,
+        ticket: it.ticket, tin: it.tin, tout: it.tout, seq: it.seq
+      };
+    });
+
+  const cmp = (a, b) => a < b ? -1 : (a > b ? 1 : 0);
+  const section = (dir, title) => {
+    const rs = rows.filter(r => r.dir === dir);
+    const gt = {}, pt = {};
+    rs.forEach(r => {
+      gt[r.group] = (gt[r.group] || 0) + r.net;
+      const k = r.group + '|' + r.party;
+      pt[k] = (pt[k] || 0) + r.net;
+    });
+    rs.sort((a, b) =>
+      (gt[b.group] - gt[a.group]) || cmp(a.group, b.group) ||
+      (pt[b.group + '|' + b.party] - pt[a.group + '|' + a.party]) || cmp(a.party, b.party) ||
+      (a.seq - b.seq));
+    rs.forEach((r, i) => { r.no = i + 1; });
+    const groups = Object.keys(gt).map(name => ({ name, total: gt[name] }))
+      .sort((a, b) => (b.total - a.total) || cmp(a.name, b.name));
+    return { title, rows: rs, total: rs.reduce((s, r) => s + r.net, 0), groups };
+  };
+
+  const info = serialInfo(state.reportDay);
+  return { day: info.day, date: info.date, sections: [section('in', 'الوارد'), section('out', 'الصادر')] };
+}
+
+/* ============================ بناء صفحة الاكسل ============================ */
+function makeExcel() {
+  const cols = state.excelCols;
+  const rows = state.items.map(it => {
+    const out = cols.map(c => {
+      if (c.party) return it.partyAll;
+      const v = it.vals[c.idx];
+      let val = NUMERIC_LABELS.includes(c.label) ? numify(v) : v;
+      if (EXCEL_SPEC.tons.includes(c.label) && typeof val === 'number') val = Math.round(val) / 1000;
+      return val;
+    });
+    out.kind = it.kind;
+    return out;
+  });
+  const tIdx = cols.findIndex(c => c.label === 'رقم المعاملة');
+  if (tIdx >= 0) rows.forEach((r, i) => { r[tIdx] = state.items[i].ticket; });
+  return { name: EXCEL_SPEC.name, cols, rows, fmt: EXCEL_SPEC.fmt, tons: EXCEL_SPEC.tons };
+}
+
+/* ============================ العرض ============================ */
+function fmtN(n) { return Math.round(n).toLocaleString('en-US'); }
+
+function buildTabs() {
+  const box = document.getElementById('sheetTabs');
+  box.innerHTML = '';
+  ['التقرير اليومي', EXCEL_SPEC.name].forEach((name, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tab-btn' + (i === activeSheet ? ' active' : '');
+    btn.textContent = name;
+    btn.addEventListener('click', () => { activeSheet = i; buildTabs(); renderTable(searchInput.value); });
+    box.appendChild(btn);
+  });
+}
+
+function renderTable(filterText) {
+  if (!state) return;
+  if (activeSheet === 0) renderDaily(filterText); else renderExcel(filterText);
+}
+
+function addRow(cls, cells) {
+  const tr = document.createElement('tr');
+  if (cls) tr.className = cls;
+  cells.forEach(c => {
+    const td = document.createElement('td');
+    td.textContent = c[0] === null || c[0] === undefined ? '' : c[0];
+    if (c[1] > 1) td.colSpan = c[1];
+    if (c[2]) td.className = c[2];
+    tr.appendChild(td);
+  });
+  tableBody.appendChild(tr);
+}
+
+function renderDaily(filterText) {
+  const d = state.daily;
+  const f = (filterText || '').trim().toLowerCase();
+  tableHead.innerHTML = '';
+  tableBody.innerHTML = '';
+
+  addRow('d', [['اليوم:', 2, 'lbl'], [d.day, 2], ['التاريخ:', 1, 'lbl'], [d.date, 4]]);
+  let shown = 0;
+  d.sections.forEach(sec => {
+    addRow('d', [[sec.title, 9, 'g-dark']]);
+    addRow('d', DAILY_COLS.map((h, i) => [h, 1, i % 2 === 0 ? 'g-blue' : 'g-gray']));
+    sec.rows.forEach(r => {
+      const cells = [r.no, r.party, r.product, fmtN(r.net), r.carrier, r.vehicle, r.ticket, r.tin, r.tout];
+      if (f && !cells.some(c => String(c).toLowerCase().includes(f))) return;
+      shown++;
+      addRow('d', cells.map((c, i) => [c, 1, i === 0 ? 'g-gray' : (i === 4 ? 'small' : '')]));
+    });
+    addRow('d', [['إجمالي ' + sec.title, 3, 'g-dark'], [fmtN(sec.total), 1, 'g-yellow'], ['', 5, 'g-gray']]);
+    for (let i = 0; i < sec.groups.length; i += 2) {
+      const g1 = sec.groups[i], g2 = sec.groups[i + 1];
+      const cells = [['إجمالي ' + g1.name, 3, 'g-dark'], [fmtN(g1.total), 1, 'g-green']];
+      if (g2) cells.push(['إجمالي ' + g2.name, 4, 'g-dark'], [fmtN(g2.total), 1, 'g-green']);
+      else cells.push(['', 5, 'gs']);
+      addRow('d', cells);
+    }
+  });
+
+  noResults.classList.toggle('hidden', !(f && shown === 0));
+  rowCountEl.textContent = 'عدد الصفوف: ' + shown.toLocaleString('ar-EG');
+}
+
+function renderExcel(filterText) {
+  const sh = state.excel;
+  const pIdx = sh.cols.findIndex(c => c.party);
+
+  tableHead.innerHTML = '';
+  const headTr = document.createElement('tr');
+  sh.cols.forEach(c => {
+    const th = document.createElement('th');
+    th.textContent = c.label;
+    headTr.appendChild(th);
+  });
+  tableHead.appendChild(headTr);
+
+  const filter = (filterText || '').trim().toLowerCase();
+  const filtered = filter === ''
+    ? sh.rows
+    : sh.rows.filter(row => row.some(cell => String(cell).toLowerCase().includes(filter)));
+
+  tableBody.innerHTML = '';
+  filtered.forEach(row => {
+    const tr = document.createElement('tr');
+    row.forEach((cellVal, ci) => {
+      const td = document.createElement('td');
+      if (ci === pIdx && row.kind) td.className = row.kind;
+      const colLabel = sh.cols[ci].label;
+      td.textContent = cellVal === null || cellVal === undefined ? ''
+        : (sh.tons.includes(colLabel) && typeof cellVal === 'number') ? cellVal.toFixed(2) : cellVal;
+      tr.appendChild(td);
+    });
+    tableBody.appendChild(tr);
+  });
+
+  noResults.classList.toggle('hidden', filtered.length !== 0);
+  rowCountEl.textContent = 'عدد الصفوف: ' + filtered.length.toLocaleString('ar-EG');
+}
+
+/* ============================ التصدير ============================ */
+const XL_FONT = 'Times New Roman', XL_SIZE = 14;
+
+const GRAD = {
+  gray:   ['FFF8F8F8', 'FFCECECE'],
+  blue:   ['FFFAFDFE', 'FFD4ECF8'],
+  dark:   ['FFFFFFFF', 'FF8A8A8A'],
+  yellow: ['FFFFFFCC', 'FFFFFF00'],
+  green:  ['FFE9F7E1', 'FF7FCB6E']
+};
+const gradFill = k => ({ type: 'gradient', gradient: 'angle', degree: 90,
+  stops: [{ position: 0, color: { argb: GRAD[k][0] } }, { position: 1, color: { argb: GRAD[k][1] } }] });
+
+function addDailySheet(wb) {
+  const d = state.daily;
+  const ws = wb.addWorksheet('التقرير اليومي', {
+    views: [{ rightToLeft: true, showGridLines: true }],
+    pageSetup: { paperSize: 9, orientation: 'portrait', fitToPage: true, fitToWidth: 1, fitToHeight: 0 }
+  });
+  // عرض كل عمود بقدر أطول نص فيه
+  const lens = DAILY_COLS.map(h => String(h).length);
+  d.sections.forEach(sec => sec.rows.forEach(row => {
+    [row.no, row.party, row.product, fmtN(row.net), row.carrier, row.vehicle, row.ticket, row.tin, row.tout]
+      .forEach((v, i) => { lens[i] = Math.max(lens[i], String(v === null || v === undefined ? '' : v).length); });
+  }));
+  lens.forEach((n, i) => { ws.getColumn(i + 1).width = Math.max(n * 1.35 + 3, 5); });
+
+  const thin = { style: 'thin', color: { argb: 'FF000000' } };
+  const border = { top: thin, left: thin, bottom: thin, right: thin };
+  const put = (r, c1, c2, value, o) => {
+    o = o || {};
+    ws.getCell(r, c1).value = value;
+    if (c2 > c1) ws.mergeCells(r, c1, r, c2);
+    for (let c = c1; c <= c2; c++) {
+      const cell = ws.getCell(r, c);
+      cell.font = { name: XL_FONT, size: o.size || 14, bold: true, color: { argb: 'FF000000' } };
+      cell.alignment = { horizontal: o.align || 'center', vertical: 'middle', wrapText: false, shrinkToFit: !!o.shrink };
+      cell.border = border;
+      if (o.grad) cell.fill = gradFill(o.grad);
+      if (o.fmt) cell.numFmt = o.fmt;
+    }
+    ws.getRow(r).height = 22;
+  };
+
+  let r = 1;
+  put(r, 1, 2, 'اليوم:', { align: 'right' });
+  put(r, 3, 4, d.day, {});
+  put(r, 5, 5, 'التاريخ:', { align: 'right' });
+  put(r, 6, 9, d.date, {});
+  r++;
+
+  d.sections.forEach(sec => {
+    put(r, 1, 9, sec.title, { grad: 'dark', size: 14 }); r++;
+    DAILY_COLS.forEach((h, i) => put(r, i + 1, i + 1, h, { grad: i % 2 === 0 ? 'blue' : 'gray' }));
+    r++;
+    sec.rows.forEach(row => {
+      const vals = [row.no, row.party, row.product, row.net, row.carrier, row.vehicle, row.ticket, row.tin, row.tout];
+      vals.forEach((v, i) => {
+        const o = {};
+        if (i === 0) o.grad = 'gray';
+        if (i === 3) o.fmt = '#,##0';
+        put(r, i + 1, i + 1, v, o);
+      });
+      r++;
+    });
+    put(r, 1, 3, 'إجمالي ' + sec.title, { grad: 'dark' });
+    put(r, 4, 4, sec.total, { grad: 'yellow', fmt: '#,##0' });
+    put(r, 5, 9, '', { grad: 'gray' });
+    r++;
+    for (let i = 0; i < sec.groups.length; i += 2) {
+      const g1 = sec.groups[i], g2 = sec.groups[i + 1];
+      put(r, 1, 3, 'إجمالي ' + g1.name, { grad: 'dark' });
+      put(r, 4, 4, g1.total, { grad: 'green', fmt: '#,##0' });
+      if (g2) {
+        put(r, 5, 8, 'إجمالي ' + g2.name, { grad: 'dark' });
+        put(r, 9, 9, g2.total, { grad: 'green', fmt: '#,##0' });
+      }
+      r++;
+    }
+  });
+}
+
+function addExcelSheet(wb, sh) {
+  const thin = { style: 'thin', color: { argb: 'FF7F8C94' } };
+  const border = { top: thin, left: thin, bottom: thin, right: thin };
+  const fillOf = argb => ({ type: 'pattern', pattern: 'solid', fgColor: { argb } });
+  const ws = wb.addWorksheet(sh.name, { views: [{ rightToLeft: true, state: 'frozen', ySplit: 1 }] });
+
+  const hr = ws.addRow(sh.cols.map(c => c.label));
+  hr.height = 30;
+  hr.eachCell(c => {
+    c.font = { name: XL_FONT, size: XL_SIZE, bold: true, color: { argb: 'FFFFFFFF' } };
+    c.fill = fillOf('FF20639B');
+    c.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+    c.border = border;
+  });
+
+  sh.rows.forEach((row, ri) => {
+    const vals = row.map((v, ci) => {
+      if (sh.cols[ci].type === 'date' && typeof v === 'string') {
+        const m = v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+        if (m) return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1]));
+      }
+      return v;
+    });
+    const rr = ws.addRow(vals);
+    rr.height = 24;
+    for (let ci = 1; ci <= sh.cols.length; ci++) {
+      const col = sh.cols[ci - 1];
+      const c = rr.getCell(ci);
+      c.font = { name: XL_FONT, size: XL_SIZE, bold: true, color: { argb: 'FF1F1F1F' } };
+      c.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+      c.border = border;
+      if (col.party && row.kind) {
+        c.fill = fillOf(row.kind === 'cust' ? 'FFD9D9D9' : 'FFFFD8A8');
+      } else if (ri % 2 === 1) {
+        c.fill = fillOf('FFEAF3F8');
+      }
+      if (col.type === 'date' && c.value instanceof Date) c.numFmt = 'dd/mm/yyyy';
+      if (sh.fmt && sh.fmt[col.label] && typeof c.value === 'number') c.numFmt = sh.fmt[col.label];
+    }
+  });
+
+  sh.cols.forEach((col, i) => {
+    let max = String(col.label).length;
+    sh.rows.forEach(rw => { max = Math.max(max, String(rw[i] === null || rw[i] === undefined ? '' : rw[i]).length); });
+    ws.getColumn(i + 1).width = Math.min(Math.max(max * 1.6 + 4, 14), 50);
+  });
+}
+
+async function exportToExcel() {
+  if (!state) return;
+  if (typeof ExcelJS === 'undefined') {
+    showStatus('⚠ مكتبة ExcelJS غير محمّلة. اتصل بالإنترنت مرة واحدة ثم أعد فتح الصفحة.', 'error');
+    return;
+  }
+  try {
+    const wb = new ExcelJS.Workbook();
+    addDailySheet(wb);
+    addExcelSheet(wb, state.excel);
+
+    const buf = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'الميزان_مترجم_بالكامل.xlsx';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    showStatus('✅ تم التنزيل', 'success');
+  } catch (err) {
+    console.error(err);
+    showStatus('⚠ تعذر إنشاء الملف: ' + err.message, 'error');
+  }
+}
+</script>
+</body>
+</html>

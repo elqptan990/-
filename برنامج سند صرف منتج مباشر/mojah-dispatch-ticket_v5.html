@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سند صرف المنتج — مصنع موجة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0a0b0d;--p:#14161a;--p2:#1b1e24;--ln:#272b33;--tx:#eceef1;--mu:#8a909b;--ac:#ffb81c;--ac2:#ff8a00;--ok:#3ecf8e;--er:#ff6370;--r:14px;--in:#0e1013;--veil:rgba(3,10,20,.62)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(var(--veil),var(--veil)),url("mojah-background.jpg");background-position:center;background-size:cover;background-attachment:fixed;color:var(--tx);font:14px/1.55 Cairo,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+#app{font-size:16px}
+header{display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(20,22,26,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;color:#111}
+header h1{font-size:16px;margin:0;font-weight:700}
+header small{display:block;color:var(--mu);font-size:12px}
+nav{display:flex;gap:3px;margin-inline-start:auto;background:var(--p2);padding:4px;border-radius:12px;border:1px solid var(--ln);flex-wrap:wrap}
+nav button{background:transparent;color:var(--mu);border:0;border-radius:9px;padding:7px 14px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}
+nav button:hover{color:var(--tx)}
+nav button.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#111}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--p2);color:var(--tx);border:1px solid var(--ln);border-radius:11px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--ac);transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#111;border-color:transparent;box-shadow:0 6px 18px rgba(255,150,0,.25)}
+.btn.big{padding:12px 22px;font-size:15px}
+.bar .pri{flex:1}
+.btn.dng{color:var(--er)}
+label.btn{font-size:14px;color:var(--tx);margin:0}
+main{padding:18px;max-width:1240px;margin:auto}
+.tab{display:none}.tab.on{display:block}
+.grid{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:18px;align-items:start}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.pv{position:static!important}}
+.card{background:var(--p);border:1px solid var(--ln);border-radius:var(--r);padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12px;color:var(--mu);margin-bottom:5px;font-weight:600}
+input,select,textarea{width:100%;height:42px;background:var(--in);color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:0 12px;font:inherit;transition:.15s}
+textarea{height:auto;padding:10px 12px}
+select{appearance:none;-webkit-appearance:none;background:var(--in) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%238a909b' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 12px center;padding-right:38px}
+input[type=checkbox]{height:auto;width:auto;accent-color:var(--ac)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px rgba(255,184,28,.18)}
+.ltr{direction:ltr;text-align:left}
+.cb{position:relative}
+.cb input{padding-right:42px}
+.ar{position:absolute;right:4px;top:4px;width:34px;height:34px;border:0;background:transparent;color:var(--mu);border-radius:8px;cursor:pointer;display:grid;place-items:center;padding:0}
+.ar:hover{background:rgba(255,184,28,.14);color:var(--ac)}
+.dp{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+.menu{position:absolute;right:0;left:0;top:calc(100% + 4px);max-height:240px;overflow:auto;background:var(--p2);border:1px solid var(--ln);border-radius:11px;z-index:20;box-shadow:0 14px 34px rgba(0,0,0,.55);direction:ltr}
+.it{padding:9px 12px;cursor:pointer;font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.it:hover{background:rgba(255,184,28,.14);color:var(--ac)}
+.fg{margin-bottom:12px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.err{color:var(--er);font-size:13px;font-weight:600;min-height:16px;margin-top:6px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.chips label{display:flex;gap:6px;align-items:center;color:var(--tx);margin:0;font-size:12px;direction:ltr;background:var(--p2);border:1px solid var(--ln);padding:5px 10px;border-radius:20px;cursor:pointer}
+.print-chip{display:flex;align-items:center;gap:9px;background:var(--p2);border:1px solid var(--ln);padding:7px 9px;border-radius:11px}
+.print-chip input[type=checkbox]{flex:none;transform:scale(1.2)}
+.print-edit{width:180px;height:40px;padding:0 10px;direction:auto;text-align:start;font-size:16px;border-radius:7px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--ln);text-align:start}
+th{color:var(--ac);font-weight:700;position:sticky;top:0;background:var(--p);z-index:1}
+tbody tr:hover td{background:rgba(255,255,255,.03)}
+td input{height:34px;padding:0 8px}
+.sc{overflow-x:auto;max-height:68vh}
+.pv{background:repeating-linear-gradient(45deg,#1a1d22,#1a1d22 12px,#171a1e 12px,#171a1e 24px);border:1px solid var(--ln);border-radius:var(--r);padding:14px;overflow:hidden;position:sticky;top:84px}
+#stage{position:relative;margin:auto}
+.sheet{position:absolute;left:0;top:0;width:794px;height:1123px;background:#fff;transform-origin:0 0;direction:ltr;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.fld,.lbl{position:absolute;white-space:nowrap;font-family:"Times New Roman",Times,serif;color:#000;line-height:1}
+.fld{font-weight:700}
+.lbl{font-weight:700}
+.sel{outline:2px dashed var(--ac);outline-offset:3px}
+#pvSheet2 .fld,#pvSheet2 .lbl{cursor:pointer;touch-action:auto;padding:2px 4px;margin:-2px -4px}
+#printRoot{display:none}
+.ok{color:var(--ok)}.bad{color:var(--er)}
+#toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--p2);color:var(--tx);border:1px solid var(--ac);padding:10px 18px;border-radius:12px;display:none;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+@page{size:A4;margin:0}
+@media print{
+ html,body{background:#fff;padding:0}
+ #app,#toast{display:none!important}
+ #printRoot{display:block}
+ #printRoot .sheet{position:absolute;transform:none!important;box-shadow:none}
+}
+
+/* light theme */
+html[data-theme=light]{color-scheme:light;--bg:#f2f4f8;--p:#fff;--p2:#eef1f6;--ln:#d8dee8;--tx:#1b212b;--mu:#667085;--in:#fff;--veil:rgba(240,246,252,.68)}
+html[data-theme=light] body{background-color:var(--bg);background-image:linear-gradient(var(--veil),var(--veil)),url("mojah-background.jpg");background-position:center;background-size:cover;background-attachment:fixed}
+html[data-theme=light] header{background:rgba(255,255,255,.35)}
+html[data-theme=light] .card{box-shadow:none}
+html[data-theme=light] .pv{background:transparent}
+html[data-theme=light] .menu{box-shadow:0 10px 26px rgba(20,30,50,.18)}
+html[data-theme=light] th{color:#b36b00}
+.tbtn{width:38px;height:38px;padding:0!important;border-radius:10px}
+.tbtn .sun{display:none}html[data-theme=light] .tbtn .sun{display:block}html[data-theme=light] .tbtn .moon{display:none}
+/* compact buttons */
+.btn{padding:7px 14px;border-radius:9px;font-size:13px}
+.btn.big{padding:10px 20px;font-size:14px}
+.btn.pri{box-shadow:none}
+/* history toolbar */
+.htool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--ln)}
+.hs{position:relative;flex:1;min-width:220px;max-width:380px}
+.hs svg{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--mu);pointer-events:none}
+.hs input{padding-right:36px}
+.badge{background:var(--p2);border:1px solid var(--ln);color:var(--mu);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:600;white-space:nowrap}
+.htool .sp{flex:1}
+.btn.xl{background:#1f7a4d;color:#fff;border-color:transparent}
+.btn.xl:hover{border-color:transparent;filter:brightness(1.12)}
+.btn.dng{background:transparent}
+.btn.hdel{background:rgba(255,99,112,.12);border-color:rgba(255,99,112,.35);color:var(--er)}
+.btn.hdel:hover{background:rgba(255,99,112,.2);border-color:var(--er)}
+.hactions{display:flex;gap:6px;white-space:nowrap}
+table{border-radius:10px;overflow:hidden}
+th{background:var(--p2)!important;font-size:12px}
+/* data manager */
+.datahead{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}
+.datahead h2{margin:0;font-size:20px}
+.datahead p{margin:3px 0 0;color:var(--mu);font-size:13px}
+.dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media(max-width:820px){.dgrid{grid-template-columns:1fr}}
+.dgrid .wide{grid-column:1/-1}
+.dgrid>.card{padding:18px}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.dh h3{margin:0;font-size:15px}
+.add{display:flex;gap:8px;margin-bottom:10px}
+.add input,.newtr input{min-width:0}
+.srch{margin:0 0 10px}
+.li{max-height:340px;overflow:auto;border:1px solid var(--ln);border-radius:12px;background:var(--in)}
+.lr{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:48px;padding:7px 10px 7px 14px;border-bottom:1px solid var(--ln);font-size:13px}
+.lr:last-child{border-bottom:0}.lr:hover{background:var(--p2)}
+.lr>span:first-child{min-width:0;overflow-wrap:anywhere}
+.lr>span:last-child{display:flex;gap:4px;flex:none}
+.ib{background:var(--p2);border:1px solid var(--ln);color:var(--mu);cursor:pointer;min-width:34px;height:30px;padding:0 8px;border-radius:8px;font:inherit;font-size:12px}
+.ib:hover{background:var(--p2);color:var(--tx)}.ib.dx:hover{color:var(--er);background:rgba(255,99,112,.12)}
+.ib.save-edit{color:var(--ok)}.ib.cancel-edit{color:var(--mu)}
+.lr input{height:34px;min-width:0;flex:1}
+.empty{padding:14px;text-align:center;color:var(--mu);font-size:12px}
+.carrier-tools{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.carrier-tools .tsearch{flex:1;margin:0}
+.carrier-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:12px}
+.tc{min-width:0;border:1px solid var(--ln);border-radius:14px;background:var(--in);overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.tc:hover{border-color:color-mix(in srgb,var(--ac) 42%,var(--ln))}
+.tc.open{border-color:color-mix(in srgb,var(--ac) 55%,var(--ln));box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.carrier-head{display:flex;align-items:center;gap:12px;min-height:76px;padding:12px 14px}
+.carrier-toggle{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:0;border:0;background:transparent;color:var(--tx);text-align:start;font:inherit;cursor:pointer}
+.carrier-mark{display:grid;place-items:center;flex:none;width:40px;height:40px;border:1px solid rgba(255,184,28,.24);border-radius:12px;background:rgba(255,184,28,.1);color:var(--ac)}
+.carrier-mark svg{width:20px;height:20px}
+.carrier-title{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:700}
+.carrier-subtitle{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px;color:var(--mu);font-size:11px}
+.carrier-count{flex:none;padding:4px 9px;border:1px solid var(--ln);border-radius:20px;background:var(--p2);color:var(--mu);font-size:11px;white-space:nowrap}
+.carrier-chevron{flex:none;color:var(--mu);transition:transform .18s}
+.tc.open .carrier-chevron{transform:rotate(180deg);color:var(--ac)}
+.carrier-actions{display:flex;gap:5px}
+.carrier-actions .ib{background:transparent}
+.carrier-body{padding:0 14px 14px;border-top:1px solid var(--ln)}
+.carrier-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 0 12px}
+.carrier-form .fg{min-width:0;margin:0}
+.carrier-form label{font-size:11px}
+.carrier-add{display:flex;gap:8px;margin:0 0 12px}
+.carrier-add input{min-width:0}
+.driver-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:7px;max-height:250px;overflow:auto}
+.driver-item{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;min-height:38px;padding:4px 6px 4px 10px;border:1px solid var(--ln);border-radius:9px;background:var(--p2)}
+.driver-item>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+.driver-item button{flex:none;width:27px;height:27px;border:0;border-radius:7px;background:transparent;color:var(--mu);cursor:pointer}
+.driver-item button:hover{background:rgba(255,99,112,.12);color:var(--er)}
+.carrier-empty{grid-column:1/-1;padding:13px;border:1px dashed var(--ln);border-radius:10px;color:var(--mu);text-align:center;font-size:12px}
+html[data-theme=light] .tc.open{box-shadow:0 8px 24px rgba(20,30,50,.07)}
+.newtr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px;margin-bottom:14px;padding:12px;background:var(--p2);border:1px solid var(--ln);border-radius:12px}
+@media(max-width:600px){.datahead{align-items:flex-start;flex-direction:column}.th2,.newtr{grid-template-columns:1fr}.th2 .btn,.newtr .btn{width:100%}.add{align-items:stretch}.add .btn{padding-inline:10px}}
+/* simple layout editor */
+.align-grid{display:grid;grid-template-columns:minmax(320px,420px) minmax(0,1fr);gap:16px;align-items:start}
+.align-panel{min-width:0}
+.align-heading h2{margin:0;font-size:18px}
+.align-heading p{margin:4px 0 14px;color:var(--mu);font-size:12px}
+.align-preview{top:84px}
+.align-settings{margin-bottom:12px;border:1px solid var(--ln);border-radius:11px;background:var(--p2)}
+.align-settings summary{padding:10px 12px;cursor:pointer;color:var(--mu);font-size:12px}
+.align-settings[open] summary{border-bottom:1px solid var(--ln);color:var(--tx)}
+.align-offset{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}
+.align-offset label{font-size:11px}
+.align-offset input{height:36px}
+.move-card{margin:0 0 12px;padding:12px;background:var(--p2);border:1px solid var(--ln);border-radius:12px}
+#selName{min-height:22px;margin-bottom:10px;color:var(--ac);font-size:13px;font-weight:700}
+.move-tools{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.move-pad{display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,40px);gap:5px}
+.move-pad button,.size-tools button{display:grid;place-items:center;min-width:40px;height:40px;border:1px solid var(--ln);border-radius:10px;background:var(--p);color:var(--tx);font:inherit;font-weight:700;cursor:pointer}
+.move-pad button:hover,.size-tools button:hover{border-color:var(--ac);color:var(--ac)}
+.move-pad [data-mv="0,-1"]{grid-column:2;grid-row:1}
+.move-pad [data-mv="-1,0"]{grid-column:1;grid-row:2}
+.move-pad [data-mv="0,1"]{grid-column:2;grid-row:2}
+.move-pad [data-mv="1,0"]{grid-column:3;grid-row:2}
+.move-options{display:grid;gap:7px;min-width:110px}
+.move-options label{margin:0;font-size:11px}
+.move-options select{height:38px;padding-inline:9px}
+#stepSel{background-size:12px 12px;background-position:right 9px center;padding-right:28px}
+.size-tools{display:flex;align-items:center;gap:7px}
+.size-tools span{flex:1;color:var(--mu);font-size:12px}
+.size-tools button{min-width:42px}
+.layout-list{display:grid;gap:8px}
+.layout-item{min-width:0;padding:9px 10px;border:1px solid var(--ln);border-radius:11px;background:var(--p2);transition:border-color .15s,background .15s}
+.layout-item.selected{border-color:var(--ac);background:rgba(255,184,28,.07)}
+.layout-item.disabled{opacity:.62}
+.layout-item-head{display:flex;align-items:center;gap:8px;min-height:34px}
+.layout-check{display:flex;align-items:center;gap:8px;flex:1;min-width:0;margin:0;color:var(--tx);font-size:13px;cursor:pointer}
+.layout-check input{flex:none}
+.layout-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.layout-select{flex:none;padding:5px 10px;border:1px solid var(--ln);border-radius:8px;background:var(--p);color:var(--mu);font:inherit;font-size:11px;cursor:pointer}
+.layout-item.selected .layout-select{border-color:var(--ac);color:var(--ac)}
+.precision{margin-top:7px;border-top:1px solid var(--ln);padding-top:5px}
+.precision summary{cursor:pointer;color:var(--mu);font-size:11px;padding:4px 0}
+.precision-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding-top:7px}
+.precision-grid label{min-width:0;margin:0;font-size:10px}
+.precision-grid input{height:34px;padding:0 7px;font-size:12px}
+.align-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.align-actions .btn{width:100%}
+.align-help{margin:10px 0 0;color:var(--mu);font-size:11px;line-height:1.6}
+@media(max-width:820px){.align-grid{grid-template-columns:1fr}.align-preview{position:static!important;grid-row:1}.align-panel{grid-row:2}}
+@media(max-width:480px){.move-card{padding:10px}.move-pad{grid-template-columns:repeat(3,38px);grid-template-rows:repeat(2,38px)}.move-pad button,.size-tools button{min-width:36px;height:38px}.move-options{min-width:94px}.precision-grid{gap:5px}.align-actions{grid-template-columns:1fr}}
+/* calendar */
+#cal{position:absolute;z-index:40;top:calc(100% + 6px);right:0;width:280px;background:var(--p);border:1px solid var(--ln);border-radius:14px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,.35);direction:rtl}
+#cal .ch{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+#cal .ch b{flex:1;text-align:center;font-size:14px}
+#cal .ch button{width:30px;height:30px;border:1px solid var(--ln);background:var(--p2);color:var(--tx);border-radius:8px;cursor:pointer;font-size:16px;line-height:1}
+#cal .ch button:hover{border-color:var(--ac)}
+#cal select{height:30px;width:72px;padding:0 6px!important;font-size:12px;background-image:none!important;text-align:center}
+.add .btn,.newtr .btn,.th2 .btn{white-space:nowrap;flex:none}
+#cal .g7{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+#cal .wd{font-size:11px;color:var(--mu);padding:4px 0}
+#cal .d{height:32px;border:0;background:none;color:var(--tx);border-radius:8px;cursor:pointer;font:inherit;font-size:13px;padding:0}
+#cal .d:hover{background:var(--p2)}
+#cal .d.o{opacity:.3}
+#cal .d.t{box-shadow:inset 0 0 0 1px var(--ac)}
+#cal .d.s{background:var(--ac);color:#111;font-weight:700}
+#cal .cf{display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--ln)}
+#cal .cf button{background:none;border:0;color:var(--ac);cursor:pointer;font:inherit;font-weight:600}
+/* Keep the supplied image visible behind the app while controls remain legible. */
+header{background:rgba(5,12,22,.34)}
+nav{background:transparent;border-color:transparent}
+.card{background:transparent;border-color:transparent;box-shadow:none}
+.pv{background:transparent;border-color:transparent}
+.tc,.align-settings,.move-card,.layout-item{background:transparent}
+.layout-item.selected{background:rgba(255,184,28,.08)}
+header h1{font-size:18px}
+header small{font-size:14px}
+nav button{font-size:15px}
+.btn{font-size:15px}
+label{font-size:14px}
+input,select,textarea{font-size:16px}
+.badge{font-size:14px}
+table{font-size:15px}
+th{font-size:14px}
+.it{font-size:15px}
+.datahead h2{font-size:22px}
+.datahead p{font-size:14px}
+.dh h3{font-size:17px}
+.carrier-subtitle{font-size:13px}
+.carrier-count{font-size:13px}
+.driver-item>span{font-size:13px}
+.layout-heading p,.align-help{font-size:13px}
+input::placeholder{font-size:14px}
+html[data-theme=light] header{background:rgba(255,255,255,.35)}
+html[data-theme=light] .card{background:transparent;border-color:transparent;box-shadow:none}
+html[data-theme=light] .pv{background:transparent;border-color:transparent}
+html[data-theme=light] .tc,html[data-theme=light] .align-settings,html[data-theme=light] .move-card,html[data-theme=light] .layout-item{background:transparent}
+html[dir=ltr] select{background-position:left 12px center;padding-left:38px;padding-right:12px}
+html[dir=ltr] .cb input{padding-left:42px;padding-right:12px}
+html[dir=ltr] .ar{left:4px;right:auto}
+
+@media print{body{background:#fff!important;background-image:none!important}}
+/* أداء: خلفية ثابتة بطبقة مستقلة بدل background-attachment:fixed، وبدون blur */
+body,html[data-theme=light] body{background-image:none!important;background-attachment:scroll!important}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(var(--veil),var(--veil)),url("mojah-background.jpg") center/cover no-repeat;transform:translateZ(0)}
+header,nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+ <div class="logo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V6h11v10M13 9h5l3 3v4h-3"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><div><h1>سند صرف المنتج مباشر</h1><small>مصنع موجة للأسفلت — فرع سيل الخير</small></div>
+ <nav id="nav">
+  <button data-t="issue" class="on">إصدار سند</button><button data-t="hist">السجل</button><button data-t="data">القوائم</button><button data-t="align">المحاذاة</button>
+ </nav>
+ <button class="btn tbtn" id="bTheme" title="تبديل الوضع: فاتح / داكن" aria-label="تبديل الوضع"><svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<main>
+<section class="tab on" id="t-issue"><div class="grid">
+ <div class="card">
+  <div class="row">
+   <div class="fg"><label>رقم السند</label><input id="f_no" class="ltr" inputmode="numeric" placeholder="اكتب رقم السند"></div>
+   <div class="fg"><label>التاريخ</label><div class="cb"><input id="f_date" class="ltr" placeholder="يوم/شهر/سنة" autocomplete="off"><button type="button" class="ar" data-dp="1" tabindex="-1" title="تقويم"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2v4M13 2v4"/></svg></button></div></div>
+  </div>
+  <div class="fg"><label>الشركة</label><div class="cb"><input id="f_company" class="ltr" autocomplete="off"><button type="button" class="ar" data-cb="f_company" tabindex="-1" title="القائمة"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg></button></div></div>
+  <div class="row">
+   <div class="fg"><label>المنتج</label><div class="cb"><input id="f_product" class="ltr" autocomplete="off"><button type="button" class="ar" data-cb="f_product" tabindex="-1" title="القائمة"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg></button></div></div>
+   <div class="fg"><label>الوزن (كجم)</label><input id="f_weight" class="ltr" inputmode="numeric"></div>
+  </div>
+  <div class="row">
+   <div class="fg"><label>الناقل</label><div class="cb"><input id="f_trans" class="ltr" autocomplete="off" placeholder="اكتب أو اختر الناقل"><button type="button" class="ar" data-cb="f_trans" tabindex="-1" title="قائمة الناقلين"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg></button></div></div>
+   <div class="fg"><label>اسم السائق</label><div class="cb"><input id="f_driver" class="ltr" autocomplete="off"><button type="button" class="ar" data-cb="f_driver" tabindex="-1" title="القائمة"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l5 5 5-5"/></svg></button></div></div>
+  </div>
+  <div class="row">
+   <div class="fg"><label>رقم الجوال</label><input id="f_mobile" class="ltr" inputmode="tel"></div>
+   <div class="fg"><label>رقم الشاحنة</label><input id="f_plate" class="ltr"></div>
+  </div>
+  <div class="err" id="errs"></div>
+  <div class="chips" id="chips"></div>
+  <div class="bar">
+   <button class="btn pri big" id="bPrint"><svg viewBox="0 0 20 20" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8V3h8v5M6 14H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-2"/><rect x="6" y="12" width="8" height="6" rx="1"/></svg>طباعة السند</button>
+   <button class="btn big" id="bClear"><svg viewBox="0 0 20 20" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v12M4 10h12"/></svg>سند جديد</button>
+  </div>
+  <datalist id="dl_company"></datalist><datalist id="dl_product"></datalist><datalist id="dl_driver"></datalist>
+ </div>
+ <div class="pv"><div id="stage"><div class="sheet" id="pvSheet"></div></div></div>
+</div></section>
+
+<section class="tab" id="t-hist"><div class="card">
+ <div class="htool"><div class="hs"><svg viewBox="0 0 20 20" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="9" r="5.5"/><path d="M13.5 13.5L17 17"/></svg><input id="hq" placeholder="بحث بالرقم أو الشركة أو السائق أو الشاحنة"></div><span class="badge" id="hcount"></span><div class="sp"></div><button class="btn xl" id="bCsv"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v10M6 9l4 4 4-4M4 16h12"/></svg>تصدير Excel</button><button class="btn dng" id="bHClr">مسح السجل</button></div>
+ <div class="sc"><table><thead><tr><th>#</th><th>التاريخ</th><th>الشركة</th><th>المنتج</th><th>كجم</th><th>السائق</th><th>الناقل</th><th>الشاحنة</th><th></th></tr></thead><tbody id="hbody"></tbody></table></div>
+</div></section>
+
+<section class="tab" id="t-data"><div class="datahead"><div><h2>إدارة القوائم</h2><p>أضف وعدّل الشركات والمنتجات والناقلين والسائقين المستخدمة في السند.</p></div><span class="badge" id="dataSummary"></span></div><div class="dgrid" id="dBox"></div>
+ <div class="bar" style="margin-top:16px"><button class="btn" id="bExp">نسخة احتياطية (JSON)</button><label class="btn" style="margin:0">استيراد نسخة<input type="file" id="bImp" accept=".json" hidden></label></div>
+</section>
+
+<section class="tab" id="t-align"><div class="align-grid"><div class="card align-panel">
+ <div class="align-heading"><h2>ترتيب عناصر السند</h2><p>اختر العنصر من المعاينة أو القائمة، ثم حرّكه بأزرار الأسهم فقط.</p></div>
+ <details class="align-settings"><summary>إعدادات الطباعة الإضافية</summary><div class="align-offset">
+  <div><label for="o_x">إزاحة الصفحة يمين / يسار (مم)</label><input id="o_x" type="number" step="0.5"></div><div><label for="o_y">إزاحة الصفحة أعلى / أسفل (مم)</label><input id="o_y" type="number" step="0.5"></div>
+ </div></details>
+ <div class="move-card"><div id="selName">اختر عنصرًا من القائمة أو اضغط عليه في المعاينة</div>
+  <div class="move-tools"><div class="move-pad" aria-label="تحريك العنصر">
+   <button type="button" data-mv="0,-1" aria-label="تحريك لأعلى" title="لأعلى">↑</button><button type="button" data-mv="-1,0" aria-label="تحريك لليسار" title="لليسار">←</button><button type="button" data-mv="0,1" aria-label="تحريك لأسفل" title="لأسفل">↓</button><button type="button" data-mv="1,0" aria-label="تحريك لليمين" title="لليمين">→</button>
+  </div><div class="move-options"><label for="stepSel">مقدار الحركة</label><select id="stepSel"><option value="0.5">دقيق جدًا</option><option value="1">دقيق</option><option value="2">متوسط</option><option value="5">واسع</option><option value="10">واسع جدًا</option></select></div></div>
+  <div class="size-tools" style="margin-top:10px"><span>حجم النص</span><button type="button" data-fs="-1" aria-label="تصغير النص">− تصغير</button><button type="button" data-fs="1" aria-label="تكبير النص">+ تكبير</button></div>
+ </div>
+ <div class="layout-list" id="lbody"></div>
+ <div class="align-actions"><button class="btn pri" id="bTest">طباعة ورقة اختبار</button></div>
+ <p class="align-help">كل تعديل يُحفظ تلقائيًا. للتحريك بدقة أكبر، افتح «ضبط دقيق» أسفل العنصر.</p>
+</div><div class="pv align-preview"><div id="stage2" style="position:relative;margin:auto"><div class="sheet" id="pvSheet2"></div></div></div></div></section>
+
+</main>
+</div>
+<div id="printRoot"><div class="sheet" id="prSheet"></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='mojah_dispatch_v1', MM=96/25.4;
+const uiLang='ar';
+const translateUi=v=>String(v);
+const DEF_DB=()=>({
+ companies:["AL-EJTTIAZ","AL-Yousefiya","Al Hamad Company","Rowad Al.Jazeera","Delta Al.Jazeera","AL-AYED","SAS Company","Rashid Contracting","Al-Falah Company","Masarat Al-Sudara","Al-Amiriyah","Esnad","Al-Ittihad Al-Sarie","Centirc","Santic Al-Alamiyah","Arabian Gulf","Eid Al-Qahtani","Intisar Company"],
+ products:["50/40","60/70","80/100"],
+ trans:[
+  {id:"asnad",ar:"اسناد",print:"Asnad Transport",drivers:["ARJUN BISHWOKARMA","BHESHA RAJ THAKURI","BINOD UPADHYAYA","DEANRJ YADAV","DHANRAJ YADAV","JANAM TAMANG","KHALIKULIAH KHAN","LAXMAN BALAMI","NAR BAHADUR B K","PRAKASH PARLYAR","PRATIK B K","RAJESH DHAMI","RAM BALAMI","RAMESH SUNAR","RANA MAGAR MAHESH","SALMAN KHAN","SIR LAL TAMANG","TUL BAHADUR SHAHI","UMESH RAJTHALA","MILAN TAMANG","VIRAS","MANUJ GUPTA"]},
+  {id:"alayed",ar:"العايد",print:"AL-AYED Transport",drivers:["ASLI ASHAQ","SIRAJ IMRAJ KHAN","MAKBOOL MANSOOR","ANSAR AMIN YOUSAF","Ngad Saad Hamad","Zishan Mohamed","Agay Ravinder","GABBAR KHAN","SAJID ALI RAHAT","AJAY RAVIDNER","MOHD ABDULIA","MOHAMED ANAS","SAJID Ahmed Younas","Gohra Ud Naqeem","Sahall Abbas Sajjad","RASHID SAID YOUSAF","Rayhan Sulaiman","GUL WAKEEL"]},
+  {id:"centric",ar:"سنتريك",print:"Centric Transport",drivers:["MOHAMED SHOAIB","DINISH ALI ZULFQAR","SHER KHAN","KAMRAN KHAN"]}]
+});
+const DEF_LAYOUT=()=>({
+ no:{l:"رقم السند",x:28,y:192,s:22},date:{l:"التاريخ",x:15,y:222,s:22},company:{l:"الشركة",x:4,y:270,s:22},
+ product:{l:"المنتج",x:67,y:378,s:30},weight:{l:"الوزن",x:436,y:378,s:30},kg:{l:"الوحدة",x:563,y:376,s:26},
+ driver:{l:"السائق",x:203,y:876,s:20},trans:{l:"الناقل",x:178,y:920,s:20},mobile:{l:"الجوال",x:203,y:958,s:20},plate:{l:"الشاحنة",x:225,y:1042,s:20},
+ lb_drv:{l:"عنوان: Driver’s",t:"Driver’s",lab:1,x:4,y:876,s:20},lb_veh:{l:"عنوان: vehicle. Desc",t:"vehicle. Desc",lab:1,x:4,y:920,s:20},
+ lb_mob:{l:"عنوان: Mobile.No :",t:"Mobile.No :",lab:1,x:4,y:958,s:20},lb_pl:{l:"عنوان: Vehicle Plate No.",t:"Vehicle Plate No.",lab:1,x:4,y:1042,s:20}});
+const PRINT_GROUPS={lb_drv:["driver"],lb_veh:["trans"],lb_mob:["mobile"],lb_pl:["plate"]};
+const LBLS=[["Driver’s",4,876],["vehicle. Desc",4,920],["Mobile.No :",4,958],["Vehicle Plate No.",4,1042]];
+let S;
+function syncPrintGroups(){for(const[label,fields]of Object.entries(PRINT_GROUPS)){
+ const on=S.layout[label].on!==false&&fields.every(k=>S.layout[k].on!==false);
+ S.layout[label].on=on;fields.forEach(k=>S.layout[k].on=on)}}
+function setPrintEnabled(k,on){S.layout[k].on=on;
+ for(const[label,fields]of Object.entries(PRINT_GROUPS))if(label===k||fields.includes(k)){
+  S.layout[label].on=on;fields.forEach(field=>S.layout[field].on=on)}}
+function syncPrintControls(){for(const[label,fields]of Object.entries(PRINT_GROUPS))for(const k of [label,...fields]){
+ const chip=document.querySelector('[data-lc="'+k+'"]'),row=document.querySelector('[data-on="'+k+'"]');
+ if(chip)chip.checked=S.layout[k].on!==false;if(row)row.checked=S.layout[k].on!==false;
+ const item=document.querySelector('[data-row="'+k+'"]');if(item)item.classList.toggle('disabled',S.layout[k].on===false)}}
+function load(){let r=null;try{r=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+ S=(r&&typeof r==='object')?r:{};
+ S.db=S.db&&Array.isArray(S.db.trans)?S.db:DEF_DB();
+ const firstCompany=S.db.companies.findIndex(c=>String(c).trim().toLowerCase()==='al-ejttiaz');
+ if(firstCompany>0)S.db.companies.unshift(S.db.companies.splice(firstCompany,1)[0]);
+ {const dl=DEF_LAYOUT(),sl=S.layout||{};S.layout=Object.fromEntries(Object.keys(dl).map(k=>[k,Object.assign({},dl[k],sl[k]||{})]))}
+ syncPrintGroups();
+ S.hist=Array.isArray(S.hist)?S.hist:[];S.memo=S.memo||{};
+ S.opts=Object.assign({ox:0,oy:0,guide:false,step:1,tab:'issue',theme:'dark',lang:'ar'},S.opts||{});document.documentElement.dataset.theme=S.opts.theme==='light'?'light':'dark';
+ S.draft=S.draft&&typeof S.draft==='object'?S.draft:null;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("تعذر الحفظ في المتصفح")}}
+function toast(m){const t=$('toast');t.textContent=translateUi(m);t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2200)}
+const fmtDate=d=>d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+const csvCell=v=>'"'+String(v).replace(/"/g,'""')+'"';
+function findDriver(n){n=(n||'').trim().toLowerCase();if(!n)return null;
+ for(const t of S.db.trans)if(t.drivers.some(d=>d.toLowerCase()===n))return t.id;return null}
+const transOf=id=>S.db.trans.find(t=>t.id===id);
+function findTrans(n){n=(n||'').trim().toLowerCase();return n?S.db.trans.find(t=>t.print.toLowerCase()===n||t.ar.toLowerCase()===n):null}
+function rememberTrans(n){n=(n||'').trim();if(!n)return null;
+ let t=findTrans(n);if(t){$('f_trans').value=t.print;return t}
+ t={id:'tr'+Date.now(),ar:n,print:n,drivers:[]};S.db.trans.push(t);save();fillLists();renderData();toast('تم حفظ الناقل')
+ return t}
+function validate(d){const e=[];
+ if(!/^\d{1,10}$/.test(d.no))e.push("رقم السند مطلوب (أرقام فقط)");
+ if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(d.date))e.push("التاريخ بصيغة d/m/yyyy");
+ if(!d.company.trim())e.push("الشركة مطلوبة");
+ if(!d.product.trim())e.push("المنتج مطلوب");
+ if(!/^\d+$/.test(d.weight)||+d.weight<1||+d.weight>99999)e.push("الوزن رقم صحيح بين 1 و 99999 كجم");
+ if(!d.driver.trim())e.push("اسم السائق مطلوب");
+ if(!d.plate.trim())e.push("رقم الشاحنة مطلوب");
+ if(d.mobile&&!/^\d{9,12}$/.test(d.mobile))e.push("رقم الجوال 9–12 رقماً");
+ return e}
+function getData(){
+ return{no:$('f_no').value.trim(),date:$('f_date').value.trim(),company:$('f_company').value.trim(),product:$('f_product').value.trim(),
+ weight:$('f_weight').value.trim(),driver:$('f_driver').value.trim(),trans:$('f_trans').value.trim(),mobile:$('f_mobile').value.trim(),plate:$('f_plate').value.trim()}}
+function renderSheet(root,d,sel){root.innerHTML='';
+ const ox=S.opts.ox*MM,oy=S.opts.oy*MM;
+ const add=(cls,txt,x,y,s,k)=>{const el=document.createElement('span');el.className=cls+(sel&&k===sel?' sel':'');el.dataset.k=k;el.textContent=txt;
+  el.style.left=(x+ox)+'px';el.style.top=(y+oy)+'px';el.style.fontSize=s+'px';root.appendChild(el);return el};
+ 
+ const v=Object.assign({},d,{kg:d.weight?'kg':''});
+ for(const k in S.layout){const L=S.layout[k];if(L.on===false)continue;const txt=L.lab?L.t:v[k];if(txt)add(L.lab?'lbl':'fld',txt,L.x,L.y,L.s,k)}}
+function fit(stageId,sheetId){const st=$(stageId),sh=$(sheetId);
+ const z=Math.min(1,(st.parentElement.clientWidth-20)/794)||1;
+ sh.style.transform='scale('+z+')';sh._z=z;st.style.width=794*z+'px';st.style.height=1123*z+'px'}
+function preview(){renderSheet($('pvSheet'),getData());fit('stage','pvSheet');saveDraft()}
+function previewAlign(){renderSheet($('pvSheet2'),SAMPLE(),SEL);fit('stage2','pvSheet2');selInfo()}
+const SAMPLE=()=>({no:"267864",date:"7/11/2026",company:"Santic Al-Alamiyah",product:"50/40",weight:"29470",driver:"GUL WAKEEL",trans:"AL-AYED Transport",mobile:"0539097617",plate:"2820"});
+function fillLists(){
+ $('dl_company').innerHTML=S.db.companies.map(c=>'<option value="'+esc(c)+'">').join('');
+ $('dl_product').innerHTML=S.db.products.map(c=>'<option value="'+esc(c)+'">').join('');
+ fillDrivers()}
+function fillDrivers(){const t=findTrans($('f_trans').value);
+ const ds=t?t.drivers:S.db.trans.flatMap(x=>x.drivers);
+ $('dl_driver').innerHTML=ds.map(c=>'<option value="'+esc(c)+'">').join('')}
+const DF=['f_no','f_date','f_company','f_product','f_weight','f_driver','f_mobile','f_plate'];
+let _dt=null;
+function flushSave(){if(_dt){clearTimeout(_dt);_dt=null;save()}}
+function saveDraft(){S.draft={tr:$('f_trans').value};DF.forEach(i=>S.draft[i]=$(i).value);clearTimeout(_dt);_dt=setTimeout(()=>{_dt=null;save()},400)}
+addEventListener('pagehide',flushSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)flushSave()});
+function restoreDraft(){const d=S.draft;if(!d)return false;DF.forEach(i=>$(i).value=d[i]||'');$('f_trans').value=d.tr||'';fillDrivers();preview();return true}
+function newTicket(){$('f_no').value='';$('f_date').value=fmtDate(new Date());
+ ['f_company','f_product','f_weight','f_driver','f_mobile','f_plate'].forEach(i=>$(i).value='');
+ $('errs').textContent='';preview()}
+function onDriver(){const n=$('f_driver').value.trim(),t=findDriver(n);
+ if(t){const carrier=transOf(t);if(carrier)$('f_trans').value=carrier.print}
+ const m=S.memo[n.toLowerCase()];
+ if(t||m){$('f_mobile').value=m?m.mobile:'';$('f_plate').value=m?m.plate:''}
+ fillDrivers();preview()}
+function nextTicketNo(){let m=null;for(const h of S.hist){if(/^\d{1,15}$/.test(String(h.no))){const v=BigInt(h.no);if(m===null||v>m)m=v}}return m===null?'267864':String(m+1n)}
+const ERR_FIELD=[["رقم السند","f_no"],["التاريخ","f_date"],["الشركة","f_company"],["المنتج","f_product"],["الوزن","f_weight"],["السائق","f_driver"],["رقم الشاحنة","f_plate"],["رقم الجوال","f_mobile"]];
+function doPrint(sample){if(!sample&&!$('f_no').value.trim()){const n=nextTicketNo();if(n){$('f_no').value=n;preview();toast('تم ترقيم السند تلقائياً: '+n)}}
+ const d=sample||getData();
+ if(!sample){$('errs').innerHTML='';
+  if(![d.company,d.product,d.weight,d.driver,d.trans,d.mobile,d.plate].some(v=>String(v||'').trim())){toast('اكتب بيانات واحدة على الأقل قبل الطباعة');return}
+  if(+d.weight>50000&&!confirm(translateUi("الوزن "+d.weight+" كجم أكبر من 50,000. متابعة؟")))return}
+ renderSheet($('prSheet'),d,false);
+ window.print();
+ if(!sample){S.hist.unshift(Object.assign({t:Date.now()},d));S.hist=S.hist.slice(0,2000);
+  if(d.driver)S.memo[d.driver.toLowerCase()]={mobile:d.mobile,plate:d.plate};learn(d);
+  save();saveDraft();renderHist();toast("تم تسجيل السند "+d.no+" — البيانات ثابتة في النموذج")}}
+function learn(d){let ch=false;
+ if(d.company&&!dupe(S.db.companies,d.company)){S.db.companies.unshift(d.company);ch=true}
+ if(d.product&&!dupe(S.db.products,d.product)){S.db.products.push(d.product);ch=true}
+ let t=findTrans(d.trans);if(d.trans&&!t){t={id:'tr'+Date.now(),ar:d.trans,print:d.trans,drivers:[]};S.db.trans.push(t);ch=true}
+ if(d.driver&&!findDriver(d.driver)&&t){t.drivers.push(d.driver);ch=true}
+ if(ch){save();fillLists();renderData()}return ch}
+function autoLearn(){const d=getData();
+ if(d.driver&&(d.mobile||d.plate)){S.memo[d.driver.toLowerCase()]={mobile:d.mobile,plate:d.plate}}
+ if(!learn(d))save()}
+function renderHist(){const q=$('hq').value.trim().toLowerCase();
+ const rows=S.hist.filter(h=>!q||[h.no,h.company,h.driver,h.plate,h.trans].join(' ').toLowerCase().includes(q));
+ $('hcount').textContent=rows.length+' سند';
+ $('hbody').innerHTML=rows.slice(0,300).map(h=>'<tr class="ltr"><td>'+esc(h.no)+'</td><td>'+esc(h.date)+'</td><td>'+esc(h.company)+'</td><td>'+esc(h.product)+'</td><td>'+esc(h.weight)+'</td><td>'+esc(h.driver)+'</td><td>'+esc(h.trans)+'</td><td>'+esc(h.plate)+'</td><td><div class="hactions"><button class="btn" data-re="'+h.t+'">إعادة</button><button class="btn hdel" data-del="'+S.hist.indexOf(h)+'" aria-label="حذف السند '+esc(h.no)+'">حذف</button></div></td></tr>').join('')}
+function crc32(b){if(!crc32.t){crc32.t=[];for(let n=0,c;n<256;n++){c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}let c=-1;for(let i=0;i<b.length;i++)c=crc32.t[(c^b[i])&255]^(c>>>8);return(c^-1)>>>0}
+function zipStore(files){const en=new TextEncoder(),parts=[],cd=[];let off=0;
+ for(const[n,t]of files){const nb=en.encode(n),db=en.encode(t),crc=crc32(db);
+  const l=new DataView(new ArrayBuffer(30));l.setUint32(0,0x04034b50,true);l.setUint16(4,20,true);l.setUint16(6,0x800,true);l.setUint16(12,0x21,true);l.setUint32(14,crc,true);l.setUint32(18,db.length,true);l.setUint32(22,db.length,true);l.setUint16(26,nb.length,true);
+  parts.push(new Uint8Array(l.buffer),nb,db);
+  const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x800,true);c.setUint16(14,0x21,true);c.setUint32(16,crc,true);c.setUint32(20,db.length,true);c.setUint32(24,db.length,true);c.setUint16(28,nb.length,true);c.setUint32(42,off,true);
+  cd.push(new Uint8Array(c.buffer),nb);off+=30+nb.length+db.length}
+ let cs=0;cd.forEach(x=>cs+=x.length);
+ const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+ return new Blob([...parts,...cd,new Uint8Array(e.buffer)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+const xe=v=>String(v??'').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function exportXlsx(){const q=$('hq').value.trim().toLowerCase();
+ const rows=S.hist.filter(h=>!q||[h.no,h.company,h.driver,h.plate,h.trans].join(' ').toLowerCase().includes(q));
+ if(!rows.length)return toast('لا توجد سندات للتصدير');
+ const H=["#","التاريخ","رقم السند","الشركة","المنتج","الوزن (كجم)","السائق","الناقل","الجوال","الشاحنة"],NC=H.length,col=i=>String.fromCharCode(65+i);
+ const T=(r,i,v,st)=>'<c r="'+col(i)+r+'" s="'+st+'" t="inlineStr"><is><t xml:space="preserve">'+xe(v)+'</t></is></c>';
+ const N=(r,i,v,st)=>'<c r="'+col(i)+r+'" s="'+st+'"><v>'+v+'</v></c>';
+ const blank=(r,st)=>{let o='';for(let i=1;i<NC;i++)o+='<c r="'+col(i)+r+'" s="'+st+'"/>';return o};
+ let x='<row r="1" ht="30" customHeight="1">'+T(1,0,'مصنع موجة للأسفلت — سجل سندات الصرف',1)+blank(1,1)+'</row>';
+ x+='<row r="2" ht="20" customHeight="1">'+T(2,0,'تاريخ التصدير: '+fmtDate(new Date())+'   |   عدد السندات: '+rows.length,9)+blank(2,9)+'</row>';
+ x+='<row r="3" ht="26" customHeight="1">'+H.map((h,i)=>T(3,i,h,2)).join('')+'</row>';
+ let tot=0;
+ rows.forEach((h,k)=>{const r=4+k,b=k%2,w=+h.weight||0;tot+=w;
+  x+='<row r="'+r+'" ht="20" customHeight="1">'+N(r,0,k+1,3+b)+T(r,1,h.date,3+b)+T(r,2,h.no,3+b)+T(r,3,h.company,3+b)+T(r,4,h.product,3+b)+N(r,5,w,5+b)+T(r,6,h.driver,3+b)+T(r,7,h.trans,3+b)+T(r,8,h.mobile||'',3+b)+T(r,9,h.plate,3+b)+'</row>'});
+ const last=3+rows.length,tr=last+1;
+ x+='<row r="'+tr+'" ht="24" customHeight="1">'+T(tr,0,'الإجمالي',7)+blank(tr,7).replace('<c r="F'+tr+'" s="7"/>','<c r="F'+tr+'" s="8"><f>SUM(F4:F'+last+')</f><v>'+tot+'</v></c>')+'</row>';
+ const widths=[6,13,13,28,10,15,28,24,15,12];
+ const sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><sheetViews><sheetView rightToLeft="1" workbookViewId="0" showGridLines="0"><pane ySplit="3" topLeftCell="A4" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="18"/><cols>'+widths.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join('')+'</cols><sheetData>'+x+'</sheetData><autoFilter ref="A3:J'+last+'"/><mergeCells count="3"><mergeCell ref="A1:J1"/><mergeCell ref="A2:J2"/><mergeCell ref="A'+tr+':E'+tr+'"/></mergeCells><pageMargins left="0.4" right="0.4" top="0.5" bottom="0.5" header="0.3" footer="0.3"/><pageSetup paperSize="9" orientation="landscape" fitToWidth="1" fitToHeight="0"/></worksheet>';
+ const bd='<border><left style="thin"><color rgb="FFD0D5DD"/></left><right style="thin"><color rgb="FFD0D5DD"/></right><top style="thin"><color rgb="FFD0D5DD"/></top><bottom style="thin"><color rgb="FFD0D5DD"/></bottom><diagonal/></border>';
+ const al='<alignment horizontal="center" vertical="center" wrapText="1"/>';
+ const xf=(f,fl,b,nf)=>'<xf numFmtId="'+(nf||0)+'" fontId="'+f+'" fillId="'+fl+'" borderId="'+b+'" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"'+(nf?' applyNumberFormat="1"':'')+'>'+al+'</xf>';
+ const styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="#,##0"/></numFmts><fonts count="6"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="15"/><color rgb="FF1F2A44"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FF1F2A44"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FF1F7A4D"/><name val="Calibri"/></font><font><i/><sz val="10"/><color rgb="FF667085"/><name val="Calibri"/></font></fonts><fills count="6"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1F2A44"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEEF3FA"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFFE9B0"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFDDF3E7"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>'+bd+'</borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="10"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'+xf(2,4,0)+xf(1,2,1)+xf(0,0,1)+xf(0,3,1)+xf(4,0,1,164)+xf(4,3,1,164)+xf(3,5,1)+xf(3,5,1,164)+xf(5,0,0)+'</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+ const wb='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="سندات الصرف" sheetId="1" r:id="rId1"/></sheets><definedNames><definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">\'سندات الصرف\'!$A$3:$J$'+last+'</definedName></definedNames></workbook>';
+ const files=[['[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'],
+ ['_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+ ['xl/workbook.xml',wb],
+ ['xl/_rels/workbook.xml.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+ ['xl/styles.xml',styles],['xl/worksheets/sheet1.xml',sheet]];
+ const a=document.createElement('a');a.href=URL.createObjectURL(zipStore(files));const d=new Date();
+ a.download='mojah-tickets-'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'.xlsx';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);toast('تم تصدير ملف Excel')}
+function dl(name,txt,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+const lines=s=>s.split('\n').map(x=>x.trim()).filter((x,i,a)=>x&&a.indexOf(x)===i);
+let LIST_EDIT=null,OPEN_TRANSPORTS=new Set();
+function listCard(k,title,ph){return '<div class="card"><div class="dh"><h3>'+title+'</h3><span class="badge" id="n_'+k+'"></span></div><div class="add"><input class="ltr" id="a_'+k+'" placeholder="'+ph+'" aria-label="'+ph+'"><button class="btn pri" data-add="'+k+'">+ إضافة</button></div><input class="srch" data-srch="'+k+'" placeholder="ابحث في '+title+'..." aria-label="بحث في '+title+'"><div class="li" id="l_'+k+'"></div></div>'}
+function fillList(k){const e=document.querySelector('[data-srch="'+k+'"]'),q=e?e.value.trim().toLowerCase():'';
+ $('l_'+k).innerHTML=S.db[k].map((x,i)=>({x,i})).filter(o=>!q||o.x.toLowerCase().includes(q)).map(o=>{
+  if(LIST_EDIT&&LIST_EDIT.k===k&&LIST_EDIT.i===o.i)return '<div class="lr"><input data-editinput="'+k+':'+o.i+'" value="'+esc(o.x)+'" aria-label="تعديل العنصر"><span><button class="ib save-edit" data-saveedit="'+k+':'+o.i+'">حفظ</button><button class="ib cancel-edit" data-canceledit="'+k+':'+o.i+'">إلغاء</button></span></div>';
+  return '<div class="lr"><span class="ltr" dir="auto">'+esc(o.x)+'</span><span><button class="ib" data-edit="'+k+':'+o.i+'" aria-label="تعديل '+esc(o.x)+'">تعديل</button><button class="ib dx" data-del="'+k+':'+o.i+'" aria-label="حذف '+esc(o.x)+'">حذف</button></span></div>'}).join('')||'<div class="empty">'+(q?'لا توجد نتائج مطابقة':'القائمة فارغة — أضف أول عنصر من الأعلى')+'</div>';
+ $('n_'+k).textContent=q?S.db[k].filter(x=>x.toLowerCase().includes(q)).length+' / '+S.db[k].length+' عنصر':S.db[k].length+' عنصر'}
+function renderTr(){const q=$('trSearch')?$('trSearch').value.trim().toLowerCase():'';
+ const matched=S.db.trans.map((t,i)=>({t,i})).filter(({t})=>!q||[t.ar,t.print,...t.drivers].some(x=>x.toLowerCase().includes(q)));
+ $('trCount').textContent=q?matched.length+' / '+S.db.trans.length+' ناقل':S.db.trans.length+' ناقل · '+S.db.trans.reduce((n,t)=>n+t.drivers.length,0)+' سائق';
+ $('trBox').innerHTML='<div class="carrier-list">'+(matched.map(({t,i})=>{
+  const open=OPEN_TRANSPORTS.has(t.id)||!!q,body=open?'<div class="carrier-body"><div class="carrier-form"><div class="fg"><label>اسم الناقل</label><input data-tr="'+i+'" data-k="ar" value="'+esc(t.ar)+'"></div><div class="fg"><label>الاسم المطبوع على السند</label><input class="ltr" data-tr="'+i+'" data-k="print" value="'+esc(t.print)+'"></div></div><div class="carrier-add"><input class="ltr" id="ad_'+i+'" placeholder="اكتب اسم السائق الجديد" aria-label="اسم سائق جديد لـ '+esc(t.ar)+'"><button class="btn pri" data-adddr="'+i+'">+ إضافة سائق</button></div><div class="driver-list">'+(t.drivers.map((d,j)=>'<div class="driver-item"><span class="ltr" dir="auto">'+esc(d)+'</span><button data-deldr="'+i+':'+j+'" aria-label="حذف السائق '+esc(d)+'" title="حذف السائق"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div>').join('')||'<div class="carrier-empty">لا يوجد سائقون لهذا الناقل بعد</div>')+'</div></div>':'';
+  return '<article class="tc'+(open?' open':'')+'" data-carrier="'+i+'"><div class="carrier-head"><button class="carrier-toggle" type="button" data-toggletr="'+i+'" aria-expanded="'+open+'"><span class="carrier-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg></span><span style="min-width:0;text-align:start"><span class="carrier-title" data-carrier-title>'+esc(t.ar)+'</span><span class="carrier-subtitle" data-carrier-print>'+esc(t.print)+'</span></span><span class="carrier-count">'+t.drivers.length+' سائق</span><svg class="carrier-chevron" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7 5 5 5-5"/></svg></button><div class="carrier-actions"><button class="ib" type="button" data-toggletr="'+i+'" aria-label="'+(open?'إغلاق':'تعديل')+' '+esc(t.ar)+'">'+(open?'تم':'تعديل')+'</button><button class="ib dx" type="button" data-deltr="'+i+'" aria-label="حذف الناقل '+esc(t.ar)+'" title="حذف الناقل"><svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h12M8 6V4h4v2m-6 0 1 11h6l1-11M9 9v5m2-5v5"/></svg></button></div></div>'+body+'</article>'}).join('')||'<div class="carrier-empty">'+(q?'لا يوجد ناقل أو سائق يطابق البحث':'لم تتم إضافة ناقلين بعد')+'</div>')+'</div>'}
+function renderData(){
+ $('dataSummary').textContent=S.db.companies.length+' شركة · '+S.db.products.length+' منتج · '+S.db.trans.length+' ناقل';
+ $('dBox').innerHTML=listCard('companies','الشركات والعملاء','اسم شركة أو عميل جديد')+listCard('products','المنتجات','اسم منتج جديد، مثال: 60/70')+
+ '<div class="card wide"><div class="dh"><div><h3>الناقلون والسائقون</h3><span style="display:block;color:var(--mu);font-size:12px;margin-top:3px">اضغط على الناقل لعرض بياناته وسائقيه</span></div><span class="badge" id="trCount"></span></div><div class="newtr"><input id="a_tr_ar" placeholder="اسم الناقل بالعربي" aria-label="اسم الناقل بالعربي"><input class="ltr" id="a_tr_pr" placeholder="الاسم الذي سيظهر على السند" aria-label="الاسم المطبوع للناقل"><button class="btn pri" data-addtr="1">+ إضافة ناقل</button></div><div class="carrier-tools"><input id="trSearch" class="tsearch" placeholder="ابحث باسم الناقل أو السائق..." aria-label="بحث في الناقلين والسائقين"></div><div id="trBox"></div></div>';
+ fillList('companies');fillList('products');renderTr()}
+const dupe=(a,v)=>a.some(x=>x.toLowerCase()===v.toLowerCase());
+function dataClick(e){const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.toggletr!=null){const t=S.db.trans[+d.toggletr];if(!t)return;if(OPEN_TRANSPORTS.has(t.id))OPEN_TRANSPORTS.delete(t.id);else OPEN_TRANSPORTS.add(t.id);renderTr();return}
+ if(d.edit){const[k,i]=d.edit.split(':');LIST_EDIT={k,i:+i};fillList(k);document.querySelector('[data-editinput="'+k+':'+i+'"]').focus();return}
+ if(d.canceledit){const[k]=d.canceledit.split(':');LIST_EDIT=null;fillList(k);return}
+ if(d.saveedit){const[k,i]=d.saveedit.split(':'),v=document.querySelector('[data-editinput="'+k+':'+i+'"]').value.trim();
+  if(!v)return toast('اكتب الاسم قبل الحفظ');if(S.db[k].some((x,j)=>j!==+i&&x.toLowerCase()===v.toLowerCase()))return toast('الاسم موجود مسبقاً');
+  S.db[k][+i]=v;LIST_EDIT=null;save();fillLists();fillList(k);return toast('تم حفظ التعديل')}
+ if(d.add){const k=d.add,i=$('a_'+k),v=i.value.trim();if(!v)return;if(dupe(S.db[k],v))return toast('موجود مسبقاً');S.db[k].unshift(v);i.value='';save();fillLists();fillList(k);return toast('تمت الإضافة')}
+ if(d.del){const[k,i]=d.del.split(':');if(!confirm(translateUi('حذف «'+S.db[k][i]+'»؟')))return;S.db[k].splice(+i,1);LIST_EDIT=null;save();fillLists();fillList(k);return}
+ if(d.addtr){const a=$('a_tr_ar').value.trim(),p=$('a_tr_pr').value.trim();if(!a)return toast('اكتب اسم الناقل');if(S.db.trans.some(t=>t.ar.toLowerCase()===a.toLowerCase()))return toast('الناقل موجود مسبقاً');S.db.trans.push({id:'tr'+Date.now(),ar:a,print:p||a,drivers:[]});save();renderData();return toast('تمت إضافة الناقل')}
+ if(d.deltr){const t=S.db.trans[d.deltr];if(!confirm(translateUi('حذف الناقل «'+t.ar+'» وكل سائقيه؟')))return;OPEN_TRANSPORTS.delete(t.id);S.db.trans.splice(+d.deltr,1);save();fillLists();renderData();return}
+ if(d.adddr){const t=S.db.trans[d.adddr],i=$('ad_'+d.adddr),v=i.value.trim();if(!v)return;if(findDriver(v))return toast('السائق موجود مسبقاً');t.drivers.push(v);OPEN_TRANSPORTS.add(t.id);save();fillLists();renderTr();return}
+ if(d.deldr){const[i,j]=d.deldr.split(':');S.db.trans[i].drivers.splice(+j,1);save();fillLists();renderTr()}}
+function renderLayout(){$('o_x').value=S.opts.ox;$('o_y').value=S.opts.oy;$('stepSel').value=String(S.opts.step);renderChips();
+ $('lbody').innerHTML=Object.keys(S.layout).map(k=>{const L=S.layout[k];return '<article class="layout-item'+(L.on===false?' disabled':'')+'" data-row="'+k+'"><div class="layout-item-head"><label class="layout-check"><input type="checkbox" data-on="'+k+'" aria-label="إظهار '+esc(L.l)+' في الطباعة"'+(L.on===false?'':' checked')+'><span class="layout-name">'+esc(L.lab?L.t:L.l)+'</span></label><button type="button" class="layout-select" data-select="'+k+'">تحديد</button></div><details class="precision"><summary>ضبط دقيق</summary><div class="precision-grid">'+[['x','أفقي'],['y','رأسي'],['s','حجم النص']].map(([p,label])=>'<label>'+label+'<input type="number" step="any" data-lk="'+k+'" data-p="'+p+'" value="'+L[p]+'"></label>').join('')+'</div></details></article>'}).join('')}
+/* ---- self test ---- */
+function tests(){const good=Object.assign(SAMPLE(),{trans:"AL-AYED Transport"});
+ return[
+ ["بيانات سليمة تمر من التحقق",()=>validate(good).length===0],
+ ["رفض وزن صفر",()=>validate(Object.assign({},good,{weight:"0"})).length===1],
+ ["رفض وزن غير رقمي",()=>validate(Object.assign({},good,{weight:"12a"})).length===1],
+ ["رفض تاريخ خاطئ",()=>validate(Object.assign({},good,{date:"2026-11-07"})).length===1],
+ ["رفض سائق فارغ",()=>validate(Object.assign({},good,{driver:" "})).length===1],
+ ["رفض جوال غير صحيح",()=>validate(Object.assign({},good,{mobile:"05-39"})).length===1],
+ ["ربط السائق بالناقل (GUL WAKEEL → العايد)",()=>findDriver("gul wakeel")==="alayed"],
+ ["سائق غير موجود يرجع null",()=>findDriver("NOBODY")===null],
+ ["لا تكرار لأسماء السائقين بين الناقلين",()=>{const a=S.db.trans.flatMap(t=>t.drivers.map(d=>d.toLowerCase()));return new Set(a).size===a.length}],
+ ["تنسيق التاريخ 7/11/2026",()=>fmtDate(new Date(2026,10,7))==="7/11/2026"],
+ ["هروب علامات الاقتباس في CSV",()=>csvCell('a"b')==='"a""b"'],
+ ["كل الحقول ضمن المربع الأسود (عرض 760)",()=>{const d=SAMPLE();d.kg="kg";return Object.keys(S.layout).every(k=>{const L=S.layout[k];return L.x>=0&&L.y>=0&&L.x+String(L.lab?L.t:(d[k]||'')).length*L.s*0.62<760&&L.y+L.s<1120})}],
+ ["رسم الورقة يحتوي الوزن والسائق",()=>{const r=document.createElement('div');renderSheet(r,good);const t=[...r.children].map(c=>c.textContent);return t.includes("29470")&&t.includes("GUL WAKEEL")}],
+ ["الإزاحة تتحرك بالملم (5 مم ≈ 18.9 بكسل)",()=>{const o=S.opts.ox;S.opts.ox=5;const r=document.createElement('div');renderSheet(r,{no:"1"});S.opts.ox=o;return Math.abs(parseFloat([...r.children].find(c=>c.textContent==="1").style.left)-(S.layout.no.x+5*MM))<0.01}],
+ ["حفظ وقراءة التخزين المحلي",()=>{try{localStorage.setItem(KEY+'_t','1');const ok=localStorage.getItem(KEY+'_t')==='1';localStorage.removeItem(KEY+'_t');return ok}catch(e){return false}}],
+ ["إخفاء العنوان يخفي الحقل المرتبط",()=>{const k='lb_drv',field='driver',o=S.layout[k].on,of=S.layout[field].on;setPrintEnabled(k,false);const r=document.createElement('div');renderSheet(r,good);setPrintEnabled(k,o!==false);S.layout[field].on=of;return ![...r.children].some(c=>c.textContent===S.layout[k].t||c.textContent===good.driver)}],
+ ["العناوين الأربعة مفعّلة افتراضياً وتُطبع",()=>{const D=DEF_LAYOUT();return["lb_drv","lb_veh","lb_mob","lb_pl"].every(k=>D[k]&&D[k].lab&&D[k].on!==false)}],
+ ["تحريك العنصر المحدد بالأسهم",()=>{const o=SEL,L=S.layout.no,x=L.x;SEL='no';moveSel(2,0);const ok=L.x===x+2;moveSel(-2,0);SEL=o;return ok&&L.x===x}],
+ ["آخر سند يُحفظ ويُسترجع تلقائياً",()=>{const el=$('f_company'),v=el.value;el.value='ZZ';saveDraft();el.value='';restoreDraft();const ok=el.value==='ZZ';el.value=v;saveDraft();return ok}],
+ ["تحويل التاريخ من/إلى التقويم",()=>toISO("7/11/2026")==="2026-11-07"&&fromISO("2026-11-07")==="7/11/2026"&&toISO("x")===""],
+ ["قوائم الشركات والسائقين تعمل",()=>COMBOS.f_company().includes("Santic Al-Alamiyah")&&COMBOS.f_driver().includes("GUL WAKEEL")&&COMBOS.f_product().length>0]]}
+function runTests(){let p=0;const T=tests();
+ $('tbody').innerHTML=T.map(([n,f])=>{let ok=false;try{ok=!!f()}catch(e){}if(ok)p++;return '<tr><td>'+esc(n)+'</td><td class="'+(ok?'ok':'bad')+'">'+(ok?'✔ نجح':'✘ فشل')+'</td></tr>'}).join('');
+ $('tsum').innerHTML='<b class="'+(p===T.length?'ok':'bad')+'">'+p+' / '+T.length+'</b>'}
+let SEL=null;
+const stepV=()=>parseFloat($('stepSel').value)||1;
+function selInfo(){const L=SEL&&S.layout[SEL];$('selName').textContent=L?('العنصر المحدد: '+(L.lab?L.t:L.l)):'اختر عنصرًا من القائمة أو اضغط عليه في المعاينة'}
+function syncRow(k){const r=document.querySelector('[data-row="'+k+'"]');if(r)r.querySelectorAll('input[data-p]').forEach(i=>i.value=S.layout[k][i.dataset.p])}
+function markSel(){$('pvSheet2').querySelectorAll('[data-k]').forEach(s=>s.classList.toggle('sel',s.dataset.k===SEL));document.querySelectorAll('#lbody .layout-item').forEach(r=>{const selected=r.dataset.row===SEL;r.classList.toggle('selected',selected);const b=r.querySelector('[data-select]');if(b)b.textContent=selected?'محدد':'تحديد'})}
+function selectKey(k){SEL=k;markSel();selInfo()}
+function moveSel(dx,dy){if(!SEL)return false;const L=S.layout[SEL];L.x=Math.round((L.x+dx)*10)/10;L.y=Math.round((L.y+dy)*10)/10;save();previewAlign();syncRow(SEL);return true}
+function sizeSel(d){if(!SEL)return;const L=S.layout[SEL];L.s=Math.max(8,Math.min(80,L.s+d));save();previewAlign();syncRow(SEL)}
+function renderChips(){$('chips').innerHTML='<span style="color:var(--mu);font-size:15px">العناوين المطبوعة (يمكن تعديل النص):</span>'+Object.keys(S.layout).filter(k=>S.layout[k].lab).map(k=>'<div class="print-chip"><label><input type="checkbox" data-lc="'+k+'" aria-label="إظهار أو إخفاء '+esc(S.layout[k].t)+'"'+(S.layout[k].on===false?'':' checked')+'></label><input class="print-edit" type="text" data-lt="'+k+'" aria-label="نص العنوان المطبوع" value="'+esc(S.layout[k].t)+'"></div>').join('')}
+const toISO=s=>{const m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s||'');return m?m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0'):''};
+const fromISO=v=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?(+m[3])+'/'+(+m[2])+'/'+m[1]:''};
+const COMBOS={f_company:()=>S.db.companies,f_product:()=>S.db.products,f_trans:()=>S.db.trans.map(t=>t.print),f_driver:()=>{const t=findTrans($('f_trans').value);return t?t.drivers:S.db.trans.flatMap(x=>x.drivers)}};
+function closeMenu(){document.querySelectorAll('.menu').forEach(m=>m.remove())}
+function openMenu(id,all){closeMenu();const inp=$(id),q=all?'':inp.value.trim().toLowerCase();
+ const items=COMBOS[id]().filter(x=>!q||x.toLowerCase().includes(q));if(!items.length)return;
+ const m=document.createElement('div');m.className='menu';m.dataset.for=id;
+ m.innerHTML=items.map(x=>'<div class="it" data-value="'+esc(x)+'" dir="auto">'+esc(x)+'</div>').join('');inp.parentElement.appendChild(m)}
+const MONTHS_AR=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"],MONTHS_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const WDN_AR=["س","ح","ن","ث","ر","خ","ج"],WDN_EN=["Su","Mo","Tu","We","Th","Fr","Sa"];
+let calY=0,calM=0;
+const parseD=s=>{const m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s||'');return m?new Date(+m[3],+m[2]-1,+m[1]):null};
+function closeCal(){const c=$('cal');if(c)c.remove()}
+function openDate(){if($('cal'))return closeCal();closeMenu();const c0=parseD($('f_date').value)||new Date();calY=c0.getFullYear();calM=c0.getMonth();
+ const c=document.createElement('div');c.id='cal';$('f_date').parentElement.appendChild(c);drawCal()}
+function drawCal(){const c=$('cal');if(!c)return;const sel=parseD($('f_date').value),t=new Date(),off=(new Date(calY,calM,1).getDay()+1)%7,dim=new Date(calY,calM+1,0).getDate(),prev=new Date(calY,calM,0).getDate();
+ let yo='';for(let y=t.getFullYear()-8;y<=t.getFullYear()+3;y++)yo+='<option'+(y===calY?' selected':'')+'>'+y+'</option>';
+ const months=uiLang==='en'?MONTHS_EN:MONTHS_AR,weekdays=uiLang==='en'?WDN_EN:WDN_AR;
+ let h='<div class="ch"><button type="button" data-cn="-1" title="'+(uiLang==='en'?'Previous month':'الشهر السابق')+'">›</button><b>'+months[calM]+'</b><select data-cy>'+yo+'</select><button type="button" data-cn="1" title="'+(uiLang==='en'?'Next month':'الشهر التالي')+'">‹</button></div><div class="g7">'+weekdays.map(w=>'<span class="wd">'+w+'</span>').join('');
+ for(let i=0;i<42;i++){let d=i-off+1,cls='d',m=calM,y=calY;
+  if(d<1){d=prev+d;cls+=' o';m--}else if(d>dim){d-=dim;cls+=' o';m++}
+  const dt=new Date(calY,m,d);
+  if(dt.toDateString()===t.toDateString())cls+=' t';if(sel&&dt.toDateString()===sel.toDateString())cls+=' s';
+  h+='<button type="button" class="'+cls+'" data-cd="'+dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear()+'">'+dt.getDate()+'</button>'}
+ c.innerHTML=h+'</div><div class="cf"><button type="button" data-ct>اليوم</button></div>'}
+document.addEventListener('click',e=>{const c=$('cal');if(!c)return;const t=e.target;
+ if(!t.closest('#cal')){if(!t.closest('[data-dp]'))closeCal();return}
+ const b=t.closest('button');if(!b)return;
+ if(b.dataset.cn){calM+=+b.dataset.cn;if(calM<0){calM=11;calY--}if(calM>11){calM=0;calY++}drawCal()}
+ else if(b.dataset.cd){$('f_date').value=b.dataset.cd;closeCal();preview()}
+ else if('ct' in b.dataset){$('f_date').value=fmtDate(new Date());closeCal();preview()}});
+document.addEventListener('change',e=>{if(e.target.dataset&&'cy' in e.target.dataset){calY=+e.target.value;drawCal()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCal()});
+/* ---- wiring ---- */
+load();fillLists();if(!restoreDraft())newTicket();renderHist();renderData();renderLayout();previewAlign();
+$('f_trans').addEventListener('input',()=>{fillDrivers();preview()});
+$('f_trans').addEventListener('change',()=>{if($('f_trans').value.trim())rememberTrans($('f_trans').value);fillDrivers();preview()});
+$('nav').onclick=e=>{const t=e.target.dataset.t;if(!t)return;
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===e.target));
+ document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id==='t-'+t));
+ S.opts.tab=t;save();if(t==='issue')preview();if(t==='align')previewAlign();if(t==='hist')renderHist()};
+['f_no','f_date','f_company','f_product','f_weight','f_mobile','f_plate'].forEach(i=>$(i).addEventListener('input',preview));
+['f_company','f_product','f_driver','f_mobile','f_plate'].forEach(i=>$(i).addEventListener('change',autoLearn));
+$('f_driver').addEventListener('input',()=>{if(findDriver($('f_driver').value))onDriver();else preview()});
+$('f_driver').addEventListener('change',onDriver);
+$('f_weight').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'')});
+$('bPrint').onclick=()=>doPrint();
+$('bClear').onclick=newTicket;
+$('bTest').onclick=()=>doPrint(SAMPLE());
+$('hq').oninput=renderHist;
+$('bCsv').onclick=exportXlsx;
+$('bHClr').onclick=()=>{if(confirm(translateUi("مسح كل السجل نهائياً؟"))){S.hist=[];save();renderHist()}};
+$('hbody').onclick=e=>{const del=e.target.closest('[data-del]');if(del){const i=Number(del.dataset.del),h=S.hist[i];if(!h)return;
+ if(confirm(translateUi('حذف السند رقم '+h.no+' من السجل؟'))){S.hist.splice(i,1);save();renderHist()}return}
+ const t=e.target.closest('[data-re]')?.dataset.re;if(!t)return;const h=S.hist.find(x=>String(x.t)===t);if(!h)return;
+ $('f_no').value=h.no;$('f_date').value=h.date;$('f_company').value=h.company;$('f_product').value=h.product;$('f_weight').value=h.weight;
+ $('f_driver').value=h.driver;$('f_mobile').value=h.mobile;$('f_plate').value=h.plate;$('f_trans').value=h.trans||'';fillDrivers();
+ document.querySelector('[data-t=issue]').click();toast("تم تحميل السند للطباعة مرة أخرى")};
+$('t-data').addEventListener('click',dataClick);
+$('t-data').addEventListener('keydown',e=>{if(e.key!=='Enter')return;const id=e.target.id||'';let b=null;
+ if(e.target.matches('[data-editinput]'))b=document.querySelector('[data-saveedit="'+e.target.dataset.editinput+'"]');else if(id.startsWith('a_tr_'))b=document.querySelector('[data-addtr]');else if(id.startsWith('ad_'))b=document.querySelector('[data-adddr="'+id.slice(3)+'"]');else if(id.startsWith('a_'))b=document.querySelector('[data-add="'+id.slice(2)+'"]');
+ if(b){e.preventDefault();b.click()}});
+$('t-data').addEventListener('input',e=>{const t=e.target;if(t.dataset.srch)return fillList(t.dataset.srch);
+ if(t.id==='trSearch')return renderTr();
+ const i=t.dataset.tr;if(i==null)return;S.db.trans[i][t.dataset.k]=t.value;
+ const card=t.closest('.tc');if(card){const title=card.querySelector('[data-carrier-title]'),print=card.querySelector('[data-carrier-print]');
+  if(t.dataset.k==='ar'&&title)title.textContent=t.value||'اسم الناقل';if(t.dataset.k==='print'&&print)print.textContent=t.value||'الاسم المطبوع على السند'}
+ save();fillLists()});
+$('bExp').onclick=()=>dl('mojah-backup.json',JSON.stringify(S),'application/json');
+$('bImp').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{const o=JSON.parse(r.result);if(!o.db||!Array.isArray(o.db.trans)||!Array.isArray(o.db.companies))throw 0;
+  localStorage.setItem(KEY,JSON.stringify(o));load();fillLists();newTicket();renderHist();renderData();renderLayout();previewAlign();toast("تم الاستيراد")}catch(x){toast("ملف غير صالح")}};r.readAsText(f);e.target.value=''};
+$('lbody').oninput=e=>{const k=e.target.dataset.lk;if(!k)return;const v=parseFloat(e.target.value);if(isNaN(v))return;S.layout[k][e.target.dataset.p]=v;save();previewAlign()};
+['o_x','o_y'].forEach(i=>$(i).oninput=()=>{S.opts.ox=parseFloat($('o_x').value)||0;S.opts.oy=parseFloat($('o_y').value)||0;save();previewAlign()});
+
+$('bTheme').onclick=()=>{S.opts.theme=S.opts.theme==='light'?'dark':'light';document.documentElement.dataset.theme=S.opts.theme;save()};
+Object.keys(COMBOS).forEach(id=>{const i=$(id);i.addEventListener('input',e=>{if(e.isTrusted)openMenu(id,false)});i.addEventListener('focus',()=>openMenu(id,false));i.addEventListener('click',()=>openMenu(id,false))});
+document.addEventListener('pointerdown',e=>{const t=e.target;if(!t.closest)return;
+ const it=t.closest('.it');if(it){e.preventDefault();const id=it.parentElement.dataset.for,inp=$(id);inp.value=it.dataset.value||it.textContent;closeMenu();inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));return}
+ const b=t.closest('[data-cb]');if(b){e.preventDefault();const id=b.dataset.cb,was=document.querySelector('.menu[data-for="'+id+'"]');closeMenu();if(!was){$(id).focus();openMenu(id,true)}return}
+ if(t.closest('[data-dp]')){e.preventDefault();openDate();return}
+ if(!t.closest('.cb'))closeMenu()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+$('chips').onchange=e=>{const k=e.target.dataset.lc;if(!k)return;setPrintEnabled(k,e.target.checked);save();syncPrintControls();preview();previewAlign()};
+$('chips').addEventListener('input',e=>{const k=e.target.dataset.lt;if(!k)return;const value=e.target.value;S.layout[k].t=value;S.layout[k].l='عنوان: '+(value||'عنوان مطبوع');const row=document.querySelector('[data-row="'+k+'"] td:nth-child(2)');if(row)row.textContent=S.layout[k].l;save();preview();previewAlign()});
+$('lbody').onchange=e=>{const k=e.target.dataset.on;if(!k)return;setPrintEnabled(k,e.target.checked);save();renderChips();syncPrintControls();preview();previewAlign()};
+$('lbody').onclick=e=>{const b=e.target.closest('[data-select]');if(b)selectKey(b.dataset.select)};
+$('stepSel').onchange=()=>{S.opts.step=stepV();save()};
+document.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{if(!SEL)return toast('حدد عنصراً من المعاينة أولاً');const[a,c]=b.dataset.mv.split(',').map(Number);moveSel(a*stepV(),c*stepV())});
+document.querySelectorAll('[data-fs]').forEach(b=>b.onclick=()=>{if(!SEL)return toast('حدد عنصراً من المعاينة أولاً');sizeSel(+b.dataset.fs)});
+$('pvSheet2').addEventListener('click',e=>{const k=e.target.dataset&&e.target.dataset.k;if(k)selectKey(k)});
+addEventListener('keydown',e=>{const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
+ if(!m||!SEL||!$('t-align').classList.contains('on')||/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName))return;
+ e.preventDefault();const s=stepV()*(e.shiftKey?5:1);moveSel(m[0]*s,m[1]*s)});
+if(S.opts.tab&&S.opts.tab!=='issue'){const b=document.querySelector('[data-t="'+S.opts.tab+'"]');if(b)b.click()}
+addEventListener('resize',()=>{preview();previewAlign()});
+
+</script>
+</body>
+</html>

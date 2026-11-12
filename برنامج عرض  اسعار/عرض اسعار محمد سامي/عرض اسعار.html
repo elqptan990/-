@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عروض أسعار - مصنع موجة</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="print-letterhead.css">
+</head>
+
+<body>
+  <header class="topbar no-print">
+    <div>
+      <h1>مصنع موجة</h1>
+      <p>برنامج إعداد عروض الأسعار والطباعة</p>
+    </div>
+    <div class="top-actions">
+      <button class="btn light" id="newQuoteBtn">عرض جديد</button>
+      <button class="btn light" id="saveQuoteBtn">حفظ العرض</button>
+      <button class="btn primary" id="printBtn">طباعة / حفظ PDF</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel editor no-print">
+      <h2>بيانات عرض السعر</h2>
+      <div class="form-grid">
+        <label>رقم عرض السعر<input id="quoteNo" placeholder="مثال: QT-0001"></label>
+        <label>التاريخ<input id="quoteDate" type="date"></label>
+        <label class="wide">اسم العميل / الشركة<input id="customer" list="customerCatalog" placeholder="اكتب اسم العميل"></label>
+      </div>
+      <datalist id="customerCatalog"></datalist>
+
+      <div class="section-head">
+        <h2>الأصناف والأسعار</h2>
+        <div class="section-actions">
+          <button class="btn small light" id="addProductBtn">إدارة أسماء المنتجات</button>
+          <button class="btn small primary" id="addItemBtn">+ إضافة صنف</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="items-editor">
+          <thead>
+            <tr>
+              <th>اسم المادة / الوصف</th>
+              <th>الوحدة</th>
+              <th>الكمية</th>
+              <th>سعر الوحدة</th>
+              <th>الإجمالي</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody"></tbody>
+        </table>
+      </div>
+      <datalist id="productCatalog"></datalist>
+      <datalist id="unitCatalog"></datalist>
+      <dialog id="productDialog" class="product-dialog">
+        <div class="product-dialog-head">
+          <h2>قائمة أسماء المنتجات</h2>
+          <button type="button" class="btn small light" id="closeProductDialogBtn">إغلاق</button>
+        </div>
+        <form class="product-add-row" id="addProductForm">
+          <label>اسم المنتج الجديد<input id="newProductName" autocomplete="off" placeholder="اكتب اسم المنتج"></label>
+          <button class="btn small primary" type="submit">إضافة وحفظ</button>
+        </form>
+        <p class="hint">يمكنك تعديل أي اسم وحفظه، وستظهر المنتجات في قائمة الاختيار.</p>
+        <div id="productManagementList" class="product-management-list"></div>
+      </dialog>
+      <div class="form-grid totals-inputs">
+        <label>الخصم (ريال)<input id="discount" type="number" min="0" step="0.01" value="0"></label>
+        <label class="check-label"><input id="vatEnabled" type="checkbox" checked> احتساب ضريبة القيمة المضافة
+          15%</label>
+      </div>
+      <label class="notes-label">الشروط والملاحظات<textarea id="terms" rows="3">والاستلام علي ارض المصنع
+الأسعار سارية الي نهاية الشهر الحالي فقط</textarea></label>
+      <div class="editor-actions">
+        <button class="btn light" id="exportBtn">تصدير نسخة احتياطية</button>
+        <label class="btn light import-label">استيراد نسخة احتياطية<input id="importFile" type="file" accept=".json"
+            hidden></label>
+      </div>
+      <hr>
+      <h2>العروض المحفوظة</h2>
+      <p class="hint">تُحفظ العروض تلقائيًا على هذا الجهاز. يمكنك حذف عرض محدد عند الحاجة.</p>
+      <div class="saved-row">
+        <select id="savedQuotes">
+          <option value="">اختر عرضًا محفوظًا</option>
+        </select>
+        <button class="btn small light" id="loadQuoteBtn">فتح</button>
+        <button class="btn small danger" id="deleteQuoteBtn">حذف</button>
+      </div>
+      <p id="status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="preview-area">
+      <div class="preview-toolbar no-print"><span>   </span><span>عدّل البيانات من اللوحة
+          الجانبية</span></div>
+      <article class="quotation" id="quotation">
+        <div class="brand-head">
+          <div class="brand-mark">MOJAH</div>
+          <div class="brand-title">
+            <h2>مصنع موجة</h2>
+            <p>للأسفلت المستحلب والعوازل الإسفلتية</p>
+            <p class="english">MOJAH ASPHALT EMULSION &amp; WATERPROOFING FACTORY</p>
+          </div>
+          <div class="doc-label"><strong><span class="title-ornament" aria-hidden="true">﴿</span> عرض سعر <span
+                class="title-ornament" aria-hidden="true">﴾</span></strong><span>QUOTATION</span></div>
+        </div>
+        <div class="accent-line"></div>
+        <div class="quote-meta">
+          <div><span>رقم العرض</span><strong id="pQuoteNo">—</strong></div>
+          <div><span>التاريخ</span><strong id="pQuoteDate">—</strong></div>
+        </div>
+        <div class="customer-box">
+          <div class="field full"><span>السادة / العميل</span><strong id="pCustomer">—</strong></div>
+        </div>
+        <p class="greeting">تحية طيبة وبعد ، يسرنا تقديم عرض اسعار منتجات العزل كما يلي :</p>
+        <table class="print-items">
+          <thead>
+            <tr>
+              <th class="num">م</th>
+              <th>البيان / اسم المادة</th>
+              <th>الوحدة</th>
+              <th>الكمية</th>
+              <th>سعر الوحدة (ر.س)</th>
+              <th>الإجمالي (ر.س)</th>
+            </tr>
+          </thead>
+          <tbody id="pItemsBody"></tbody>
+        </table>
+        <div class="totals-layout">
+          <div class="terms-box">
+            <h3>الشروط والملاحظات</h3>
+            <p id="pTerms"></p>
+          </div>
+          <div class="summary">
+            <div><span>إجمالي الأصناف</span><strong id="pSubtotal">0.00</strong></div>
+            <div><span>الخصم</span><strong id="pDiscount">0.00</strong></div>
+            <div><span>المبلغ الخاضع للضريبة</span><strong id="pTaxable">0.00</strong></div>
+            <div><span>ضريبة القيمة المضافة (15%)</span><strong id="pVat">0.00</strong></div>
+            <div class="grand"><span>الإجمالي شامل الضريبة</span><strong id="pGrand">0.00 ر.س</strong></div>
+          </div>
+          <div class="amount-words"><strong>الإجمالي كتابةً:</strong> <span id="pWords">—</span></div>
+        </div>
+        <div class="signatures">
+          <div class="signature-block">
+            <span>وتفضلوا بقبول فائق الاحترام</span>
+            <strong>إدارة التسويق والمبيعات / أ. محمد شعبان</strong>
+            <span class="signature-rule" aria-hidden="true"></span>
+          </div>
+          <div class="signature-block">
+            <strong>مندوب المبيعات / أ. محمد سامي</strong>
+            <span class="signature-rule" aria-hidden="true"></span>
+            <strong>رقم جوال: 0565949568</strong>
+          </div>
+        </div>
+        <footer class="paper-footer"><span>مصنع موجة للأسفلت المستحلب والعوازل الإسفلتية</span><span>عرض أسعار — نسخة
+            العميل</span></footer>
+      </article>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+
+</html>

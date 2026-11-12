@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAFCO | طباعة الملصقات</title>
+<style>
+:root {
+  --line: rgba(0, 0, 0, 0.22);
+  --brand: #c62828;
+  --brand-dark: #a61f1f;
+  --ink: #1f2430;
+  --muted: #6b7280;
+  --border: #e2e5ea;
+  --bg: #f1f3f6;
+  --card: #ffffff;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  direction: rtl;
+  background: var(--bg);
+  color: var(--ink);
+}
+ 
+[hidden] { display: none !important; }
+ 
+/* ---------- الواجهة ---------- */
+.topbar {
+  background: linear-gradient(135deg, #1f2430, #2b3142);
+  color: #fff;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 4px solid var(--brand);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  background: var(--brand);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+}
+.brand h1 { margin: 0; font-size: 18px; font-weight: 600; }
+.brand small { display: block; color: #aeb4c2; font-weight: 400; font-size: 12px; margin-top: 2px; }
+.topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+ 
+.app {
+  display: grid;
+  grid-template-columns: minmax(340px, 440px) 1fr;
+  gap: 24px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px;
+  align-items: start;
+}
+ 
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+.card h2 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card h2::before {
+  content: "";
+  width: 4px;
+  height: 16px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+ 
+.field { margin-bottom: 12px; }
+.field > label, .field-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.row { display: flex; gap: 10px; }
+.row > * { flex: 1; min-width: 0; }
+.row.inline { align-items: center; }
+ 
+input[type="text"], input[type="number"], input[type="date"], select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfd4dc;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
+}
+ 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .05s;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-dark); }
+.btn-secondary { background: #fff; color: var(--ink); border-color: #cfd4dc; }
+.btn-secondary:hover { background: #f5f6f8; }
+.btn-ghost { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25); padding: 8px 14px; font-size: 13px; }
+.btn-ghost:hover { background: rgba(255,255,255,.2); }
+.btn-danger { background: #fff; color: var(--brand); border-color: #f0c4c4; }
+.btn-danger:hover { background: #fdeeee; }
+.btn-block { width: 100%; }
+.btn-sm { padding: 9px 12px; font-size: 13px; }
+ 
+.hint { font-size: 12px; color: var(--muted); margin: 8px 0 0; line-height: 1.7; }
+ 
+.divider { height: 1px; background: var(--border); margin: 14px 0; }
+ 
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.check input { width: 18px; height: 18px; accent-color: var(--brand); }
+ 
+.pos-grid { display: flex; gap: 16px; align-items: center; }
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, 38px);
+  grid-template-rows: repeat(3, 38px);
+  gap: 4px;
+  direction: ltr;
+}
+.pad button {
+  border: 1px solid #cfd4dc;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--ink);
+}
+.pad button:hover { background: #f5f6f8; border-color: var(--brand); color: var(--brand); }
+.pad .up { grid-column: 2; grid-row: 1; }
+.pad .left { grid-column: 1; grid-row: 2; }
+.pad .right { grid-column: 3; grid-row: 2; }
+.pad .down { grid-column: 2; grid-row: 3; }
+.pad .mid { grid-column: 2; grid-row: 2; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--muted); }
+.readouts { display: grid; gap: 8px; font-size: 13px; }
+.readouts b { display: inline-block; min-width: 52px; font-variant-numeric: tabular-nums; }
+.readouts span.tag { color: var(--muted); }
+ 
+.preview-col { position: sticky; top: 16px; }
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.paper {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 14px;
+  background: #d9dde4;
+  border-radius: 12px;
+}
+ 
+.label {
+  box-sizing: border-box;
+  width: 190mm;
+  max-width: calc(100vw - 40px);
+  height: auto;
+  aspect-ratio: 190 / 277;
+  --label-scale: 1;
+  position: relative;
+  margin: 0 auto;
+  border: 1px solid #000;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 28px, var(--line) 28px, var(--line) 29px),
+    repeating-linear-gradient(to right, transparent 0, transparent 45px, var(--line) 45px, var(--line) 46px),
+    #f7f7f7;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+.paper .label { width: 100%; max-width: none; }
+ 
+.code, .name, .size, .qty {
+  position: absolute;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  user-select: none;
+}
+.code {
+  top: 48%; left: 59%;
+  transform: translate(calc(-50% + var(--drag-x, 0px)), calc(-50% + var(--drag-y, 0px)));
+  font-size: 26px;
+}
+.name {
+  top: 48%; left: 43%;
+  transform: translate(calc(-50% + var(--drag-x, 0px)), calc(-50% + var(--drag-y, 0px)));
+  font-size: 42px;
+}
+.size {
+  top: 48%; left: 22%;
+  transform: translate(calc(-50% + var(--drag-x, 0px)), calc(-50% + var(--drag-y, 0px)));
+  font-size: 28px;
+}
+.qty {
+  bottom: calc(18px * var(--label-scale));
+  left: calc(16px * var(--label-scale));
+  transform: translate(var(--drag-x, 0px), var(--drag-y, 0px));
+  font-size: 28px;
+}
+ 
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1f2430;
+  color: #fff;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--brand); }
+ 
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; padding: 14px; }
+  .preview-col { position: static; order: -1; }
+  .topbar { padding: 12px 16px; }
+}
+ 
+/* ---------- الطباعة ---------- */
+#printCopies { display: none; }
+ 
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+ 
+  html, body {
+    width: 190mm;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    direction: ltr;
+    background: #fff;
+    overflow: visible;
+  }
+ 
+  .screen-only, .toast { display: none !important; }
+ 
+  #printCopies { display: block; }
+ 
+  .print-copy {
+    position: relative;
+    box-sizing: border-box;
+    max-width: none;
+    width: 190mm;
+    height: 277mm;
+    margin: 0;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+  }
+ 
+  .print-copy + .print-copy {
+    break-before: page;
+    page-break-before: always;
+  }
+ 
+  .code, .name, .size, .qty {
+    direction: rtl;
+    cursor: auto;
+  }
+}
+</style>
+</head>
+<body>
+ 
+<div class="screen-only">
+ 
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">MAFCO</span>
+      <h1>طباعة الملصقات<small>إدخال البيانات وضبط الطباعة في صفحة واحدة</small></h1>
+    </div>
+    <div class="topbar-actions">
+      <button type="button" class="btn btn-ghost" id="exportBtn">⬇ نسخة احتياطية</button>
+      <button type="button" class="btn btn-ghost" id="importBtn">⬆ استرجاع نسخة</button>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+    </div>
+  </header>
+ 
+  <main class="app">
+ 
+    <section class="controls-col">
+ 
+      <!-- بيانات الملصق -->
+      <div class="card">
+        <h2>بيانات الملصق</h2>
+ 
+        <div class="field">
+          <label for="batch">رقم الباتش</label>
+          <input type="text" id="batch" placeholder="اكتب رقم الباتش، مثال: 275" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="batchDate">تاريخ الباتش</label>
+          <div class="row inline">
+            <input type="date" id="batchDate" dir="ltr" required>
+            <button type="button" class="btn btn-secondary btn-sm" id="todayDateBtn" style="flex:0 0 auto">تاريخ اليوم</button>
+          </div>
+        </div>
+ 
+        <div class="field">
+          <label for="product">المنتج</label>
+          <div class="row inline">
+            <select id="product" aria-label="اختر المنتج"></select>
+            <button type="button" class="btn btn-danger btn-sm" id="deleteProductBtn" style="flex:0 0 auto" title="حذف المنتج المختار من القائمة">حذف</button>
+          </div>
+        </div>
+ 
+        <div class="field">
+          <label for="newProduct">إضافة منتج جديد</label>
+          <div class="row inline">
+            <input type="text" id="newProduct" placeholder="اكتب اسم المنتج ثم اضغط إضافة" autocomplete="off">
+            <button type="button" class="btn btn-secondary btn-sm" id="addProductBtn" style="flex:0 0 auto">+ إضافة</button>
+          </div>
+        </div>
+ 
+        <div class="row">
+          <div class="field">
+            <label for="sizeInput">المقاس</label>
+            <input type="text" id="sizeInput" placeholder="1x10 M" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="qtyInput">الكمية</label>
+            <input type="text" id="qtyInput" placeholder="23" autocomplete="off">
+          </div>
+        </div>
+ 
+        <div class="divider"></div>
+ 
+        <div class="field" style="margin-bottom:8px">
+          <label for="savedBatches">آخر التسجيلات</label>
+          <div class="row inline">
+            <select id="savedBatches" aria-label="آخر التسجيلات"></select>
+            <button type="button" class="btn btn-danger btn-sm" id="deleteBatchBtn" style="flex:0 0 auto">حذف</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-block" id="saveBatchBtn">💾 حفظ هذا التسجيل في القائمة</button>
+        <p class="hint">يتم حفظ كل التعديلات تلقائيًا على هذا الجهاز، والمعاينة تتغير فورًا.</p>
+      </div>
+ 
+      <!-- إعدادات الطباعة -->
+      <div class="card">
+        <h2>ضبط الحقل</h2>
+ 
+        <div class="field">
+          <label for="fieldSelect">الحقل</label>
+          <select id="fieldSelect">
+            <option value="codeView">رقم الباتش</option>
+            <option value="productView">الصنف</option>
+            <option value="sizeView">المقاس</option>
+            <option value="qtyView">الكمية</option>
+          </select>
+        </div>
+ 
+        <label class="check">
+          <input type="checkbox" id="fieldVisible" checked>
+          اطبع هذا الحقل
+        </label>
+ 
+        <div class="row">
+          <div class="field">
+            <label for="fontSizeInput">حجم الخط (px)</label>
+            <input type="number" id="fontSizeInput" min="8" max="100" step="1">
+          </div>
+          <div class="field">
+            <label for="fieldAlignment">المحاذاة</label>
+            <select id="fieldAlignment">
+              <option value="start">بداية</option>
+              <option value="center">وسط</option>
+              <option value="end">نهاية</option>
+            </select>
+          </div>
+        </div>
+ 
+        <span class="field-label">الموضع</span>
+        <div class="pos-grid">
+          <div class="pad" aria-label="تحريك الحقل">
+            <button type="button" class="up" data-dx="0" data-dy="-1" aria-label="أعلى">▲</button>
+            <button type="button" class="left" data-dx="-1" data-dy="0" aria-label="يسار">◀</button>
+            <span class="mid">0.5 مم</span>
+            <button type="button" class="right" data-dx="1" data-dy="0" aria-label="يمين">▶</button>
+            <button type="button" class="down" data-dx="0" data-dy="1" aria-label="أسفل">▼</button>
+          </div>
+          <div class="readouts">
+            <div><span class="tag">X (مم):</span> <b id="positionX">—</b></div>
+            <div><span class="tag">Y (مم):</span> <b id="positionY">—</b></div>
+          </div>
+        </div>
+        <p class="hint">استخدم الأسهم لتحريك الحقل بمقدار 0.5 مم، واضغط Shift مع السهم للتحريك 5 مم.</p>
+      </div>
+ 
+      <!-- الطباعة -->
+      <div class="card">
+        <h2>الطباعة</h2>
+        <div class="row inline">
+          <div class="field" style="margin:0">
+            <label for="copyCount">عدد النسخ</label>
+            <input type="number" id="copyCount" min="1" max="100" step="1" value="1">
+          </div>
+          <button type="button" class="btn btn-primary" id="printBtn" style="margin-top:20px">🖨 طباعة</button>
+        </div>
+      </div>
+ 
+    </section>
+ 
+    <section class="preview-col">
+      <div class="preview-head">
+        <strong>معاينة الملصق (A4)</strong>
+        <span>المعاينة بحجم مصغّر</span>
+      </div>
+      <div class="paper">
+        <div class="label" id="labelPreview">
+          <div class="code" id="codeView"></div>
+          <div class="name" id="productView"></div>
+          <div class="size" id="sizeView"></div>
+          <div class="qty" id="qtyView"></div>
+        </div>
+      </div>
+    </section>
+ 
+  </main>
+</div>
+ 
+<div id="printCopies"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+ 
+<script>
+// مفاتيح التخزين (نفس المفاتيح القديمة حتى تبقى إعداداتك السابقة)
+const STORAGE_KEY = "mafcoLabelState";
+const HISTORY_KEY = "mafcoLabelHistory";
+const PRODUCT_KEY = "mafcoProductList";
+const SEEDED_KEY = "mafcoProductsSeeded";
+const POSITIONS_KEY = "mafcoLabelPositions";
+const FONT_SIZES_KEY = "mafcoLabelFontSizes";
+const FIELD_SETTINGS_KEY = "mafcoLabelFieldSettings";
+const BACKUP_KEYS = [STORAGE_KEY, HISTORY_KEY, PRODUCT_KEY, SEEDED_KEY, POSITIONS_KEY, FONT_SIZES_KEY, FIELD_SETTINGS_KEY];
+ 
+const LABEL_WIDTH_MM = 190;
+const LABEL_HEIGHT_MM = 277;
+const HISTORY_LIMIT = 30;
+ 
+const DEFAULT_PRODUCTS = [
+  "MAFCO FIBER",
+  "MAFCO 160",
+  "MAFCO 180",
+  "MAFCO 200",
+  "MAFCO 160-Granule",
+  "MAFCO 180-Granule",
+  "MAFCO 200-Granule"
+];
+const DEFAULT_STATE = { batch: "275", product: "MAFCO 200", size: "1x10 M", qty: "23" };
+const DEFAULT_FONT_SIZES = { codeView: 26, productView: 42, sizeView: 28, qtyView: 28 };
+const FIELD_NAMES = { codeView: "رقم الباتش", productView: "الصنف", sizeView: "المقاس", qtyView: "الكمية" };
+ 
+const $ = function (id) { return document.getElementById(id); };
+ 
+/* ---------- أدوات التخزين والتنبيهات ---------- */
+function readJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    const value = JSON.parse(raw);
+    return value === null || value === undefined ? fallback : value;
+  } catch (error) {
+    return fallback;
+  }
+}
+ 
+function writeJSON(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    console.warn("Unable to save", key, error);
+    toast("تعذّر الحفظ على هذا الجهاز", true);
+    return false;
+  }
+}
+ 
+let toastTimer = null;
+function toast(message, isError) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.toggle("error", !!isError);
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2200);
+}
+ 
+function sameText(a, b) {
+  return String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
+}
+
+function getBatchNumber(value) {
+  return String(value || "")
+    .trim()
+    .replace(/^#/, "")
+    .replace(/-\d{2}-\d{2}-\d{2,4}$/, "")
+    .trim();
+}
+
+function getTodayISODate() {
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  return today.getFullYear() + "-" + month + "-" + day;
+}
+
+function getBatchDate(value) {
+  const match = String(value || "").match(/-(\d{2})-(\d{2})-(\d{2,4})$/);
+  if (!match) return "";
+  const year = match[3].length === 2 ? "20" + match[3] : match[3];
+  return year + "-" + match[2] + "-" + match[1];
+}
+
+function formatBatch(value, dateValue) {
+  const batchNumber = getBatchNumber(value);
+  if (!batchNumber) return "";
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(dateValue) ? dateValue : getTodayISODate();
+  const parts = date.split("-");
+  return "#" + batchNumber + "-" + parts[2] + "-" + parts[1] + "-" + parts[0].slice(-2);
+}
+ 
+/* ---------- المنتجات ---------- */
+function loadProducts() {
+  let list = readJSON(PRODUCT_KEY, []);
+  if (!Array.isArray(list)) list = [];
+  list = list
+    .filter(function (item) { return typeof item === "string" && item.trim(); })
+    .map(function (item) { return item.trim(); });
+ 
+  let seeded = false;
+  try { seeded = localStorage.getItem(SEEDED_KEY) === "1"; } catch (e) {}
+ 
+  if (!seeded) {
+    // أول تشغيل: المنتجات الأساسية أولًا ثم أي منتجات سبق أن أضافها المستخدم
+    const extras = list.filter(function (item) {
+      return !DEFAULT_PRODUCTS.some(function (p) { return sameText(p, item); });
+    });
+    list = DEFAULT_PRODUCTS.concat(extras);
+    writeJSON(PRODUCT_KEY, list);
+    try { localStorage.setItem(SEEDED_KEY, "1"); } catch (e) {}
+  }
+ 
+  // إزالة التكرار
+  const unique = [];
+  list.forEach(function (item) {
+    if (!unique.some(function (u) { return sameText(u, item); })) unique.push(item);
+  });
+  return unique;
+}
+ 
+function saveProducts(list) {
+  return writeJSON(PRODUCT_KEY, list);
+}
+ 
+function renderProducts(selected) {
+  const select = $("product");
+  const products = loadProducts();
+  const wanted = selected !== undefined ? selected : select.value;
+ 
+  select.replaceChildren();
+  products.forEach(function (item) {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    select.appendChild(option);
+  });
+ 
+  const match = products.find(function (item) { return sameText(item, wanted); });
+  if (match) {
+    select.value = match;
+  } else if (products.length) {
+    select.value = products[0];
+  }
+}
+ 
+function addProduct() {
+  const input = $("newProduct");
+  const name = input.value.trim().replace(/\s+/g, " ");
+  if (!name) {
+    toast("اكتب اسم المنتج أولًا", true);
+    input.focus();
+    return;
+  }
+ 
+  const products = loadProducts();
+  const existing = products.find(function (item) { return sameText(item, name); });
+ 
+  if (existing) {
+    renderProducts(existing);
+    updateLabel();
+    toast("هذا المنتج موجود بالفعل وتم اختياره");
+  } else {
+    products.push(name);
+    if (!saveProducts(products)) return;
+    renderProducts(name);
+    updateLabel();
+    toast("تمت إضافة المنتج وحفظه");
+  }
+  input.value = "";
+}
+ 
+function deleteProduct() {
+  const select = $("product");
+  const current = select.value;
+  if (!current) return;
+ 
+  const products = loadProducts();
+  if (products.length <= 1) {
+    toast("لا يمكن حذف آخر منتج في القائمة", true);
+    return;
+  }
+  if (!window.confirm("حذف المنتج \"" + current + "\" من القائمة؟")) return;
+ 
+  const remaining = products.filter(function (item) { return !sameText(item, current); });
+  saveProducts(remaining);
+  renderProducts(remaining[0]);
+  updateLabel();
+  toast("تم حذف المنتج");
+}
+ 
+/* ---------- حالة الملصق ---------- */
+function readState() {
+  return {
+    batch: formatBatch($("batch").value, $("batchDate").value),
+    batchDate: $("batchDate").value || getTodayISODate(),
+    batchDateManual: batchDateIsManual,
+    product: $("product").value,
+    size: $("sizeInput").value.trim(),
+    qty: $("qtyInput").value.trim()
+  };
+}
+
+let batchDateIsManual = false;
+
+function updateLabel() {
+  const state = readState();
+  $("codeView").textContent = state.batch;
+  $("productView").textContent = state.product;
+  $("sizeView").textContent = state.size;
+  $("qtyView").textContent = state.qty;
+  writeJSON(STORAGE_KEY, state);
+  updateSelectedFieldControls();
+}
+
+function scheduleBatchDateRefresh() {
+  const now = new Date();
+  const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  setTimeout(function () {
+    if (!batchDateIsManual) $("batchDate").value = getTodayISODate();
+    updateLabel();
+    scheduleBatchDateRefresh();
+  }, nextDay.getTime() - now.getTime());
+}
+ 
+function applyState(state, preserveSavedDate) {
+  const merged = Object.assign({}, DEFAULT_STATE, state || {});
+  $("batch").value = getBatchNumber(merged.batch);
+  const savedDate = /^\d{4}-\d{2}-\d{2}$/.test(merged.batchDate)
+    ? merged.batchDate
+    : (preserveSavedDate ? getBatchDate(merged.batch) : "");
+  $("batchDate").value = savedDate || getTodayISODate();
+  batchDateIsManual = preserveSavedDate || merged.batchDateManual === true;
+  $("sizeInput").value = merged.size;
+  $("qtyInput").value = merged.qty;
+ 
+  // لو المنتج غير موجود في القائمة نضيفه حتى لا يضيع
+  const products = loadProducts();
+  if (merged.product && !products.some(function (item) { return sameText(item, merged.product); })) {
+    products.push(merged.product);
+    saveProducts(products);
+  }
+  renderProducts(merged.product);
+  updateLabel();
+}
+ 
+/* ---------- سجل التسجيلات ---------- */
+function getHistory() {
+  const history = readJSON(HISTORY_KEY, []);
+  return Array.isArray(history) ? history : [];
+}
+ 
+function renderHistory() {
+  const select = $("savedBatches");
+  const history = getHistory();
+  select.replaceChildren();
+ 
+  const first = document.createElement("option");
+  first.value = "";
+  first.textContent = history.length ? "-- اختر تسجيلًا سابقًا --" : "-- لا توجد تسجيلات محفوظة --";
+  select.appendChild(first);
+ 
+  history.forEach(function (item, index) {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = item.batch + " / " + item.product + " / " + item.size + " / " + item.qty;
+    select.appendChild(option);
+  });
+}
+ 
+function saveToHistory() {
+  const state = readState();
+  if (!state.batch) {
+    toast("اكتب رقم الباتش أولًا", true);
+    $("batch").focus();
+    return;
+  }
+ 
+  const key = function (s) { return [s.batch, s.product, s.size, s.qty].join("|"); };
+  const history = getHistory().filter(function (item) { return key(item) !== key(state); });
+  history.unshift(state);
+ 
+  if (writeJSON(HISTORY_KEY, history.slice(0, HISTORY_LIMIT))) {
+    renderHistory();
+    toast("تم حفظ التسجيل");
+  }
+}
+ 
+function deleteHistoryItem() {
+  const index = $("savedBatches").value;
+  const history = getHistory();
+  if (index === "" || !history[index]) {
+    toast("اختر تسجيلًا لحذفه", true);
+    return;
+  }
+  history.splice(Number(index), 1);
+  writeJSON(HISTORY_KEY, history);
+  renderHistory();
+  toast("تم حذف التسجيل");
+}
+ 
+/* ---------- المواضع والخطوط وإعدادات الحقول ---------- */
+function getSavedPositions() {
+  const positions = readJSON(POSITIONS_KEY, {});
+  return positions && typeof positions === "object" ? positions : {};
+}
+ 
+function getSavedFontSizes() {
+  const sizes = readJSON(FONT_SIZES_KEY, {});
+  return sizes && typeof sizes === "object" ? sizes : {};
+}
+ 
+function getFieldSettings() {
+  const settings = readJSON(FIELD_SETTINGS_KEY, {});
+  return settings && typeof settings === "object" ? settings : {};
+}
+ 
+function validFontSize(value, fallback) {
+  const size = Number(value);
+  return Number.isFinite(size) && size >= 8 && size <= 100 ? size : fallback;
+}
+ 
+function getSelectedFieldId() {
+  return $("fieldSelect").value;
+}
+ 
+function updatePreviewScale() {
+  const label = $("labelPreview");
+  const scale = label.getBoundingClientRect().width / (LABEL_WIDTH_MM * 96 / 25.4);
+  if (!Number.isFinite(scale) || scale <= 0) return;
+  label.style.setProperty("--label-scale", String(scale));
+ 
+  const fontSizes = getSavedFontSizes();
+  Object.keys(DEFAULT_FONT_SIZES).forEach(function (fieldId) {
+    const size = validFontSize(fontSizes[fieldId], DEFAULT_FONT_SIZES[fieldId]);
+    $(fieldId).style.fontSize = (size * scale) + "px";
+  });
+}
+ 
+function applyPositions() {
+  const label = $("labelPreview");
+  const bounds = label.getBoundingClientRect();
+  const positions = getSavedPositions();
+  Object.keys(FIELD_NAMES).forEach(function (fieldId) {
+    const position = positions[fieldId];
+    const x = position && Number.isFinite(position.x) ? position.x * bounds.width : 0;
+    const y = position && Number.isFinite(position.y) ? position.y * bounds.height : 0;
+    const el = $(fieldId);
+    el.style.setProperty("--drag-x", x + "px");
+    el.style.setProperty("--drag-y", y + "px");
+  });
+}
+ 
+function applyAllFieldSettings() {
+  const settings = getFieldSettings();
+  Object.keys(FIELD_NAMES).forEach(function (fieldId) {
+    const fieldSettings = settings[fieldId] || {};
+    const el = $(fieldId);
+    el.style.visibility = fieldSettings.visible === false ? "hidden" : "";
+    el.style.textAlign = fieldSettings.alignment || "start";
+  });
+}
+ 
+function updateSelectedFieldControls() {
+  const fieldId = getSelectedFieldId();
+  const field = $(fieldId);
+  const labelBounds = $("labelPreview").getBoundingClientRect();
+  const fieldBounds = field.getBoundingClientRect();
+  if (!labelBounds.width || !labelBounds.height) return;
+ 
+  const position = getSavedPositions()[fieldId] || { x: 0, y: 0 };
+  const px = Number.isFinite(position.x) ? position.x : 0;
+  const py = Number.isFinite(position.y) ? position.y : 0;
+ 
+  // الموضع الحالي كنسبة من الورقة (المركز الحقيقي للحقل)
+  const currentX = (fieldBounds.left + fieldBounds.width / 2 - labelBounds.left) / labelBounds.width;
+  const currentY = (fieldBounds.top + fieldBounds.height / 2 - labelBounds.top) / labelBounds.height;
+ 
+  $("positionX").textContent = (currentX * LABEL_WIDTH_MM).toFixed(1);
+  $("positionY").textContent = (currentY * LABEL_HEIGHT_MM).toFixed(1);
+ 
+  const fieldSettings = getFieldSettings()[fieldId] || {};
+  const fontInput = $("fontSizeInput");
+  if (document.activeElement !== fontInput) {
+    fontInput.value = String(validFontSize(getSavedFontSizes()[fieldId], DEFAULT_FONT_SIZES[fieldId]));
+  }
+  $("fieldVisible").checked = fieldSettings.visible !== false;
+  $("fieldAlignment").value = fieldSettings.alignment || "start";
+}
+ 
+function saveFontSize() {
+  const fieldId = getSelectedFieldId();
+  const size = Number($("fontSizeInput").value);
+  if (!Number.isFinite(size) || size < 8 || size > 100) return;
+  const sizes = getSavedFontSizes();
+  sizes[fieldId] = size;
+  writeJSON(FONT_SIZES_KEY, sizes);
+  updatePreviewScale();
+  updateSelectedFieldControls();
+}
+ 
+function saveFieldSetting(name, value) {
+  const fieldId = getSelectedFieldId();
+  const settings = getFieldSettings();
+  settings[fieldId] = settings[fieldId] || {};
+  settings[fieldId][name] = value;
+  writeJSON(FIELD_SETTINGS_KEY, settings);
+  applyAllFieldSettings();
+  updateSelectedFieldControls();
+}
+ 
+function nudge(dxMm, dyMm) {
+  const fieldId = getSelectedFieldId();
+  const positions = getSavedPositions();
+  const position = positions[fieldId] || { x: 0, y: 0 };
+  position.x = (Number.isFinite(position.x) ? position.x : 0) + dxMm / LABEL_WIDTH_MM;
+  position.y = (Number.isFinite(position.y) ? position.y : 0) + dyMm / LABEL_HEIGHT_MM;
+  positions[fieldId] = position;
+  writeJSON(POSITIONS_KEY, positions);
+  applyPositions();
+  updateSelectedFieldControls();
+}
+ 
+function setupPreviewResize() {
+  window.addEventListener("resize", function () {
+    updatePreviewScale();
+    applyPositions();
+    updateSelectedFieldControls();
+  });
+}
+ 
+/* ---------- الطباعة ---------- */
+function preparePrintCopies() {
+  const input = $("copyCount");
+  const copies = Number(input.value);
+ 
+  if (!Number.isInteger(copies) || copies < 1 || copies > 100) {
+    toast("أدخل عدد نسخ صحيح من 1 إلى 100", true);
+    input.focus();
+    return false;
+  }
+ 
+  const container = $("printCopies");
+  const label = $("labelPreview");
+  const positions = getSavedPositions();
+  const savedFontSizes = getSavedFontSizes();
+  const pageWidth = LABEL_WIDTH_MM * 96 / 25.4;
+  const pageHeight = LABEL_HEIGHT_MM * 96 / 25.4;
+ 
+  container.replaceChildren();
+ 
+  for (let index = 0; index < copies; index += 1) {
+    const copy = label.cloneNode(true);
+    copy.removeAttribute("id");
+    copy.classList.add("print-copy");
+    copy.style.setProperty("--label-scale", "1");
+ 
+    copy.querySelectorAll(".code, .name, .size, .qty").forEach(function (element) {
+      const fieldId = element.id;
+      element.removeAttribute("id");
+      element.style.fontSize = validFontSize(savedFontSizes[fieldId], DEFAULT_FONT_SIZES[fieldId]) + "px";
+      const position = positions[fieldId];
+      const x = position && Number.isFinite(position.x) ? position.x * pageWidth : 0;
+      const y = position && Number.isFinite(position.y) ? position.y * pageHeight : 0;
+      element.style.setProperty("--drag-x", x + "px");
+      element.style.setProperty("--drag-y", y + "px");
+    });
+ 
+    container.appendChild(copy);
+  }
+  return true;
+}
+ 
+function printLabels() {
+  updateLabel();
+  if (preparePrintCopies()) {
+    window.print();
+  }
+}
+ 
+/* ---------- نسخة احتياطية ---------- */
+function exportBackup() {
+  const data = {};
+  BACKUP_KEYS.forEach(function (key) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw !== null) data[key] = raw;
+    } catch (e) {}
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0, 10);
+  link.href = URL.createObjectURL(blob);
+  link.download = "mafco-backup-" + stamp + ".json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+  toast("تم تنزيل النسخة الاحتياطية");
+}
+ 
+function importBackup(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function () {
+    try {
+      const data = JSON.parse(String(reader.result));
+      if (!data || typeof data !== "object") throw new Error("bad file");
+      BACKUP_KEYS.forEach(function (key) {
+        if (typeof data[key] === "string") localStorage.setItem(key, data[key]);
+      });
+      toast("تم استرجاع النسخة، جارٍ التحديث...");
+      setTimeout(function () { window.location.reload(); }, 700);
+    } catch (error) {
+      toast("الملف غير صالح", true);
+    }
+  };
+  reader.readAsText(file);
+}
+ 
+/* ---------- التشغيل ---------- */
+window.addEventListener("DOMContentLoaded", function () {
+  renderHistory();
+  applyState(readJSON(STORAGE_KEY, DEFAULT_STATE));
+ 
+  ["batch", "sizeInput", "qtyInput"].forEach(function (id) {
+    $(id).addEventListener("input", updateLabel);
+  });
+  $("batchDate").addEventListener("change", function () {
+    batchDateIsManual = !!this.value;
+    if (!this.value) this.value = getTodayISODate();
+    updateLabel();
+  });
+  $("todayDateBtn").addEventListener("click", function () {
+    batchDateIsManual = false;
+    $("batchDate").value = getTodayISODate();
+    updateLabel();
+  });
+  $("product").addEventListener("change", updateLabel);
+ 
+  $("addProductBtn").addEventListener("click", addProduct);
+  $("newProduct").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") { event.preventDefault(); addProduct(); }
+  });
+  $("deleteProductBtn").addEventListener("click", deleteProduct);
+ 
+  $("saveBatchBtn").addEventListener("click", saveToHistory);
+  $("deleteBatchBtn").addEventListener("click", deleteHistoryItem);
+  $("savedBatches").addEventListener("change", function () {
+    const history = getHistory();
+    if (this.value !== "" && history[this.value]) {
+      applyState(history[this.value], true);
+    }
+  });
+ 
+  $("fieldSelect").addEventListener("change", updateSelectedFieldControls);
+  $("fieldVisible").addEventListener("change", function () { saveFieldSetting("visible", this.checked); });
+  $("fieldAlignment").addEventListener("change", function () { saveFieldSetting("alignment", this.value); });
+  $("fontSizeInput").addEventListener("input", saveFontSize);
+  $("fontSizeInput").addEventListener("blur", function () {
+    this.value = String(validFontSize(getSavedFontSizes()[getSelectedFieldId()], DEFAULT_FONT_SIZES[getSelectedFieldId()]));
+  });
+  document.querySelectorAll(".pad button[data-dx]").forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      const step = event.shiftKey ? 5 : 0.5;
+      nudge(Number(button.dataset.dx) * step, Number(button.dataset.dy) * step);
+    });
+  });
+ 
+  $("printBtn").addEventListener("click", printLabels);
+  $("exportBtn").addEventListener("click", exportBackup);
+  $("importBtn").addEventListener("click", function () { $("importFile").click(); });
+  $("importFile").addEventListener("change", function () {
+    importBackup(this.files[0]);
+    this.value = "";
+  });
+ 
+  setupPreviewResize();
+  applyAllFieldSettings();
+  updatePreviewScale();
+  applyPositions();
+  updateSelectedFieldControls();
+  scheduleBatchDateRefresh();
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+      if (!batchDateIsManual) $("batchDate").value = getTodayISODate();
+      updateLabel();
+    }
+  });
+});
+ 
+window.addEventListener("beforeprint", function () {
+  if ($("printCopies").childElementCount === 0) preparePrintCopies();
+});
+ 
+window.addEventListener("afterprint", function () {
+  $("printCopies").replaceChildren();
+});
+</script>
+ 
+</body>
+</html>

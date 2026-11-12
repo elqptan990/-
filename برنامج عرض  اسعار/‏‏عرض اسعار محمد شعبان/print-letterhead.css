@@ -1,0 +1,108 @@
+/* =====================================================
+   الطباعة على الورق الرسمي - مصنع موجة (A4)
+   يُحمَّل بعد style.css
+   ===================================================== */
+
+/* ---------- المعاينة على الشاشة (اختياري) ---------- */
+@media screen {
+  .quotation {
+    box-sizing: border-box;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 50mm 14mm 32mm 14mm;
+    background: #fff url("letterhead.jpg") top center / 100% auto no-repeat;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .quotation {
+    width: 100%;
+    min-height: 0;
+    padding: 36mm 5mm 22mm;
+  }
+}
+
+/* ---------- عناصر الورق الرسمي المكررة (نخفيها دائمًا) ---------- */
+.quotation .brand-mark,
+.quotation .brand-title,
+.quotation .accent-line,
+.quotation .paper-footer { display: none !important; }
+
+.quotation .brand-head {
+  display: block !important;
+  margin: 0 0 6mm !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  text-align: center;
+}
+.quotation .doc-label { display: block !important; text-align: center; }
+.quotation .doc-label strong { display: block; font-size: 22px; }
+
+/* ---------- الطباعة ---------- */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html { background: #fff !important; }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body { background: transparent !important; }
+
+  .no-print,
+  .topbar,
+  .editor,
+  .preview-toolbar { display: none !important; }
+
+  .layout,
+  .preview-area {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    background: none !important;
+  }
+
+  /* الورق الرسمي: عنصر ثابت يتكرر في كل صفحة، ويمتد داخل هوامش الصفحة */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 210mm;
+    height: 297mm;
+    background: url("letterhead.jpg") center / 100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  .quotation {
+    box-sizing: border-box !important;
+    width: 210mm !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    /* المسافات الآمنة (الهيدر والفوتر) تتكرر في كل صفحة */
+    padding: 50mm 14mm 32mm 14mm !important;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* منع قص الصفوف والأقسام بين الصفحات */
+  .print-items tr { break-inside: avoid; page-break-inside: avoid; }
+  .print-items thead { display: table-header-group; }
+  .totals-layout, .summary, .amount-words, .terms-box, .signatures {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
